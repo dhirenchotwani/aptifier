@@ -132,11 +132,18 @@
       photo.setAttribute('src', data);
     } else {
 		console.log("ht and width not set");
-//      clearphoto();
+      clearphoto();
     }
   }
 	
+//Download the photo  using download attribute of anchor tag	
+	var link = document.getElementById('download');
+   
+link.addEventListener('click', function(ev) {
+    link.href = canvas.toDataURL();
 	
+    link.download = "mypainting.png";
+}, false);	
 	
   // Set up our event listener to run the startup process
   // once loading is complete.
