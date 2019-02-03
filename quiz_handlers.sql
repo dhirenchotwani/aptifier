@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 03, 2019 at 04:24 PM
+-- Generation Time: Feb 03, 2019 at 08:07 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -206,23 +206,30 @@ CREATE TABLE `users` (
   `user_last_name` varchar(255) NOT NULL,
   `user_email` varchar(255) NOT NULL,
   `user_password` text NOT NULL,
-  `user_flat` int(5) NOT NULL,
-  `user_building` varchar(255) NOT NULL,
-  `user_street` varchar(255) NOT NULL,
-  `user_city` varchar(255) NOT NULL,
-  `user_state` varchar(255) NOT NULL,
-  `user_nationality` varchar(255) NOT NULL,
-  `user_token` text NOT NULL,
+  `user_flat` int(5) DEFAULT NULL,
+  `user_building` varchar(255) DEFAULT NULL,
+  `user_street` varchar(255) DEFAULT NULL,
+  `user_city` varchar(255) DEFAULT NULL,
+  `user_state` varchar(255) DEFAULT NULL,
+  `user_nationality` varchar(255) DEFAULT NULL,
+  `user_token` text,
   `user_role_id` int(11) NOT NULL,
   `is_email_verified` int(2) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `created_by` int(11) NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_by` int(11) NOT NULL,
-  `deleted_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_by` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int(11) DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_by` int(11) DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT '0000-00-00 00:00:00',
+  `deleted_by` int(11) DEFAULT NULL,
   `is_deleted` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `user_first_name`, `user_last_name`, `user_email`, `user_password`, `user_flat`, `user_building`, `user_street`, `user_city`, `user_state`, `user_nationality`, `user_token`, `user_role_id`, `is_email_verified`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`, `deleted_by`, `is_deleted`) VALUES
+(1, 'Dhiren', 'Chotwani', 'dhirenchotwani@gmail.com', 'abc123', 202, 'Parth Sarthi', 'Jai Mata Di Nagar', 'Ulhasnagar', 'Maharashtra', 'Indian', '', 5, 1, '2019-02-03 18:35:11', 1, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -358,7 +365,7 @@ ALTER TABLE `test_student`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `user_type`
 --
