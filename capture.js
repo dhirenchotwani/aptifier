@@ -128,8 +128,10 @@
       canvas.height = height;
       context.drawImage(video, 0, 0, width, height);
     
-      var data = canvas.toDataURL('image/png');
-      photo.setAttribute('src', data);
+      var data = canvas.toDataURL('image/jpg');
+  
+	
+	photo.setAttribute('src', data);
     } else {
 		console.log("ht and width not set");
       clearphoto();
@@ -142,7 +144,7 @@
 link.addEventListener('click', function(ev) {
     link.href = canvas.toDataURL();
 	
-    link.download = "mypainting.png";
+    link.download = "mypainting.jpg";
 }, false);	
 	
   // Set up our event listener to run the startup process
