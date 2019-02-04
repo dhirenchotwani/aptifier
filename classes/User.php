@@ -5,6 +5,22 @@
    	include_once("Cipher.php");
 	include_once("Mailer.php");
     class User{
+        
+    private $table = "users";
+    private $user_id;
+    private $user_first_name;
+    private $user_last_name;
+    private $user_email;
+    private $user_password;
+    private $user_flat;
+    private $user_building;
+    private $user_street;
+    private $user_city;
+    private $user_state;
+    private $user_nationality;
+    private $user_token = "I dont know anything!!";
+    
+        
         private $connection;
         public function __construct(){
             global $database;
@@ -153,6 +169,31 @@
             if(!Session::isSessionStart())
                 Functions::redirect("login.php");
         }
+        
+        
+        public function insertUserDetails($user_first_name, $user_last_name, $user_email, $user_password, $user_flat, $user_building, $user_street, $user_city, $user_state, $user_nationality){
+        
+        $sql = "INSERT INTO {$this->table} (user_first_name, user_last_name, user_email, user_password, user_flat, user_building, user_street, user_city, user_state, user_nationality, user_token, user_role_id, is_email_verified, created_at, created_by, updated_at, updated_by) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        
+        $created_by = $_SESSION['user_id'];
+        $current_date = date("Y-m-d h:i:sa");
+        $is_email_verified = 1;
+        
+        $preparedStatement = $this->connection->prepare($sql);
+        $preparedStatement->bind_param("ssssissssssiisisi", $user_first_name, $user_last_name, $user_email, $user_password, $user_flat, $user_building, $user_street, $user_city, $user_state, $user_nationality, $this->user_token, $created_by, $is_email_verified, $current_date, $created_by, $current_date, $created_by);
+        
+        
+          if($preparedStatement->execute()){
+                return $this->connection->insert_id;
+            } else{
+                die("ERROR WHILE INSERTING USER");
+            }
+//        $statement = $this->conn->prepare($sql);
+//        $statement->execute();
+//        $result = $statement->fetch();
+//        return $result;
+        
+    }
 		
     }
 ?>
