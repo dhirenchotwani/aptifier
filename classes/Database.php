@@ -62,7 +62,7 @@
         }
 
         public function query($sql){
-            $result = $this->connection->query($sql);
+            $result =mysqli_query($this->connection,$sql);
             if(!$result){
                 die("Query Failed! " .$sql );
             }
@@ -77,6 +77,11 @@
         public function getConnection(){
             return $this->connection;
         }
+		
+		public function getUserWithCondition($scondn,$key){
+		$sql="select * from users where $condn='$key'";
+		
+		}
         
         function __destruct(){
             //this is destructor
