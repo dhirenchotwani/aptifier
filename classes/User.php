@@ -153,6 +153,16 @@
             if(!Session::isSessionStart())
                 Functions::redirect("login.php");
         }
+		public function getUserWithCondition($condn,$key){
+			global $database;
+			$res=$database->query("select * from users where $condn=$key");
+			return $res;
+		}
+		public function getUserWithJoinCondition($sql,$condn,$key){
+			global $database;
+			$res=$database->query("select * from users $sql where $condn=$key");
+			return $res;
+		}
 		
     }
 ?>
