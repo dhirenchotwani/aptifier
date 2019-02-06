@@ -1,0 +1,14 @@
+
+//    $user_first_name = $_POST['user_first_name'];
+//    $user_last_name = $_POST['user_last_name'];
+//    $user_email = $_POST['user_email'];
+//    $user_password = $_POST['user_password'];
+//    $user_flat = $_POST['user_flat'];
+//    $user_building = $_POST['user_building'];
+//    $user_street = $_POST['user_street'];
+//    $user_city = $_POST['user_city'];
+//    $user_state = $_POST['user_state'];
+//    $user_nationality = $_POST['user_nationality'];
+    
+//     $db = new Database();
+//    $connection = $db->getConnection();

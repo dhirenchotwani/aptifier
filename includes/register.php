@@ -6,13 +6,14 @@ include_once('../classes/Cipher.php');
 if(isset($_POST['register_submit'])){
 	$obj=new User();
 	extract($_POST);
-	$obj->sendEmailToRecipient($user_email);
+	if($obj->sendEmailToRecipient($user_email))
+	$obj->insertUserEmail($user_email,$user_password);
 }
 
 if(isset($_GET['XSRS'])){
 	
 
-	Functions::redirect("registerUser.php?p={$_GET['XSRS']}");
+	Functions::redirect("login.php?p={$_GET['XSRS']}");
 }
 ?>
 <!DOCTYPE html>
@@ -104,7 +105,15 @@ if(isset($_GET['XSRS'])){
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Email" type="email" name="user_email">
+                    <input class="form-control" placeholder="Email" type="email" name="user_email"><br>
+                   
+                  </div>
+                  <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                    </div>
+                    <input class="form-control" placeholder="Password" type="password" name="user_password"><br>
+                   
                   </div>
                 </div>
                

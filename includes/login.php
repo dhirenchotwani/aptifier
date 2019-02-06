@@ -1,4 +1,4 @@
-<?php
+ <?php
 include_once('../classes/Database.php');
 include_once('../classes/User.php');
 
@@ -15,6 +15,16 @@ if(isset($_POST['login_submit'])){
 			</script>
     	<?php	
 	}
+}
+
+if(isset($_GET['p'])){
+//	$user_email=$_GET['p'];
+	?>
+	<script>
+		console.log("hi");
+		document.getElementById('user_email').value=<?php echo $_GET['p']; ?>
+	</script>
+	<?php
 }
 ?>
 <!DOCTYPE html>
@@ -120,7 +130,7 @@ if(isset($_POST['login_submit'])){
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Email" type="email" name="user_email">
+                    <input class="form-control" placeholder="Email" type="email" name="user_email" id="user_email">
                   </div>
                 </div>
                 <div class="form-group">

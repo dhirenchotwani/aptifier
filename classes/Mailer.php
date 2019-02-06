@@ -19,9 +19,9 @@ class Mailer{
 
     public  function send_mail($user_mail,$body,$subject){
 
-        $this->mail->Username = "handlesquizlikeaboss@gmail.com";
-        $this->mail->Password = "quizhandlers123";
-        $this->mail->SetFrom("dhirenchotwani@gmail.com", "Quiz Handlers");
+		 $this->mail->Username = "handlesquizlikeaboss@gmail.com";
+		$this->mail->Password = "quizhandlers123";
+        $this->mail->SetFrom("handlesquizlikeaboss@gmail.com", "Quiz Handlers");
         $this->mail->Subject = $subject;
         $this->mail->Body = $body;
         $this->mail->AddAddress("$user_mail");

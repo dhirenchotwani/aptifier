@@ -5,6 +5,22 @@
    	include_once("Cipher.php");
 	include_once("Mailer.php");
     class User{
+        
+    private $table = "users";
+    private $user_id;
+    private $user_first_name;
+    private $user_last_name;
+    private $user_email;
+    private $user_password;
+    private $user_flat;
+    private $user_building;
+    private $user_street;
+    private $user_city;
+    private $user_state;
+    private $user_nationality;
+    private $user_token = "I dont know anything!!";
+  
+        
         private $connection;
         public function __construct(){
             global $database;
@@ -26,20 +42,29 @@
 				$res=$database->query("select * from users where user_email='$email'");
 			if($row=mysqli_fetch_assoc($res)){	
 					extract($row);
-
-					//Setting the cookie content here for further check
-				$this->setCookies($user_id,$signed_in);
+			
+					if($password === $user_password){
+						$this->setCookies($user_id,$signed_in);
+						if($is_first_login==1){
+							$_SESSION['user_id']=$user_id;
+							Functions::redirect('registerUser.php');
+						}
+						else{
+							
 				$user_name=$user_first_name." ".$user_last_name;
-					// Setting the session variables here for further use 
-				$this->setSession($user_id,$user_name,$user_role); 
-				return true;
+//					// Setting the session variables here for further use 
+				$this->setSession($user_id,$user_name,$user_role_id);
+							
+								return true;
+						}
+				
+			
                 } else{
-                    echo 'falsee';
+                    echo 'false';
                 }
             }
-       
-        
-//		}
+		}
+				
         
         public function user_logout() {
 			$this->deleteCookies();
@@ -112,7 +137,7 @@
          		return true;
 			}else{
 				?>
-				<script>console.log("User data ont found using user_id from cookie ");</script>
+				<script>console.log("User data not found using user_id from cookie ");</script>
 				<?php
 			}
 		}else
@@ -146,13 +171,14 @@
             <h5>The Quiz Handler Team.</h5>
             </div>";
 
-        $mailer->send_mail($email, $body, $subject);
+       return( $mailer->send_mail($email, $body, $subject));
     }
         
         public static function checkActiveSession(){
             if(!Session::isSessionStart())
                 Functions::redirect("login.php");
         }
+
 		public function getUserWithCondition($condn,$key){
 			global $database;
 			$res=$database->query("select * from users where $condn=$key");
@@ -164,5 +190,37 @@
 			return $res;
 		}
 		
-    }
+		public function insertUserEmail($email,$password){
+			 global $database;
+			$res=$database->query("INSERT INTO $this->table (user_email,user_password,is_email_verified,is_first_login,is_deleted) VALUES ('$email','$password',0,1,0)");
+		}
+        
+        
+        public function insertUserDetails($user_first_name, $user_last_name, $user_flat, $user_building, $user_street, $user_city, $user_state, $user_nationality,$user_role_id,$img_name){
+			
+			global $database;
+			
+			
+			$img1 = file_get_contents("images/$img_name");
+			$data1 = base64_encode($img1);
+			
+			$created_by = $_SESSION['user_id'];
+        	$current_date = date("Y-m-d h:i:sa");
+        	$is_email_verified = 1;
+			$sql = "UPDATE $this->table set user_first_name='$user_first_name', user_last_name='$user_last_name', user_flat='$user_flat', user_building='$user_building', user_street='$user_street', user_city='$user_city', user_state='$user_state', user_nationality='$user_nationality', user_role_id= $user_role_id,user_profile_pic='$data1',is_email_verified=1,is_first_login=0, created_by=$created_by, updated_by=$created_by,is_deleted=0 where user_id=$created_by";
+			
+			
+			$res=$database->query($sql);
+			
+		
+			$user_name=$user_first_name." ".$user_last_name;
+			$this->setSession($created_by,$user_name,$user_role_id);
+			
+			unlink("images/$img_name");
+
+			
+			
+		}
+	}
+
 ?>
