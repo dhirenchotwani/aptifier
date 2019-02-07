@@ -40,8 +40,9 @@ curl_close($curl);
 
 if ($err) {
   echo "cURL Error #:" . $err;
+	return false;
 } else {
-  echo $response;
+return $response;
 } 
 
  }

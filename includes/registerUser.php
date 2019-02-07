@@ -17,7 +17,7 @@ if(isset($_POST['submit_user_details'])){
 	
     $result = $user->insertUserDetails($user_first_name, $user_last_name, $user_flat, $user_building, $user_street, $user_city, $user_state, $user_nationality,$user_role_id,$newname);
 //	
-//	Functions::redirect('../dashboard.php');
+	Functions::redirect('../dashboard.php');
 }
 
 ?>
