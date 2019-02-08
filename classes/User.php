@@ -43,7 +43,7 @@
 			if($row=mysqli_fetch_assoc($res)){	
 					extract($row);
 			
-					if($password === $user_password){
+					if(password_verify($password,$user_password)){
 						$this->setCookies($user_id,$signed_in);
 						if($is_first_login==1){
 							$_SESSION['user_id']=$user_id;
@@ -145,16 +145,10 @@
 		}
 		
 		public function sendEmailToRecipient($email){
-			$cip=new Cipher();
-			
+	
        
-		
-        require_once("Mailer.php");
         $mailer = new Mailer();
 
-//		 $ciphertext_email= mcrypt_encrypt(MCRYPT_3DES,"123456789012345678901234",$email,"ecb");
-			
-			
         $subject = "Quiz-Handlers Account Confirmation";
 
         $base_url_link ="http://localhost/quiz-handlers/includes/register.php?XSRS=$email";
@@ -173,6 +167,28 @@
 
        return( $mailer->send_mail($email, $body, $subject));
     }
+		public function sendForgotPassEmailToRecipient($email){
+	    
+        $mailer = new Mailer();
+
+        $subject = "Quiz-Handlers Reset Password Confirmation";
+
+        $base_url_link ="http://localhost/quiz-handlers/includes/resetPassword.php?XSRS=$email";
+        $body = "<div style='font-family:Roboto; font-size:16px; max-width: 600px; line-height: 21px;'>     <h4>Hello,</h4>
+            <h3>Reset your Account Password here!</h3>
+            <br>  
+            <a style='text-decoration:none; color:#fff; background-color:#348eda;border:solid #348eda; border-width:2px 10px; line-height:2;font-weight:bold; text-align:center; display:inline-block;border-radius:4px' href='$base_url_link'>
+            Reset Your Password</a>
+            <br>  
+            <h3>Thank you for Choosing Quiz-Handlers.</h3>
+            <br>
+            <br>
+            <h4>Sincerely,</h4>
+            <h5>The Quiz Handler Team.</h5>
+            </div>";
+
+       return( $mailer->send_mail($email, $body, $subject));
+		}
         
         public static function checkActiveSession(){
             if(!Session::isSessionStart())
@@ -192,7 +208,8 @@
 		
 		public function insertUserEmail($email,$password){
 			 global $database;
-			$res=$database->query("INSERT INTO $this->table (user_email,user_password,is_email_verified,is_first_login,is_deleted) VALUES ('$email','$password',0,1,0)");
+			$hashedpass =  password_hash("$password", PASSWORD_BCRYPT); 
+			$res=$database->query("INSERT INTO $this->table (user_email,user_password,is_email_verified,is_first_login,is_deleted) VALUES ('$email','$hashedpass',0,1,0)");
 		}
         
         

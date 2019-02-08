@@ -1,31 +1,19 @@
- <?php
+<?php
 include_once('../classes/Database.php');
 include_once('../classes/User.php');
+include_once('../classes/Functions.php');
 
-if(isset($_POST['login_submit'])){
+if(isset($_POST['recovery_submit'])){
+	$obj=new User();
 	extract($_POST);
-	$obj = new User();
-	$signed_in=($_POST['signed_in']=='Remember me') ? 1 : 0;
-    if( $obj->processLogin( $user_email, $user_password,$signed_in) ) {
-        Functions::redirect("../dashboard.php");
-    } else{
-        $flag = 1;
-    	?>
-    	<script>
-    	console.log('login failed');
-			</script>
-    	<?php	
-	}
+	if($obj->sendForgotPassEmailToRecipient($user_email))
+		Functions::redirect('login.php');
 }
 
-if(isset($_GET['p'])){
-//	$user_email=$_GET['p'];
-	?>
-	<script>
-		console.log("hi");
-		document.getElementById('user_email').value=<?php echo $_GET['p']; ?>
-	</script>
-	<?php
+if(isset($_GET['XSRS'])){
+	
+
+	Functions::redirect("login.php?p={$_GET['XSRS']}");
 }
 ?>
 <!DOCTYPE html>
@@ -108,60 +96,29 @@ if(isset($_GET['p'])){
       <div class="row justify-content-center">
         <div class="col-lg-5 col-md-7">
           <div class="card bg-secondary shadow border-0">
-            <div class="card-header bg-transparent pb-5">
-              <div class="text-muted text-center mt-2 mb-3"><small>Sign in with</small></div>
-              <div class="btn-wrapper text-center">
-                <a href="#" class="btn btn-neutral btn-icon">
-                  <span class="btn-inner--icon"><img src="../assets/img/icons/common/github.svg"></span>
-                  <span class="btn-inner--text">Github</span>
-                </a>
-                <a href="#" class="btn btn-neutral btn-icon">
-                  <span class="btn-inner--icon"><img src="../assets/img/icons/common/google.svg"></span>
-                  <span class="btn-inner--text">Google</span>
-                </a>
-              </div>
-            </div>
+        
             <div class="card-body px-lg-5 py-lg-5">
-              <div class="text-center text-muted mb-4">
-                <small>Or sign in with credentials</small>
-              </div>
+              
               <form role="form" method="post" action="#">
                 <div class="form-group mb-3">
                   <div class="input-group input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Email" type="email" name="user_email" id="user_email">
+                    <input class="form-control" placeholder="Email" type="email" name="user_email"><br>
+                   
                   </div>
+               
                 </div>
-                <div class="form-group">
-                  <div class="input-group input-group-alternative">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                    </div>
-                    <input class="form-control" placeholder="Password" type="password" name="user_password">
-                  </div>
-                </div>
-                <div class="custom-control custom-control-alternative custom-checkbox">
-                  <input class="custom-control-input" id=" customCheckLogin" type="checkbox" name="signed_in" value="Remember me">
-                  <label class="custom-control-label" for=" customCheckLogin">
-                    <span class="text-muted">Remember me</span>
-                  </label>
-                </div>
+               
+           
                 <div class="text-center">
-                  <button type="submit" name="login_submit" class="btn btn-primary my-4">Sign in</button>
+                  <button type="submit" name="recovery_submit" class="btn btn-primary my-4">Send Recovery Mail</button>
                 </div>
               </form>
             </div>
           </div>
-          <div class="row mt-3">
-            <div class="col-6">
-              <a href="forgotPassword.php" class="text-light"><small>Forgot password?</small></a>
-            </div>
-            <div class="col-6 text-right">
-              <a href="register.php" class="text-light"><small>New Here ?  Register Now!</small></a>
-            </div>
-          </div>
+         
         </div>
       </div>
     </div>
