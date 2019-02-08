@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 08, 2019 at 08:23 PM
+-- Generation Time: Feb 08, 2019 at 08:38 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -83,7 +83,9 @@ CREATE TABLE `student` (
 
 INSERT INTO `student` (`student_id`, `user_id`, `student_class_id`, `student_division`, `student_branch`) VALUES
 (1, 1, '12', 'B', 1),
-(2, 4, '11', 'A', 3);
+(2, 4, '11', 'A', 3),
+(3, 9, '14', 'C', 4),
+(4, 8, '7', 'A', 1);
 
 -- --------------------------------------------------------
 
@@ -384,7 +386,7 @@ ALTER TABLE `question`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `student_branch`
 --

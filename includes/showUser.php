@@ -11,6 +11,7 @@ $obj=new User();
 $res=$obj->getUserWithJoinCondition("INNER JOIN student on users.user_id = student.user_id INNER JOIN student_class on student.student_class_id=student_class.student_class_id INNER JOIN student_branch on student.student_branch=student_branch.student_branch_id","users.user_id",$_SESSION['user_id']);
 $row=mysqli_fetch_assoc($res);
 extract($row);
+
 ?>
 
 
@@ -145,7 +146,7 @@ extract($row);
             <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
-                  <img alt="Image placeholder" src="../assets/img/theme/team-4-800x800.jpg">
+                  <img alt="Image placeholder"src="data:image/jpg;base64,<?php echo $user_profile_pic; ?>" >
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
                   <span class="mb-0 text-sm  font-weight-bold"><?php echo $_SESSION['user_name'];?></span>
@@ -191,7 +192,7 @@ extract($row);
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <a href="#">
-                    <img src="../assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
+                    <img src="data:image/jpg;base64,<?php echo $user_profile_pic; ?>" class="rounded-circle">
                   </a>
                 </div>
               </div>
