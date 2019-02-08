@@ -2,8 +2,9 @@
     include_once("Database.php");
     include_once("Session.php");
     include_once("Functions.php");
-   	include_once("Cipher.php");
+   	include_once("Detection.php");
 	include_once("Mailer.php");
+	include_once("Cipher.php");
     class User{
         
     private $table = "users";
@@ -64,6 +65,17 @@
                 }
             }
 		}
+		
+		public function loginUserWithFaceID($email,$image){
+			global $database;
+			$obj=new Detection();
+				$res=$database->query("select * from users where user_email='$email'");
+			if($row=mysqli_fetch_assoc($res)){	
+					extract($row);
+				return $obj->performDetection($image,$user_profile_pic);
+				
+		}
+	}
 				
         
         public function user_logout() {
@@ -123,15 +135,7 @@
 			if($row=mysqli_fetch_assoc($res)){	
 					extract($row);
 				$user_name=$user_first_name." ".$user_last_name;
-            //echo $user_id;
-//				$query  = "SELECT * FROM users WHERE user_id = '$user_id'";
-//                $select_user = mysqli_query($connection, $query);         
-//				if($row = mysqli_fetch_assoc($select_user))
-//					extract();
-//				
-//					$user_name=$user_first_name." ".$user_last_name;
-//                  
-//					setSession($user_id,$user_name,$user_role);
+
                 $this->setSession($user_id,$user_name,$user_role);
 					
          		return true;

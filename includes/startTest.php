@@ -12,7 +12,6 @@ if(isset($_POST['check-photos'])){
 
    $obj=new Detection();
     $img = $_POST['image'];
-    $folderPath = "upload/";
     $image_parts = explode(";base64,", $img);
     
 echo $obj->performDetection($image_parts[1],$user_profile_pic);
@@ -37,7 +36,7 @@ echo $obj->performDetection($image_parts[1],$user_profile_pic);
     <form method="POST" action="">
         <div class="row">
             <div class="col-md-6">
-                <div id="my_camera"></div>
+                <div id="my_camera" style="display:none"></div>
                 <br/>
                 <input type=button value="Take Snapshot" onClick="take_snapshot()">
                 <input type="hidden" name="image" class="image-tag">
@@ -54,22 +53,7 @@ echo $obj->performDetection($image_parts[1],$user_profile_pic);
 </div>
   
 
-<script language="JavaScript">
-    Webcam.set({
-        width: 490,
-        height: 390,
-        image_format: 'jpeg',
-        jpeg_quality: 90
-    });
-  
-    Webcam.attach( '#my_camera' );
-  
-    function take_snapshot() {
-        Webcam.snap( function(data_uri) {
-            $(".image-tag").val(data_uri);
-            document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
-        } );
-    }
+<script language="JavaScript" src="../assets/js/web.js">
 </script>
  
 </body>

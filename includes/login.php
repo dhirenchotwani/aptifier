@@ -5,7 +5,7 @@ include_once('../classes/User.php');
 if(isset($_POST['login_submit'])){
 	extract($_POST);
 	$obj = new User();
-	$signed_in=($_POST['signed_in']=='Remember me') ? 1 : 0;
+	$signed_in=($_POST['signed_in']==='Remember me') ? 1 : 0;
     if( $obj->processLogin( $user_email, $user_password,$signed_in) ) {
         Functions::redirect("../dashboard.php");
     } else{
@@ -18,8 +18,15 @@ if(isset($_POST['login_submit'])){
 	}
 }
 
+if(isset($_POST['check-photos'])){
+	extract($_POST);
+	$obj=new User();
+    $image_parts = explode(";base64,", $image);
+	echo $obj->loginUserWithFaceID($user_email_faceID,$image_parts[1]);
+}
+
 if(isset($_GET['p'])){
-//	$user_email=$_GET['p'];
+
 	?>
 	<script>
 		console.log("hi");
@@ -153,6 +160,43 @@ if(isset($_GET['p'])){
                 </div>
               </form>
             </div>
+            <hr>
+            <div class="card-header bg-transparent pb-5">
+              <div class="text-muted text-center mt-2 mb-3"><small>or Sign in using FaceID</small></div>
+              <form method="POST" action="">
+              <div class="btn-wrapper text-center">
+                <div class="form-group mb-3">
+                  <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                    </div>
+                    <input class="form-control" placeholder="Email" type="email" name="user_email_faceID" id="user_email_faceID">
+                    
+                  </div>
+                </div>
+                
+              </div>
+              <div class="container">
+            <div class="row">
+           
+            <div class="col-md-6">
+                <div id="results">Your captured image will appear here...</div>
+            </div>
+             <div class="col-md-6">
+                <div id="my_camera" style="display:none"></div>
+                <br/>
+                <input type=button value="Take Snapshot" onClick="take_snapshot()">
+                <input type="hidden" name="image" class="image-tag">
+            </div>
+            <div class="col-md-12 text-center">
+                <br/>
+                <button class="btn btn-success" name="check-photos">Submit</button>
+            </div>
+        </div>
+    
+			</div>
+           </form>
+            </div>
           </div>
           <div class="row mt-3">
             <div class="col-6">
@@ -173,6 +217,9 @@ if(isset($_GET['p'])){
   <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Argon JS -->
   <script src="../assets/js/argon.js?v=1.0.0"></script>
+<!--  Webcam Script-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
+  <script src="../assets/js/web.js"></script>
 </body>
 
 </html>
