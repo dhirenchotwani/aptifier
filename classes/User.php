@@ -175,9 +175,32 @@
 	    
         $mailer = new Mailer();
 
-        $subject = "Quiz-Handlers Reset Password Confirmation";
+        $subject = "Quiz-Handlers Forgot Password Confirmation";
 
         $base_url_link ="http://localhost/quiz-handlers/includes/resetPassword.php?XSRS=$email";
+        $body = "<div style='font-family:Roboto; font-size:16px; max-width: 600px; line-height: 21px;'>     <h4>Hello,</h4>
+            <h3>Reset your Account Password here!</h3>
+            <br>  
+            <a style='text-decoration:none; color:#fff; background-color:#348eda;border:solid #348eda; border-width:2px 10px; line-height:2;font-weight:bold; text-align:center; display:inline-block;border-radius:4px' href='$base_url_link'>
+            Reset Your Password</a>
+            <br>  
+            <h3>Thank you for Choosing Quiz-Handlers.</h3>
+            <br>
+            <br>
+            <h4>Sincerely,</h4>
+            <h5>The Quiz Handler Team.</h5>
+            </div>";
+
+       return( $mailer->send_mail($email, $body, $subject));
+		}
+		
+		public function sendChangePassEmailToRecipient($email){
+	    
+        $mailer = new Mailer();
+
+        $subject = "Quiz-Handlers Reset Password Confirmation";
+
+        $base_url_link ="http://localhost/quiz-handlers/includes/resetPassword.php?XSRS=$email&action=reset";
         $body = "<div style='font-family:Roboto; font-size:16px; max-width: 600px; line-height: 21px;'>     <h4>Hello,</h4>
             <h3>Reset your Account Password here!</h3>
             <br>  
@@ -241,6 +264,16 @@
 
 			
 			
+		}
+		
+		public function updateUser($user_first_name,$user_last_name,$user_pincode){
+			global $database;
+			$user_id=$_SESSION['user_id'];
+        	$current_date = date("Y-m-d h:i:sa");
+			$sql="UPDATE $this->table set user_first_name='$user_first_name', user_last_name='$user_last_name', updated_by=$user_id,updated_at='$current_date',user_pincode='$user_pincode' where user_id=$user_id";
+			$res=$database->query($sql);
+			
+			Functions::redirect("showUser.php");
 		}
 	}
 

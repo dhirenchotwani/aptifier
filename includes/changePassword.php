@@ -3,18 +3,21 @@ include_once('../classes/Database.php');
 include_once('../classes/User.php');
 include_once('../classes/Functions.php');
 
-if(isset($_POST['recovery_submit'])){
+if(isset($_POST['recovery_submit']) && (isset($_GET['action']) != "reset")){
 	$obj=new User();
 	extract($_POST);
 	if($obj->sendForgotPassEmailToRecipient($user_email))
 		Functions::redirect('login.php');
 }
 
-if(isset($_GET['XSRS'])){
-	
-
-	Functions::redirect("login.php?p={$_GET['XSRS']}");
+if(isset($_POST['recovery_submit']) && (isset($_GET['action']) == "reset")){
+		$obj=new User();
+	extract($_POST);
+	if($obj->sendChangePassEmailToRecipient($user_email))
+		Functions::redirect('login.php');
 }
+
+//$url=parse_url()
 ?>
 <!DOCTYPE html>
 <html>

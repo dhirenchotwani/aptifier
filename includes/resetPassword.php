@@ -5,16 +5,35 @@ if(isset($_POST['reset_submit'])){
 	global $database;
 	extract($_POST);
 	$user_email=$_GET['XSRS'];
-	$res=$database->query("select user_id from users where user_email='$user_email'");
+	$res=$database->query("select user_id,user_password from users where user_email='$user_email'");
 	if($row=mysqli_fetch_assoc($res))
 		extract($row);
+	$flag=0;
+	if($act === "reset"){
+		if(password_verify($user_password,$old_password))
+			$flag=1;
+	}
+	if($user_new_password === $user_confirm_password){
 	
-	if($user_password === $user_confirm_password){
-		$hashed_pass=password_hash("$user_password",PASSWORD_BCRYPT);
+		$hashed_pass=password_hash("$user_new_password",PASSWORD_BCRYPT);
+		$flag=1;
+	}
+		if($flag==1){
+		
 		$database->query("UPDATE users set user_password='$hashed_pass',updated_at=now(),updated_by=$user_id where user_email='$user_email';");
 		Functions::redirect('login.php');
-		
+		}
+	else {
+		echo "false";
 	}
+
+	
+}
+$act="";
+$link = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+$action=explode('=',$link);
+if(count($action)>2){
+	$act= $action[2];
 }
 ?>
 <!DOCTYPE html>
@@ -103,12 +122,25 @@ if(isset($_POST['reset_submit'])){
                 <small>Reset your password here!</small>
               </div>
               <form role="form" method="post" action="#">
+              <?php
+              if($act === "reset"){
+					echo "<div class='form-group mb-3'>
+                  <div class='input-group input-group-alternative'>
+                    <div class='input-group-prepend'>
+                      <span class='input-group-text'><i class='ni ni-email-83'></i></span>
+                    </div>
+                    <input class='form-control' placeholder='Old Password' type='password' name='old_password' id='old_password'>
+                  </div>
+                </div>";
+			  }
+          		?>
+           		
                 <div class="form-group mb-3">
                   <div class="input-group input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Password" type="password" name="user_password" id="user_email">
+                    <input class="form-control" placeholder="New Password" type="password" name="user_new_password" id="user_new_password">
                   </div>
                 </div>
                 <div class="form-group">
@@ -116,7 +148,7 @@ if(isset($_POST['reset_submit'])){
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Confirm Password" type="password" name="user_confirm_password">
+                    <input class="form-control" placeholder="Confirm New Password" type="password" name="user_confirm_password">
                   </div>
                 </div>
               

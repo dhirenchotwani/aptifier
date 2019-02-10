@@ -200,7 +200,7 @@ if(isset($_GET['p'])){
           </div>
           <div class="row mt-3">
             <div class="col-6">
-              <a href="forgotPassword.php" class="text-light"><small>Forgot password?</small></a>
+              <a href="changePassword.php" class="text-light"><small>Forgot password?</small></a>
             </div>
             <div class="col-6 text-right">
               <a href="register.php" class="text-light"><small>New Here ?  Register Now!</small></a>
