@@ -8,19 +8,7 @@
     class User{
         
     private $table = "users";
-    private $user_id;
-    private $user_first_name;
-    private $user_last_name;
-    private $user_email;
-    private $user_password;
-    private $user_flat;
-    private $user_building;
-    private $user_street;
-    private $user_city;
-    private $user_state;
-    private $user_nationality;
-    private $user_token = "I dont know anything!!";
-  
+   
         
         private $connection;
         public function __construct(){
