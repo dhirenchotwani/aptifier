@@ -49,7 +49,7 @@
 				
 			
                 } else{
-                    echo 'false';
+                    return false;
                 }
             }
 		}
@@ -60,9 +60,15 @@
 				$res=$database->query("select * from users where user_email='$email'");
 			if($row=mysqli_fetch_assoc($res)){	
 					extract($row);
-				return $obj->performDetection($image,$user_profile_pic);
+				if($obj->performDetection($image,$user_profile_pic)){
+					$user_name=$user_first_name." ".$user_last_name;
+				$this->setSession($user_id,$user_name,$user_role_id);
+				}
+				return true;
 				
-		}
+		}else{
+                    return false;
+                }
 	}
 				
         
@@ -258,7 +264,7 @@
 			global $database;
 			$user_id=$_SESSION['user_id'];
         	$current_date = date("Y-m-d h:i:sa");
-			$sql="UPDATE $this->table set user_first_name='$user_first_name', user_last_name='$user_last_name', updated_by=$user_id,updated_at='$current_date',user_pincode='$user_pincode' where user_id=$user_id";
+			$sql="UPDATE $this->table set user_first_name='$user_first_name', user_last_name='$user_last_name', updated_by=$user_id,updated_at=now(),user_pincode='$user_pincode' where user_id=$user_id";
 			$res=$database->query($sql);
 			
 			Functions::redirect("showUser.php");

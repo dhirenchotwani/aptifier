@@ -1,5 +1,5 @@
 <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
-      <div class="container-fluid">
+      <div class="container-fluid" >
         <!-- Brand -->
         <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="./index.php"><?php echo $page; ?></a>
         <!-- Form -->
@@ -44,12 +44,25 @@
                 <i class="ni ni-calendar-grid-58"></i>
                 <span>Activity</span>
               </a>
-              
+              <?php 
+				if($page=="User Profile"){
+					?>
+					 <div class="dropdown-divider"></div>
+              <a href="logout.php" class="dropdown-item">
+                <i class="ni ni-user-run"></i>
+                <span>Logout</span>
+              </a>
+					<?php
+				}else{
+				?>
               <div class="dropdown-divider"></div>
               <a href="includes/logout.php" class="dropdown-item">
                 <i class="ni ni-user-run"></i>
                 <span>Logout</span>
               </a>
+              <?php
+				}
+				?>
             </div>
           </li>
         </ul>

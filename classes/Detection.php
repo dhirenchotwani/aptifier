@@ -34,15 +34,19 @@ curl_setopt_array($curl, array(
 ));
 
 $response = curl_exec($curl);
+$response=json_decode($response);
 $err = curl_error($curl);
-
+	
 curl_close($curl);
 
 if ($err) {
   echo "cURL Error #:" . $err;
-	return false;
+//	return false;
 } else {
-return $response;
+if(array_key_exists("confidence",$response))
+		return true;
+	else 
+		return false;
 } 
 
  }

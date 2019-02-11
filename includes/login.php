@@ -2,6 +2,7 @@
 include_once('../classes/Database.php');
 include_once('../classes/User.php');
 
+
 if(isset($_POST['login_submit'])){
 	extract($_POST);
 	$obj = new User();
@@ -12,7 +13,7 @@ if(isset($_POST['login_submit'])){
         $flag = 1;
     	?>
     	<script>
-    	console.log('login failed');
+    	window.alert('login failed');
 			</script>
     	<?php	
 	}
@@ -22,7 +23,16 @@ if(isset($_POST['check-photos'])){
 	extract($_POST);
 	$obj=new User();
     $image_parts = explode(";base64,", $image);
-	echo $obj->loginUserWithFaceID($user_email_faceID,$image_parts[1]);
+	if($obj->loginUserWithFaceID($user_email_faceID,$image_parts[1])){
+		 Functions::redirect("../dashboard.php");
+	}else{
+        $flag = 1;
+    	?>
+    	<script>
+    	window.alert('login failed');
+			</script>
+    	<?php	
+	}
 }
 
 if(isset($_GET['p'])){
@@ -55,13 +65,13 @@ if(isset($_GET['p'])){
   <link type="text/css" href="../assets/css/argon.css?v=1.0.0" rel="stylesheet">
 </head>
 
-<body class="bg-default">
+<body class="bg-default" >
   <div class="main-content">
     <!-- Navbar -->
     <nav class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark">
       <div class="container px-4">
         <a class="navbar-brand" href="">
-          <img src="../assets/img/brand/white.png" />
+          <img src="../assets/img/brand/logo.png" />
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>

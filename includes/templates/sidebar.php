@@ -7,9 +7,9 @@
       <!-- Brand -->
       <a class="navbar-brand pt-0" href="./index.html">
        <?php if($page=="Dashboard"){
-        echo "<img src='./assets/img/brand/blue.png' class='navbar-brand-img' alt='...'>";
+        echo "<img src='./assets/img/brand/logo.png' class='navbar-brand-img' alt='...'>";
  }else{
- echo "<img src='../assets/img/brand/blue.png' class='navbar-brand-img' alt='...'>";
+ echo "<img src='../assets/img/brand/logo.png' class='navbar-brand-img' alt='...'>";
 }?>
 			</a>
       <!-- User -->

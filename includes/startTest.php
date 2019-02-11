@@ -14,7 +14,19 @@ if(isset($_POST['check-photos'])){
     $img = $_POST['image'];
     $image_parts = explode(";base64,", $img);
     
-echo $obj->performDetection($image_parts[1],$user_profile_pic);
+	if($obj->performDetection($image_parts[1],$user_profile_pic)){
+		?>
+		<script>window.alert("face matched answer question!!");</script>
+		<?php
+	}else{
+		?>
+		<script>window.alert("face did not match current-1 attempts left!!");</script>
+		<?php
+	}
+//	echo $data->{'confidence'};
+
+		
+
 }
 ?>
 <!DOCTYPE html>
