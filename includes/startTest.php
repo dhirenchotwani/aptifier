@@ -2,6 +2,7 @@
 include_once('../classes/Detection.php');
 include_once('../classes/Database.php');
 include_once('../classes/Session.php');
+include_once('../classes/Functions.php');
 Session::startSession();
 if(isset($_POST['check-photos'])){
 	global $database;
@@ -18,6 +19,7 @@ if(isset($_POST['check-photos'])){
 		?>
 		<script>window.alert("face matched answer question!!");</script>
 		<?php
+		Functions::redirect("student_test.php");
 	}else{
 		?>
 		<script>window.alert("face did not match current-1 attempts left!!");</script>

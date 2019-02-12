@@ -32,11 +32,11 @@
               </div>
               <?php
               if($page!="User Profile"){
-              echo "<a href='includes/showUser.php' class='dropdown-item'>
+              echo "<a href='showUser.php' class='dropdown-item'>
                 <i class='ni ni-single-02'></i>
                 <span>My profile</span>
               </a>";}?>
-              <a href="includes/changePassword.php?action=reset" class="dropdown-item">
+              <a href="changePassword.php?action=reset" class="dropdown-item">
                 <i class="ni ni-settings-gear-65"></i>
                 <span>Settings</span>
               </a>
@@ -44,25 +44,13 @@
                 <i class="ni ni-calendar-grid-58"></i>
                 <span>Activity</span>
               </a>
-              <?php 
-				if($page=="User Profile"){
-					?>
-					 <div class="dropdown-divider"></div>
+             
+              <div class="dropdown-divider"></div>
               <a href="logout.php" class="dropdown-item">
                 <i class="ni ni-user-run"></i>
                 <span>Logout</span>
               </a>
-					<?php
-				}else{
-				?>
-              <div class="dropdown-divider"></div>
-              <a href="includes/logout.php" class="dropdown-item">
-                <i class="ni ni-user-run"></i>
-                <span>Logout</span>
-              </a>
-              <?php
-				}
-				?>
+           
             </div>
           </li>
         </ul>

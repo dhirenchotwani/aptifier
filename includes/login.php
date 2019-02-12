@@ -8,7 +8,7 @@ if(isset($_POST['login_submit'])){
 	$obj = new User();
 	$signed_in=($_POST['signed_in']==='Remember me') ? 1 : 0;
     if( $obj->processLogin( $user_email, $user_password,$signed_in) ) {
-        Functions::redirect("../dashboard.php");
+        Functions::redirect("dashboard.php");
     } else{
         $flag = 1;
     	?>
@@ -24,7 +24,7 @@ if(isset($_POST['check-photos'])){
 	$obj=new User();
     $image_parts = explode(";base64,", $image);
 	if($obj->loginUserWithFaceID($user_email_faceID,$image_parts[1])){
-		 Functions::redirect("../dashboard.php");
+		 Functions::redirect("dashboard.php");
 	}else{
         $flag = 1;
     	?>

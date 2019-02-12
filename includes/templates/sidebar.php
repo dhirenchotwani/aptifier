@@ -1,4 +1,5 @@
- <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
+
+   <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
     <div class="container-fluid">
       <!-- Toggler -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
@@ -6,12 +7,9 @@
       </button>
       <!-- Brand -->
       <a class="navbar-brand pt-0" href="./index.html">
-       <?php if($page=="Dashboard"){
-        echo "<img src='./assets/img/brand/logo.png' class='navbar-brand-img' alt='...'>";
- }else{
- echo "<img src='../assets/img/brand/logo.png' class='navbar-brand-img' alt='...'>";
-}?>
-			</a>
+     
+ 	<img src='../assets/img/brand/logo.png' class='navbar-brand-img' alt='...'>";
+		</a>
       <!-- User -->
       <ul class="nav align-items-center d-md-none">
         <li class="nav-item dropdown">
@@ -29,7 +27,7 @@
           <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="media align-items-center">
               <span class="avatar avatar-sm rounded-circle">
-                <img alt="Image placeholder" src="./assets/img/theme/team-1-800x800.jpg">
+                <img alt="Image placeholder" src="../assets/img/theme/team-1-800x800.jpg">
               </span>
             </div>
           </a>
@@ -65,7 +63,7 @@
           <div class="row">
             <div class="col-6 collapse-brand">
               <a href="./index.html">
-                <img src="./assets/img/brand/blue.png">
+                <img src="../assets/img/brand/blue.png">
               </a>
             </div>
             <div class="col-6 collapse-close">
@@ -90,16 +88,19 @@
         <!-- Navigation -->
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="../index.php">
+            <a class="nav-link" href="dashboard.php">
               <i class="ni ni-tv-2 text-primary"></i> Dashboard
             </a>
           </li>
+          <?php if($user_role_id == 3){?>
           <li class="nav-item">
-            <a class="nav-link" href="./examples/test.html">
+            <a class="nav-link" href="test.php">
               <i class="ni ni-planet text-blue"></i>Test
             </a>
           </li>
- 
+ <?php
+}
+			?>
         </ul>
         <!-- Divider -->
         <hr class="my-3">
