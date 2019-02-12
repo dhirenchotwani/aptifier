@@ -227,6 +227,8 @@
 			return $res;
 		}
 		
+		
+		
 		public function insertUserEmail($email,$password){
 			 global $database;
 			$hashedpass =  password_hash("$password", PASSWORD_BCRYPT); 
