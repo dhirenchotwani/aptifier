@@ -3,19 +3,29 @@ include_once('../classes/Detection.php');
 include_once('../classes/Database.php');
 include_once('../classes/Session.php');
 include_once('../classes/Functions.php');
+define('UPLOAD_DIR', 'images/');
 Session::startSession();
 if(isset($_POST['check-photos'])){
 	global $database;
 	$user_id=$_SESSION['user_id'];
-	$res=$database->query("select user_profile_pic from users where user_id=$user_id");
+	$res=$database->query("select user_profile_pic,user_first_name from users where user_id=$user_id");
 	if($row=mysqli_fetch_assoc($res))
 		extract($row);
 
    $obj=new Detection();
-    $img = $_POST['image'];
-    $image_parts = explode(";base64,", $img);
-    
-	if($obj->performDetection($image_parts[1],$user_profile_pic)){
+    $image = $_POST['image'];
+   // $image_parts = explode(";base64,", $img);
+	$image_parts = explode(";base64,", $image);
+    $image_type_aux = explode("image/", $image_parts[0]);
+    $image_type = $image_type_aux[1];
+    $image_base64 = base64_decode($image_parts[1]);
+    $file = UPLOAD_DIR . $user_first_name. '.png';
+    file_put_contents($file, $image_base64);
+	
+	if($obj->countFaces(realpath($file))){
+		unlink($file);
+    $res=$obj->performDetection($image_parts[1],$user_profile_pic);
+	if($res['confidence']>0.4){
 		?>
 		<script>window.alert("face matched answer question!!");</script>
 		<?php
@@ -23,6 +33,12 @@ if(isset($_POST['check-photos'])){
 	}else{
 		?>
 		<script>window.alert("face did not match current-1 attempts left!!");</script>
+		<?php
+	}
+	}
+	else{
+		?>
+		<script>window.alert("multiple faces detected!!!");</script>
 		<?php
 	}
 //	echo $data->{'confidence'};

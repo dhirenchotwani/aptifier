@@ -54,20 +54,27 @@
             }
 		}
 		
-		public function loginUserWithFaceID($email,$image){
+		public function loginUserWithFaceID($email,$image,$realpath){
 			global $database;
 			$obj=new Detection();
 				$res=$database->query("select * from users where user_email='$email'");
 			if($row=mysqli_fetch_assoc($res)){	
 					extract($row);
-				if($obj->performDetection($image,$user_profile_pic)){
-					$user_name=$user_first_name." ".$user_last_name;
+				if($obj->countFaces($realpath)){
+				$res=$obj->performDetection($image,$user_profile_pic);
+				if($res['confidence']>0.4){
+				$user_name=$user_first_name." ".$user_last_name;
 				$this->setSession($user_id,$user_name,$user_role_id);
-				}
 				return true;
-				
+				}
+				else{
+				return false; //FACE DETECTION FAILED ERROR HERE!!!!
+				}
+				}else{
+					return false; //multple faces detectd error here!!
+				}
 		}else{
-                    return false;
+                    return false;// LOGIN CREDENTAILS I.E USER_EMAIL DOES NOT EXOSTS ERR HERE!
                 }
 	}
 				

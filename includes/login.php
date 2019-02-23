@@ -1,7 +1,7 @@
  <?php
 include_once('../classes/Database.php');
 include_once('../classes/User.php');
-
+define('UPLOAD_DIR', 'images/');
 
 if(isset($_POST['login_submit'])){
 	extract($_POST);
@@ -22,8 +22,17 @@ if(isset($_POST['login_submit'])){
 if(isset($_POST['check-photos'])){
 	extract($_POST);
 	$obj=new User();
-    $image_parts = explode(";base64,", $image);
-	if($obj->loginUserWithFaceID($user_email_faceID,$image_parts[1])){
+ 
+	$image_parts = explode(";base64,", $image);
+    $image_type_aux = explode("image/", $image_parts[0]);
+    $image_type = $image_type_aux[1];
+    $image_base64 = base64_decode($image_parts[1]);
+    $file = UPLOAD_DIR . $user_email_faceID. '.png';
+    file_put_contents($file, $image_base64);
+	
+	
+	if($obj->loginUserWithFaceID($user_email_faceID,$image_parts[1],realpath($file))){
+		unlink($file);
 		 Functions::redirect("dashboard.php");
 	}else{
         $flag = 1;

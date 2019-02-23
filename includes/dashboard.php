@@ -2,6 +2,7 @@
 include_once("bootstrap.php");
 Session::startSession();
 $page="Dashboard";
+$test_set=0;
 $obj=new User();
 $test=new Test();
 $user_id=$_SESSION['user_id'];
@@ -13,16 +14,20 @@ $row=mysqli_fetch_assoc($res);
 extract($row);
 if($user_role_id==5){
 	$res=$test->getAllLiveTest($student_class_id);
-	if($row=mysqli_fetch_assoc($res))
+	if($row=mysqli_fetch_assoc($res)){
 		extract($row);
 	$_SESSION['test_id']=$test_id;
+		$test_set=1;
+	}
 
 }
 else if($user_role_id==3){
 	$res=$test->getAllLiveTestForTeacher($user_id);
-	if($row=mysqli_fetch_assoc($res))
+	if($row=mysqli_fetch_assoc($res)){
 		extract($row);
 	$_SESSION['test_id']=$test_id;
+		$test_set=1;
+	}
 }
 //Functions::redirect('includes/login.php');
 
@@ -67,11 +72,14 @@ else if($user_role_id==3){
               <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                  <?php
+					if($test_set==1){
 					if($user_role_id==3){
 						echo "<a href='showTestStatistics.php'>$test_name</a>";
-					}else{
+					}else if($user_role_id==5){
+                echo "<a href='startTest.php'>$test_name</a>"; 
+                }
+                }
 					?>
-                <a href="student_test.php"><?php echo $test_name; ?></a><?php } ?>
                 </div>
               </div>
             </div>
