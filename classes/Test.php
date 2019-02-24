@@ -66,6 +66,11 @@ class Test{
 		global $database;
         return mysqli_num_rows($res=$database->query($sql));
 	}
+	
+	public function getPhoneOfAllTestStudents($sql){
+		global $database;
+		return $database->query($sql);
+	}
     public function lastTestID(){
         $sql = "SELECT MAX(test_id) as lastTestID FROM test";
         global $database;
