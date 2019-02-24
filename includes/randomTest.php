@@ -1,5 +1,6 @@
 <?php
 include_once("bootstrap.php");
+session_start();
 
 ?>
 <!DOCTYPE html>
@@ -29,22 +30,23 @@ include_once("bootstrap.php");
             <!-- Header -->
             <div class="header py-lg-8"></div>
             <?php
+            $user_id = $_SESSION['user_id'];
             $obj = new Test();
-            $result = $obj->countQuestions();
+            $result = $obj->countQuestions($user_id);
+            $res = $obj->lastInsertQuestionID($user_id);
+            
             if(isset($_POST['generateRandom'])){
 
                 extract($_POST);
                 if($countOfQuestions <= $result){
                     $array = array();
                     for($i=0;count($array)<$countOfQuestions;$i++){
-                        $rand = rand(1,$result);
+                        $obj = new Test();
+                        $rand = rand($res-$result+1,$res);
                         if(!in_array($rand,$array)){
                             array_push($array, $rand);
                         }
                     }
-                    //print_r($array);
-                    session_start();
-                    //echo "hii";
                     $_SESSION['array'] = $array;
                 
                 }
@@ -104,7 +106,7 @@ include_once("bootstrap.php");
 				<input type="time" name="end_time">
 -->
         <p>Class:</p>
-        <select name="test_division" id="test_division">
+        <select name="test_class_id" id="test_division">
             <option value="1">D1</option>
             <option value="2">D2</option>
             <option value="3">D3</option>
@@ -132,6 +134,13 @@ include_once("bootstrap.php");
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
+        </select>
+                   
+        <p>Test Level:</p>         
+        <select name="test_division" id="">
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
         </select>
                     <button type="submit" name="submit_test" class="btn btn-blue">SET TEST</button>
                     <a href="<?php echo BASEURL."includes/showGeneratedTest.php "?>" class="btn">Generate Again!</a>

@@ -9,10 +9,19 @@ $obj=new User();
 $page="User Profile";
 //$res=$obj->getUserWithCondition("user_id",$_SESSION['user_id']);
 //$row=mysqli_fetch_assoc($res);
+$res=$obj->getUserWithCondition("user_id",$_SESSION['user_id']);
+if($row=mysqli_fetch_assoc($res))
+	extract($row); 
+if($user_role_id==5){
 $res=$obj->getUserWithJoinCondition("INNER JOIN student on users.user_id = student.user_id INNER JOIN student_class on student.student_class_id=student_class.student_class_id INNER JOIN branch on student.student_branch=branch.branch_id","users.user_id",$_SESSION['user_id']);
 $row=mysqli_fetch_assoc($res);
 extract($row);
-
+}
+else if($user_role_id==3){
+$res=$obj->getUserWithJoinCondition("INNER JOIN teacher on users.user_id = teacher.user_id INNER JOIN branch on teacher.teacher_branch_id=branch.branch_id INNER JOIN designation on teacher.teacher_designation_id=designation.designation_id","users.user_id",$_SESSION['user_id']);
+$row=mysqli_fetch_assoc($res);
+extract($row);
+}
 if(isset($_POST["edit_profile_submit"])){
 	extract($_POST);
 	$obj->updateUser($user_first_name,$user_last_name,$user_pincode);
@@ -97,15 +106,29 @@ if(isset($_POST["edit_profile_submit"])){
                   <?php echo $user_first_name." ".$user_last_name;; ?><span class="font-weight-light">, 27</span>
                 </h3>
                 <div class="h5 font-weight-300">
-                  <i class="ni location_pin mr-2"></i><?php echo $user_city ?>, <?php echo $user_state; ?>
+                  <i class="ni location_pin mr-2"></i><?php echo $user_city; ?>, <?php echo $user_state; ?>
                 </div>
+                <?php
+                if($user_role_id==5){
+					?>
                 <div class="h5 font-weight-300">
-                  <i class="ni location_pin mr-2"></i><?php echo $student_class ?><?php echo $student_division; ?>
+                  <i class="ni location_pin mr-2"></i><?php echo $student_class; ?><?php echo $student_division; ?>
                 </div>
                  <div class="h5 font-weight-300">
-                  <i class="ni location_pin mr-2"></i><?php echo $branch_name ?>
+                  <i class="ni location_pin mr-2"></i><?php echo $branch_name; ?>
                 </div>
-               
+               <?php
+				}else{
+					?>
+					<div class="h5 font-weight-300">
+                  <i class="ni location_pin mr-2"></i><?php echo $designation_name; ?>
+                </div>
+                 <div class="h5 font-weight-300">
+                  <i class="ni location_pin mr-2"></i><?php echo $branch_name; ?>
+                </div>
+					<?php
+				}
+						?>
                 
               </div>
             </div>

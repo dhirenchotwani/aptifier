@@ -3,8 +3,17 @@ include_once('../classes/Detection.php');
 include_once('../classes/Database.php');
 include_once('../classes/Session.php');
 include_once('../classes/Functions.php');
+include_once('../classes/Test.php');
 define('UPLOAD_DIR', 'images/');
 Session::startSession();
+$_SESSION['test_id']=$_GET['q'];
+$test=new Test();
+if($test->isTestGiven($_SESSION['user_id'],$_SESSION['test_id'])){
+echo "already given test get a modal here bros";
+echo "<a href='dashboard.php'>Go to dashboard</a>";
+	
+}
+else{
 if(isset($_POST['check-photos'])){
 	global $database;
 	$user_id=$_SESSION['user_id'];
@@ -44,7 +53,7 @@ if(isset($_POST['check-photos'])){
 //	echo $data->{'confidence'};
 
 		
-
+}
 }
 ?>
 <!DOCTYPE html>

@@ -1,9 +1,11 @@
 <?php
 include_once("bootstrap.php");
+session_start();
 ?>
 <?php
+$user_id = $_SESSION['user_id'];
 $obj = new Test();
-$result = $obj->countQuestions();
+$result = $obj->countQuestions($user_id);
 echo "you inserted ".$result." Questions";
 
 ?>

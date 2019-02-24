@@ -85,6 +85,8 @@
             $_SESSION['user_id'] = null;
             $_SESSION['user_name'] = null;
             $_SESSION['user_role'] = null;
+			$_SESSION['student_id'] = null;
+			$_SESSION['teacher_id'] = null;
             session_destroy();
         }
 

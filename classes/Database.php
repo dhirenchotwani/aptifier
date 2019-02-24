@@ -54,9 +54,7 @@
                 //echo "Database Selection Failed";
             }
             else{
-                ?>
-                <script>console.log("Database Selected");</script>
-                <?php
+             
             }
             //return $this->connection;
         }
