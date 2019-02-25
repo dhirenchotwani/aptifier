@@ -130,7 +130,7 @@ if(isset($_POST['finish_inserting_question'])){
                 <button type="submit" class="btn btn-primary" style="margin-left:350px; margin-bottom: 20px;" name="finish_inserting_question">Finish</button>
 
             </form>
-
+	<a href="insertQuestionFromExcel.php">Import from EXCEL</a>
         </div>
         
           <script>
