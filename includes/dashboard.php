@@ -95,7 +95,7 @@ else if($user_role_id==3){
                  <p class="mt-3 mb-0 text-muted text-sm">
                     
                     <span class="text-nowrap">Last Score</span>
-                    <span class="text-success mr-2"><b><?php echo $last_score; ?></b></span>
+                    <span class="text-success mr-2 font-weight-bold "><b style="color:red;"><?php echo $last_score; ?></b></span>
                   </p>
                 </div>
               </div>
@@ -106,7 +106,7 @@ else if($user_role_id==3){
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Total Tests</h5>
-                      <span class="h2 font-weight-bold mb-0"><?php echo $testCount; ?></span>
+                      <span class="h2 font-weight-bold mb-0 "><?php echo $testCount; ?></span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -117,7 +117,7 @@ else if($user_role_id==3){
                 <p class="mt-3 mb-0 text-muted text-sm">
                     
                     <span class="text-nowrap">Last Test:</span>
-                    <span class="text-success mr-2"><b><?php echo $last_test_name; ?></b></span>
+                    <span class="text-success mr-2 font-weight-bold "><b style="color:red"><?php echo $last_test_name; ?></b></span>
                   </p>
                 </div>
               </div>
@@ -139,7 +139,7 @@ else if($user_role_id==3){
                  <p class="mt-3 mb-0 text-muted text-sm">
                     
                     <span class="text-nowrap">Last Max Score:</span>
-                    <span class="text-success mr-2"><b><?php echo $prevscore; ?></b></span>
+                    <span class="text-success mr-2 font-weight-bold "><b style="color:red"><?php echo $prevscore; ?></b></span>
                   </p>
                 </div>
               </div>
@@ -161,7 +161,7 @@ else if($user_role_id==3){
                   <p class="mt-3 mb-0 text-muted text-sm">
                     
                     <span class="text-nowrap">Last Test given on:</span>
-     <span class="text-success mr-2"><b><?php echo substr($last_test_date,0,10); ?></b></span>
+     <span class="text-success mr-2 font-weight-bold "><b style="color:red"><?php echo substr($last_test_date,0,10); ?></b></span>
                   </p>
                 </div>
               </div>
@@ -213,7 +213,7 @@ else if($user_role_id==3){
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Total Tests</h5>
-                      <span class="h2 font-weight-bold mb-0"><?php echo $testCount; ?></span>
+                      <span class="h2 font-weight-bold mb-0" style="color:"><?php echo $testCount; ?></span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-warning text-white rounded-circle shadow">

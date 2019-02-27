@@ -80,7 +80,7 @@ if(isset($_GET['p'])){
     <nav class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark">
       <div class="container px-4">
         <a class="navbar-brand" href="">
-          <img src="../assets/img/brand/logo.png" />
+          
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -117,8 +117,8 @@ if(isset($_GET['p'])){
         <div class="header-body text-center mb-7">
           <div class="row justify-content-center">
             <div class="col-lg-5 col-md-6">
-              <h1 class="text-white">Welcome!</h1>
-              <p class="text-lead text-light">This is a place where you can test your brains!</p>
+          
+              <img src="../assets/img/brand/trans_white.png" />
             </div>
           </div>
         </div>
