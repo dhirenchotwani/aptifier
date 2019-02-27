@@ -122,13 +122,13 @@ class Test{
 	
 	public function getAllLiveTest($student_class_id){
 			global $database;
-			$res=$database->query("select * from test where test_class_id='$student_class_id'");
+			$res=$database->query("select * from test where test_class_id='$student_class_id' order by test_date");
 			return $res;
 		}
 	
 	public function getAllLiveTestForTeacher($teacher_id){
 		global $database;
-			$res=$database->query("select * from test where created_by=$teacher_id");
+			$res=$database->query("select * from test where created_by=$teacher_id order by created_at desc");
 			return $res;
 	}
     
@@ -161,6 +161,49 @@ class Test{
 
        return( $mailer->send_mail($email, $body, $subject));
 		}
+	
+	public function getTestAndScoreCount($student_id){
+		global $database;
+		$sql="select count(test_id) as testCount, sum(score)as final_score,max(score) as max_score from test_student where student_id=$student_id";
+		return($database->query($sql));
+	}
+	public function getLastScoreAndTest($student_id){
+		global $database;
+		$sql="select score as last_score,test.test_name as last_test_name,test_student.created_at as last_test_date  from test_student inner join test on test_student.test_id=test.test_id WHERE student_id=$student_id ORDER by test_student.created_at desc LIMIT 1";
+		return($database->query($sql));
+	}
+	
+	public function getPrevHighScore($student_id){
+		global $database;
+		$sql="select score as prevscore from test_student WHERE student_id=$student_id ORDER by score desc LIMIT 1,1";
+		return($database->query($sql));
+	}
+	
+	public function getAllGivenTest($student_id){
+		$sql="select score,test.test_name,test.test_date from test_student inner join test on test_student.test_id=test.test_id where student_id=$student_id order by test_date desc";
+		global $database;
+return($database->query($sql));
+
+	}
+	
+	public function getTotalQuestions($teacher_id){
+		$sql="SELECT count(questions_id) as total_ques from question WHERE created_by=$teacher_id";
+		global $database;
+		return($database->query($sql));
+
+	}
+	
+	public function getTotalTests($teacher_id){
+		$sql="SELECT count(test_id) as testCount from test where created_by=$teacher_id";
+		global $database;
+		return($database->query($sql));
+	}
+	
+	public function getTotalStudentsWhoGaveTest($teacher_id){
+		$sql="SELECT count(test_student.test_student_id) as studCount from test_student inner join test on test_student.test_id=test.test_id where test.created_by=$teacher_id";
+		global $database;
+		return($database->query($sql));
+	}
 }
 ?>
 
