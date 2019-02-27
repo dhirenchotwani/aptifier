@@ -138,6 +138,29 @@ class Test{
         $res=$database->query($sql);
         return $res;
     }
+	
+	public function sendScheduledTestMail($email,$user_name,$faculty_name,$test_name,$date){
+	    
+        $mailer = new Mailer();
+
+        $subject = "A quiz has beeen scheduled for You!";
+
+        $body = "<div style='font-family:Roboto; font-size:16px; max-width: 600px; line-height: 21px;'>     <h4>Hello,</h4>
+            <h3>Hey, $user_name a Test has been scheduled</h3>
+            <br>  
+            <p style='text-decoration:none; color:#fff; background-color:#348eda;border:solid #348eda; border-width:2px 10px; line-height:2;font-weight:bold; text-align:center; display:inline-block;border-radius:4px'>
+			$test_name has been scheduled for you by $faculty_name on $date;
+			</p>
+            <br>  
+            <h3>Thank you for Choosing Quiz-Handlers.</h3>
+            <br>
+            <br>
+            <h4>Sincerely,</h4>
+            <h5>The Quiz Handler Team.</h5>
+            </div>";
+
+       return( $mailer->send_mail($email, $body, $subject));
+		}
 }
 ?>
 
