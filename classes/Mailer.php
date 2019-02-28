@@ -23,7 +23,10 @@ class Mailer{
 		$this->mail->Password = "quizhandlers123";
         $this->mail->SetFrom("handlesquizlikeaboss@gmail.com", "Quiz Handlers");
         $this->mail->Subject = $subject;
-        $this->mail->Body = $body;
+        $this->mail->Body =$body;
+		$this->mail->addEmbeddedImage('img/final1.png', 'logo');	
+		
+		
         $this->mail->AddAddress("$user_mail");
 
         if (!$this->mail->Send()) {
