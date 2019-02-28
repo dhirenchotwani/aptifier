@@ -14,12 +14,12 @@ if($user_role_id==5){
 	$res=$obj->getUserWithJoinCondition("INNER JOIN student on users.user_id = student.user_id INNER JOIN student_class on student.student_class_id=student_class.student_class_id INNER JOIN branch on student.student_branch=branch.branch_id","users.user_id",$_SESSION['user_id']);
 $row=mysqli_fetch_assoc($res);
 extract($row);
-	$res=$test->getAllLiveTest($student_class_id);		
+	$res=$test->getAllTestForStudent($student_class_id,"=");		
 	}
 
 
 else if($user_role_id==3){
-	$res=$test->getAllLiveTestForTeacher($user_id);
+	$res=$test->getAllTestForTeacher($user_id,"=");
 	if($row=mysqli_fetch_assoc($res)){
 		extract($row);
 	$_SESSION['test_id']=$test_id;
@@ -46,7 +46,7 @@ else if($user_role_id==3){
   <link href="../assets/vendor/nucleo/css/nucleo.css" rel="stylesheet">
   <link href="../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
-  <link type="text/css" href="../assets/css/argon.min.css" rel="stylesheet">
+  <link type="text/css" href="../assets/css/argon.css" rel="stylesheet">
 </head>
 
 <body>
@@ -275,12 +275,9 @@ else if($user_role_id==3){
 <!--   Page Content-->
    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
        <hr style="border-color:white">
-       <?php
-	   if($user_role_id==3)
-		   echo "<h3 style='color:white; padding-left:40px;'>ALL TESTS</h3>";
-	   else
-		   echo "<h3 style='color:white; padding-left:40px;'>LIVE TEST</h3>";
-	   ?>
+     
+		  <h3 style='color:white; padding-left:40px;'>LIVE TESTS</h3>
+
        
     
       <div class="container-fluid">
@@ -303,6 +300,7 @@ else if($user_role_id==3){
 						echo "<p>Test Class:D$test_class_id$test_division</p>";
 					
 						echo "<p>Test Date:$test_date</p>";
+				 $start_time=date("g:i a",strtotime(substr($start_time,10)));
 				echo "<p>Test Starts at:$start_time</p>";
 			
 					?>
@@ -320,8 +318,9 @@ else if($user_role_id==3){
                  <?php
 							echo "<a href='startTest.php?q=$test_id'>$test_name</a>";
 						echo "<p>Test Date:$test_date</p>";
-				   $start_time=substr($start_time,10);
+				   $start_time=date("g:i a",strtotime(substr($start_time,10)));
 				echo "<p>Test Starts at:$start_time</p>";
+				  
 			
 					?>
                 </div>
@@ -341,14 +340,19 @@ else if($user_role_id==3){
       </div>
     </div>
     
-<!--    TESTS GIVEN SECTION HERE-->
+<!--   UPCOOMING TESTS  SECTION HERE-->
     <?php
 	  if($user_role_id==5){
-		  $res=$test->getAllGivenTest($_SESSION['user_id']);
-	  ?>
-     <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+		  $res=$test->getAllTestForStudent($student_class_id,">");
+	  }else($user_role_id==3){
+		  $res=$test->getAllTestForTeacher($_SESSION['user_id'],">")
+	  }
+		  
+	  
+		  ?>
+		  <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
        <hr style="border-color:white">
-		 <h3 style='color:white; padding-left:40px;'>TEST GIVEN</h3>
+		 <h3 style='color:white; padding-left:40px;'>UPCOMING TESTS</h3>
 
        
     
@@ -369,7 +373,8 @@ else if($user_role_id==3){
                  <?php
 							echo "<p>Test Name:$test_name</p>";
 						echo "<p>Test Date:$test_date</p>";
-					echo "<p>Test Score:$score</p>";
+					  $start_time=date("g:i a",strtotime(substr($start_time,10)));
+				echo "<p>Test Starts at:$start_time</p>";
 			
 					?>
                 </div>
@@ -388,9 +393,115 @@ else if($user_role_id==3){
         </div>
       </div>
     </div>
+<!--    TESTS GIVEN SECTION HERE-->
+		  <?php
+	  if($user_role_id==5){
+		  $res=$test->getAllGivenTest($_SESSION['user_id']);
+	  }else
+		  $res=$test->getAllTestForTeacher($_SESSION['user_id'],"<");
+	  ?>
+     <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+       <hr style="border-color:white">
+       <?php
+       if($user_role_id==3){
+		 echo "<h3 style='color:white; padding-left:40px;'>ALL TESTS</h3>";
+	   }else if($user_role_id==5){
+		    echo "<h3 style='color:white; padding-left:40px;'>TESTS GIVEN</h3>";
+	   }?>
+       
+    
+      <div class="container-fluid">
+        <div class="header-body">
+          <!-- Card stats -->
+  
+          <div class="row">
+            <?php
+			  if(mysqli_num_rows($res) > 0 ){
+				 	foreach($res as $tst){
+						extract($tst);
+				  
+			?>
+			   <div class="col-xl-3 col-lg-6">
+              <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body" style="width:300px;">
+                 <?php
+							echo "<p>Test Name:$test_name</p>";
+						echo "<p>Test Date:$test_date</p>";
+						if($user_role_id==5)
+					echo "<p>Test Score:$score</p>";
+			
+					?>
+                </div>
+              </div>
+            </div>
+			<?php   
+		   }
+		   }
+			
+			
+            ?>
+           
+           
+          
+          </div>
+        </div>
+      </div>
+    </div>
+    
+<!--    TEST MISSED BY STUDENT HERE-->
+   	  <?php
+	  if($user_role_id==5){
+		  $res=$test->getAllTestForStudent($student_class_id,"<");
+?>
+     <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+       <hr style="border-color:white">
+       <?php
+		  	if($user_role_id==5){
+		    echo "<h3 style='color:white; padding-left:40px;'>TESTS MISSED</h3>";
+	   }?>
+       
+    
+      <div class="container-fluid">
+        <div class="header-body">
+          <!-- Card stats -->
+  
+          <div class="row">
+            <?php
+			  if(mysqli_num_rows($res) > 0 ){
+				 	foreach($res as $tst){
+						extract($tst);
+						if(!$test->isTestGiven($_SESSION['user_id'],$test_id)){
+				  
+			?>
+			   <div class="col-xl-3 col-lg-6">
+              <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body" style="width:300px;">
+                 <?php
+							echo "<p>Test Name:$test_name</p>";
+						echo "<p>Test Date:$test_date</p>";
+					
+			
+					?>
+                </div>
+              </div>
+            </div>
+			<?php   
+		   }
+		   }
+			 }
+			
+			
+            ?>
+           
+           
+          
+          </div>
+        </div>
+      </div>
+    </div>
     <?php
-    }
-    ?>
+	  }
+	  ?>
 <!--    Page content ends here-->
   </div>
   <!-- Argon Scripts -->

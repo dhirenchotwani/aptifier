@@ -120,15 +120,21 @@ class Test{
     }
     
 	
-	public function getAllLiveTest($student_class_id){
+	public function getAllTestForStudent($student_class_id,$opt){
 			global $database;
-			$res=$database->query("select * from test where test_class_id='$student_class_id' order by test_date");
-			return $res;
+			$res=$database->query("select * from test where test_class_id=$student_class_id and test_date $opt CURDATE() order by test_date");
+			return $res; 
 		}
 	
-	public function getAllLiveTestForTeacher($teacher_id){
+//	public function getAllFutureTest($student_class_id){
+//			global $database;
+//			$res=$database->query("select * from test where test_class_id=$student_class_id and test_date>CURDATE() order by test_date");
+//			return $res; 
+//		}
+	
+	public function getAllTestForTeacher($teacher_id,$opt){
 		global $database;
-			$res=$database->query("select * from test where created_by=$teacher_id order by created_at desc");
+			$res=$database->query("select * from test where created_by=$teacher_id and test_date $opt CURDATE() order by test_date desc");
 			return $res;
 	}
     
@@ -200,7 +206,7 @@ return($database->query($sql));
 	}
 	
 	public function getTotalStudentsWhoGaveTest($teacher_id){
-		$sql="SELECT count(test_student.test_student_id) as studCount from test_student inner join test on test_student.test_id=test.test_id where test.created_by=$teacher_id";
+		$sql="SELECT count(DISTINCT test_student.student_id) as studCount from test_student inner join test on test_student.test_id=test.test_id where test.created_by=$teacher_id";
 		global $database;
 		return($database->query($sql));
 	}
