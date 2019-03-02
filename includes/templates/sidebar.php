@@ -94,7 +94,7 @@
           </li>
           <?php if($user_role_id == 3){?>
           <li class="nav-item">
-            <a class="nav-link" href="insertQuestion.php">
+            <a class="nav-link" href="test.php">
               <i class="ni ni-planet text-blue"></i>Test
             </a>
           </li>

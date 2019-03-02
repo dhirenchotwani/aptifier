@@ -83,7 +83,11 @@ session_start();
                         echo "nonrepeatarray id : ".$id." ";
                         echo "<br>";
                     }*/
-                    $_SESSION['array'] = $nonrepeatarray;
+					$temp=array();
+					for($i=0;$i<count($nonrepeatarray);$i++){
+						array_push($temp,$array2[$nonrepeatarray[$i]]);
+					}
+                    $_SESSION['array'] = $temp;
                 
                 }
                 $obj = new Test();
