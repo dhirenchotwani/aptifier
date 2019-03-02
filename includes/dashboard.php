@@ -46,6 +46,7 @@ else if($user_role_id==3){
   <link href="../assets/vendor/nucleo/css/nucleo.css" rel="stylesheet">
   <link href="../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
+<!--  <link type="text/css" href="../assets/css/argon.min.css" rel="stylesheet">-->
   <link type="text/css" href="../assets/css/argon.css" rel="stylesheet">
 </head>
 
@@ -296,7 +297,7 @@ else if($user_role_id==3){
               <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body" >
                  <?php
-							echo "<a href='showTestStatistics.php'>$test_name</a>";
+							echo "<a href='showTestStatistics.php?q=$test_id'>$test_name</a>";
 						echo "<p>Test Class:D$test_class_id$test_division</p>";
 					
 						echo "<p>Test Date:$test_date</p>";

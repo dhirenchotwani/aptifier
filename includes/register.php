@@ -1,13 +1,17 @@
 <?php
 include_once('../classes/Database.php');
 include_once('../classes/User.php');
-include_once('../classes/Cipher.php');
+include_once('../classes/Functions.php');
 
 if(isset($_POST['register_submit'])){
 	$obj=new User();
 	extract($_POST);
-	if($obj->sendEmailToRecipient($user_email))
+	if($obj->sendEmailToRecipient($user_email)){
 	$obj->insertUserEmail($user_email,$user_password);
+		Functions::redirect("login.php");
+	}else{
+		echo "email sending failed!";
+	}
 }
 
 if(isset($_GET['XSRS'])){

@@ -18,7 +18,7 @@ $curl = curl_init();
 //$data2 = base64_encode($img2);
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "http://106.51.58.118:5000/compare_faces?face_det=1",
+  CURLOPT_URL => "http://facexapi.com/compare_faces?face_det=1",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -55,7 +55,7 @@ public function countFaces($data1){
 	$curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "http://106.51.58.118:5000/get_image_attr?bboxes=286,118,403,246&face_det=1",
+  CURLOPT_URL => "http://facexapi.com/get_image_attr?bboxes=286,118,403,246&face_det=1",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
