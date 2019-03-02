@@ -89,13 +89,7 @@ class Test{
         
     }
     
-    public function countQuestions($user_id){
-        $sql = "SELECT COUNT(questions_id) as total from question WHERE created_by = {$user_id} and is_deleted=0";
-        global $database;
-        $res=$database->query($sql);
-        $row = $res->fetch_assoc();
-        return $row['total'];
-    }
+   
     
     public function countQuestionsForTest(){
         $sql = "SELECT COUNT(questions_id) as total from question";
@@ -211,6 +205,54 @@ return($database->query($sql));
 		global $database;
 		return($database->query($sql));
 	}
+	public function selectNewQuestions($user_id){
+        $sql = "SELECT questions_id FROM question WHERE created_by={$user_id} and is_deleted=0";
+        global $database;
+        $res=$database->query($sql);
+        return $res;
+        
+    }
+    
+     public function selectOldQuestions($user_id,$question_chapter_id){
+        $sql = "SELECT questions_id FROM question WHERE created_by={$user_id} and question_chapter_id = {$question_chapter_id} and is_deleted=1";
+        global $database;
+        $res=$database->query($sql);
+        return $res;
+        
+    }
+    
+    public function countnewInsertedQuestions($user_id){
+        $sql = "SELECT COUNT(questions_id) as total from question WHERE created_by = {$user_id} and is_deleted=0";
+        global $database;
+        $res=$database->query($sql);
+        $row = $res->fetch_assoc();
+        return $row['total'];
+    }
+    
+    
+    
+    public function countQuestions($question_chapter_id){
+        $sql = "SELECT COUNT(questions_id) as total from question WHERE question_chapter_id = {$question_chapter_id} and is_deleted=1";
+        global $database;
+        $res=$database->query($sql);
+        $row = $res->fetch_assoc();
+        return $row['total'];
+    }
+    
+    public function countoldInsertedQuestions($user_id){
+        $sql = "SELECT COUNT(questions_id) as total,question_chapter_id from question WHERE created_by = {$user_id} and is_deleted = 1 GROUP BY(question_chapter_id)";
+        global $database;
+        $res=$database->query($sql);
+        return $res;
+    }
+    
+    public function getChapterName($chapter_id){
+        $sql = "SELECT chapter_name from chapter WHERE chapter_id = {$chapter_id}";
+        global $database;
+        $res=$database->query($sql);
+        $row = $res->fetch_assoc();
+        return $row['chapter_name'];
+    }
 }
 ?>
 

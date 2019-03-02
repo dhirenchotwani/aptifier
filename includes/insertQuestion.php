@@ -1,6 +1,6 @@
 <?php
 include_once("bootstrap.php");
-Session::startSession();
+session_start();
 ?>
 
 <?php
@@ -30,14 +30,42 @@ if(isset($_POST['submit_question'])){
            $is_question_image = 1;
 
     }
-    //$string_of_chapters_id = implode(",",$_SESSION['array_chapters_id']);
-    //echo $string_of_chapters_id;
-    //echo $question_option1.$question_option2.$question_option3.$question_option4;
+    $bool = TRUE;
     $array = array("question_text"=>$question_text, "question_image"=>$question_image, "question_option1"=>$question_option1, "question_option2"=>$question_option2, "question_option3"=>$question_option3, "question_option4"=>$question_option4, "question_correct_answer"=>$question_correct_answer,"question_difficulty_level"=>$question_difficulty_level, "is_question_image"=>$is_question_image,"question_chapter_id"=> $chapter_id, "created_at" => date("Y-m-d H:i:s"),"created_by"=> $user_id,"updated_at" => date("Y-m-d h:i:s"),"updated_by"=> $user_id);
     
     $obj = new Test();
+    if(strcmp($question_option1,$question_option2) == 0){
+        $bool = FALSE;
+    }
+    if(strcmp($question_option1,$question_option2) == 0){
+        $bool = FALSE;
+    }
+    if(strcmp($question_option1,$question_option3) == 0){
+        $bool = FALSE;
+    }
+    if(strcmp($question_option1,$question_option4) == 0){
+        $bool = FALSE;
+    }
+    if(strcmp($question_option2,$question_option3) == 0){
+        $bool = FALSE;
+    }
+    if(strcmp($question_option2,$question_option4) == 0){
+        $bool = FALSE;
+    }
+    if(strcmp($question_option3,$question_option4) == 0){
+        $bool = FALSE;
+    }
+    if($bool){
     $obj->insert($array, "question");
+    }
+    else{
+        ?>
+        
+        <script>window.alert("Two Mcq Cannot Have Same Answers!");</script>
+        <?php
+    }
 }
+
 
 if(isset($_POST['finish_inserting_question'])){
     Functions::redirect('showGeneratedTest.php');
@@ -76,7 +104,7 @@ if(isset($_POST['finish_inserting_question'])){
         </div>
         <h2 style="text-align: center; padding-top: 30px;">Add|Questions</h2>
         <div class="container" style="border: 1px solid #ddd; background-color: #fff; margin:0 auto;width: 800px;">
-
+		<a href="insertQuestionFromExcel.php">Insert From EXCEL</a>
             <form method="post" enctype="multipart/form-data" action="" class="" style=>
               
               <label for="">Subject:</label>
@@ -130,7 +158,7 @@ if(isset($_POST['finish_inserting_question'])){
                 <button type="submit" class="btn btn-primary" style="margin-left:350px; margin-bottom: 20px;" name="finish_inserting_question">Finish</button>
 
             </form>
-	<a href="insertQuestionFromExcel.php">Import from EXCEL</a>
+
         </div>
         
           <script>

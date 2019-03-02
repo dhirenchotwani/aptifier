@@ -32,28 +32,65 @@ session_start();
             <?php
             $user_id = $_SESSION['user_id'];
             $obj = new Test();
-            $result = $obj->countQuestions($user_id);
-            $res = $obj->lastInsertQuestionID($user_id);
+            
             
             if(isset($_POST['generateRandom'])){
-
                 extract($_POST);
-                if($countOfQuestions <= $result){
-                    $array = array();
-                    for($i=0;count($array)<$countOfQuestions;$i++){
-                        $obj = new Test();
-                        $rand = rand($res-$result+1,$res);
-                        if(!in_array($rand,$array)){
-                            array_push($array, $rand);
-                        }
+                if($test_id == "new"){
+                $result = $obj->countnewInsertedQuestions($user_id);
+                //$res = $obj->lastInsertQuestionID($user_id);
+                $array2 = array();
+            $res = $obj->selectNewQuestions($user_id);
+                while($row=mysqli_fetch_assoc($res)){
+                    extract($row);
+                    array_push($array2,$questions_id);
+                }
+                
+//                foreach($array2 as $id){
+//                        echo "array2 id : ".$id." ";
+//                    echo "<br>";
+//                    }
+                    echo "count=".count($array2);
+                    echo "<br>";
+                
+                }
+                else{
+                    $result = $obj->countQuestions($test_id);
+                        //here $test_id is $question_chapter_id
+                $array2 = array();
+            $res = $obj->selectOldQuestions($user_id,$test_id);
+                while($row=mysqli_fetch_assoc($res)){
+                    extract($row);
+                    array_push($array2,$questions_id);
+                }
+					/*
+                foreach($array2 as $id){
+                        echo "array2 id : ".$id." ";
+                        echo "<br>";
                     }
-                    $_SESSION['array'] = $array;
+                    echo "count=".count($array2);*/
+                    echo "<br>";
+                    
+                }
+                if($countOfQuestions <= $result){
+                    
+                    //$array = array();
+                    $arr = range(0, count($array2)-1);
+                    shuffle($arr);
+    $nonrepeatarray = array_slice($arr, 0, $countOfQuestions);
+                    /*
+                    foreach($nonrepeatarray as $id){
+                        echo "nonrepeatarray id : ".$id." ";
+                        echo "<br>";
+                    }*/
+                    $_SESSION['array'] = $nonrepeatarray;
                 
                 }
                 $obj = new Test();
                 $k=1;
-                for($j=0;$j<count($array);$j++){
-                    $res = $obj->getQuestionWithRandomNumber($array[$j]);
+                for($j=0;$j<count($nonrepeatarray);$j++){
+                    $res = $obj->getQuestionWithRandomNumber($array2[$nonrepeatarray[$j]]);
+                   // echo "index=".$array[$j]." ";
                     $row = mysqli_fetch_assoc($res);
                     extract($row);
             ?>
