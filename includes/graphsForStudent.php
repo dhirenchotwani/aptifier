@@ -1,4 +1,5 @@
 <?php
+
  include_once("../classes/Session.php");
 include_once("../classes/Functions.php");
 include_once("../classes/User.php");
@@ -15,19 +16,19 @@ $user_role_id=$_SESSION['user_role'];
 
 $data=array();
 $labels=array();
-if(isset($_POST['class'])){
-$res=$database->query("SELECT count(*) as cnt,test.test_class_id,student_class.student_class as class from test inner join student_class on test.test_class_id=student_class.student_class_id where test.created_by=$user_id group by test_class_id");
+if(isset($_POST['subject'])){
+$res=$database->query("select count(*) as cnt,subject_name as subject from test_student inner join test on test_student.test_id=test.test_id inner join chapter on test.test_chapter_id=chapter.chapter_id inner join subject on chapter.chapter_subject_id=subject.subject_id where test_student.student_id=$user_id GROUP by subject_name");
 
 foreach($res as $row){
 	extract($row);
 	array_push($data,$cnt);
-	array_push($labels,$class);
+	array_push($labels,$subject);
 }	
-	$headline="Total tests taken for each class(All Time)";
+	$headline="Total tests given for each sbuject(All Time)";
 	$type=1;
 }
 else if(isset($_POST['chapter'])){
-	$res=$database->query("select count(test.test_id) as cnt, chapter.chapter_name as cname from test inner join chapter on test.test_chapter_id=chapter.chapter_id where test.created_by=$user_id GROUP by test.test_chapter_id");
+	$res=$database->query("select count(*) as cnt,chapter_name as cname from test_student inner join test on test_student.test_id=test.test_id inner join chapter on test.test_chapter_id=chapter.chapter_id WHERE test_student.student_id=$user_id GROUP by chapter.chapter_id");
 $data=array();
 $labels=array();
 foreach($res as $row){
@@ -35,46 +36,18 @@ foreach($res as $row){
 	array_push($data,$cnt);
 	array_push($labels,$cname);
 }
-	$headline="Total tests taken for each chapter(All Time)";
+	$headline="Total tests given for each chapter(All Time)";
 	$type=2;
 }
-else if(isset($_POST['maxscoreeachtest'])){
-	$res=$database->query("select max(score) as max,test.test_name,users.user_first_name from test_student inner join test on test_student.test_id=test.test_id inner join users on test_student.student_id=users.user_id where test.created_by=$user_id GROUP by test.test_name");
+else if(isset($_POST['score'])){
+	$res=$database->query("select score,test_name from test_student inner join test on test_student.test_id=test.test_id where student_id=$user_id");
 foreach($res as $row){
 	extract($row);
-	array_push($data,$max);
-	array_push($labels,($test_name." by ".$user_first_name));
+	array_push($data,$score);
+	array_push($labels,$test_name);
 }
 	$headline=" Max score for each test taken (All Time)";
 	$type=3;
-}else if(isset($_POST['chapterMonth'])){
-	$data1=array();
-	$res=$database->query("select count(*) as cnt,chapter.chapter_name as name,chapter_id from test inner join chapter on test_chapter_id=chapter.chapter_id where EXTRACT(MONTH FROM test_date)=2 and test.created_by=$user_id GROUP by chapter.chapter_id");
-	foreach($res as $row){
-	extract($row);
-	array_push($data,$cnt);
-	array_push($labels,$name);
-}
-	$res=$database->query("select count(*) as cnt,chapter.chapter_name,chapter_id from test inner join chapter on test_chapter_id=chapter.chapter_id where EXTRACT(MONTH FROM test_date)=3 and test.created_by=$user_id GROUP by chapter.chapter_id");
-	foreach($res as $row){
-	extract($row);
-	array_push($data1,$cnt);
-
-}
-	$headline="Total tests taken for each chapter for last 2 months";
-	$type=4;
-	?>
-	<script>	var data1= <?php echo json_encode($data1); ?>;</script>
-	<?php
-}else if(isset($_POST['subject'])){
-	$res=$database->query("select count(test.test_id) as cnt, subject.subject_name as sname from test inner join chapter on test.test_chapter_id=chapter.chapter_id inner JOIN subject on chapter.chapter_subject_id=subject.subject_id where test.created_by=$user_id GROUP by chapter.chapter_subject_id");
-foreach($res as $row){
-	extract($row);
-	array_push($data,$cnt);
-	array_push($labels,$sname);
-}
-	$headline=" No of test taken for each subject (All Time)";
-	$type=5;
 }
 ?>
 <!DOCTYPE html>
@@ -111,11 +84,9 @@ foreach($res as $row){
     <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
       <div class="container-fluid">
         <form action="" method="post">
-	 <input type="submit" name="class" value="Class">
-   <input type="submit" name="subject" value="Subject">
-    <input type="submit" name="chapter" value="Chapter">
-    <input type="submit" name="chapterMonth" value="Chapter for last 2 Months">
-     <input type="submit" name="maxscoreeachtest" value="Max Score">
+	<input type="submit" name="subject" value="Subjects">
+	  <input type="submit" name="chapter" value="Chapter">
+	   <input type="submit" name="score" value="Score">
 	 <div id="container" style="height:550px; width:1000px; display:none; background-color: white;">
        <?php echo $headline; ?>
         <canvas id="class" ></canvas>
@@ -141,15 +112,11 @@ var labels = <?php echo json_encode($labels); ?>;
 
 document.getElementById("container").style.display="block";
 		if(type==1){
-renderChart(data,labels,"bar");
+renderPieChart(data,labels,"Subjects")
 		}else if(type==2){
 renderChart(data,labels,"bar");
 		}else if(type==3){
 renderChart(data,labels,"horizontalBar");
-		}else if(type==4){
-						renderDoubleChart(data,data1,labels);
-		}else if(type==5){
-			renderPieChart(data,labels,"Subjects")
 		}
 	</script>
   <!-- Core -->
@@ -163,3 +130,4 @@ renderChart(data,labels,"horizontalBar");
 </body>
 
 </html>
+?>
