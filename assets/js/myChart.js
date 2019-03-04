@@ -84,3 +84,29 @@ var myChart = new Chart(pie, {
     }
 });
 }
+
+function renderLineChart(data,labels){
+	 var ctx = document.getElementById("class").getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'All time',
+                data: data,
+                borderColor: 'rgba(8, 71, 110, 1)',
+                backgroundColor: 'rgba(8, 71, 110, 0.6)',
+            }]
+        },
+        options: {            
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        
+                    }
+                }]                
+            }
+        },
+    });
+}

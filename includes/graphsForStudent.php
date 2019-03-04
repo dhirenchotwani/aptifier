@@ -48,6 +48,34 @@ foreach($res as $row){
 }
 	$headline=" Max score for each test taken (All Time)";
 	$type=3;
+}else if(isset($_POST['month'])){
+	$data1=array();
+	$res=$database->query("select count(*) as cnt,subject.subject_name as sname from test_student inner join test on test_student.test_id=test.test_id INNER join chapter on test.test_chapter_id=chapter.chapter_id INNER join subject on chapter.chapter_subject_id=subject.subject_id where EXTRACT(MONTH FROM test_student.created_at)=2 and student_id=$user_id GROUP by subject.subject_id");
+	foreach($res as $row){
+	extract($row);
+	array_push($data,$cnt);
+	array_push($labels,$sname);
+}
+	$res=$database->query("select count(*) as cnt,subject.subject_name as sname from test_student inner join test on test_student.test_id=test.test_id INNER join chapter on test.test_chapter_id=chapter.chapter_id INNER join subject on chapter.chapter_subject_id=subject.subject_id where EXTRACT(MONTH FROM test_student.created_at)=3 and student_id=$user_id GROUP by subject.subject_id");
+	foreach($res as $row){
+	extract($row);
+	array_push($data1,$cnt);
+	
+}
+	$headline="No of test given for each test";
+	$type=4;
+	?>
+	<script>	var data1= <?php echo json_encode($data1); ?>;</script>
+	<?php
+}else if(isset($_POST['performance'])){
+	$res=$database->query("SELECT score,test.test_name FROM `test_student` inner join test on test_student.test_id=test.test_id where student_id=$user_id");
+	foreach($res as $row){
+	extract($row);
+	array_push($data,$score);
+	array_push($labels,$test_name);
+}
+	$type=5;
+	$headline="All time Overall Performance";
 }
 ?>
 <!DOCTYPE html>
@@ -87,6 +115,8 @@ foreach($res as $row){
 	<input type="submit" name="subject" value="Subjects">
 	  <input type="submit" name="chapter" value="Chapter">
 	   <input type="submit" name="score" value="Score">
+	    <input type="submit" name="month" value="Previous Month">
+	    <input type="submit" name="performance" value="Overall Performance">
 	 <div id="container" style="height:550px; width:1000px; display:none; background-color: white;">
        <?php echo $headline; ?>
         <canvas id="class" ></canvas>
@@ -117,6 +147,10 @@ renderPieChart(data,labels,"Subjects")
 renderChart(data,labels,"bar");
 		}else if(type==3){
 renderChart(data,labels,"horizontalBar");
+		}else if(type==4){
+						renderDoubleChart(data,data1,labels);
+		}else if(type==5){
+			renderLineChart(data,labels);
 		}
 	</script>
   <!-- Core -->
