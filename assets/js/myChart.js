@@ -31,7 +31,7 @@ function renderChart(data, labels,typeG) {
 function renderDoubleChart(data, data1,labels,typeG) {
     var ctx = document.getElementById("class").getContext('2d');
     var myChart = new Chart(ctx, {
-        type: 'bar',
+        type: typeG,
         data: {
             labels: labels,
             datasets: [
@@ -109,4 +109,26 @@ function renderLineChart(data,labels){
             }
         },
     });
+}
+function renderDoughnutChart(data,labels){
+
+new Chart(document.getElementById("class"), {
+    type: 'doughnut',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: "Population (millions)",
+          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+          data: data
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Predicted world population (millions) in 2050'
+      }
+    }
+});
 }

@@ -39,11 +39,11 @@ foreach($res as $row){
 	$type=2;
 }
 else if(isset($_POST['maxscoreeachtest'])){
-	$res=$database->query("select max(score) as max,test.test_name,users.user_first_name from test_student inner join test on test_student.test_id=test.test_id inner join users on test_student.student_id=users.user_id where test.created_by=$user_id GROUP by test.test_name");
+	$res=$database->query("select max(score) as max,test.test_name,users.user_first_name as name from test_student inner join test on test_student.test_id=test.test_id inner join users on test_student.student_id=users.user_id where test.created_by=$user_id GROUP by test.test_name");
 foreach($res as $row){
 	extract($row);
 	array_push($data,$max);
-	array_push($labels,($test_name." by ".$user_first_name));
+	array_push($labels,($test_name." by ".$name));
 }
 	$headline=" Max score for each test taken (All Time)";
 	$type=3;
@@ -147,7 +147,7 @@ renderChart(data,labels,"bar");
 		}else if(type==3){
 renderChart(data,labels,"horizontalBar");
 		}else if(type==4){
-						renderDoubleChart(data,data1,labels);
+						renderDoubleChart(data,data1,labels,"bar");
 		}else if(type==5){
 			renderPieChart(data,labels,"Subjects")
 		}

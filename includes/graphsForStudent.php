@@ -148,9 +148,9 @@ renderChart(data,labels,"bar");
 		}else if(type==3){
 renderChart(data,labels,"horizontalBar");
 		}else if(type==4){
-						renderDoubleChart(data,data1,labels);
+						renderDoubleChart(data,data1,labels,"bar");
 		}else if(type==5){
-			renderLineChart(data,labels);
+			renderDoughnutChart(data,labels);
 		}
 	</script>
   <!-- Core -->
