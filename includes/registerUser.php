@@ -30,6 +30,7 @@ if(isset($_POST['submit_user_details'])){
     <head>
         <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="../assets/css/details.css">
+         <title>Aptifiers! | Personal Details</title>
     </head>
     <body>
        

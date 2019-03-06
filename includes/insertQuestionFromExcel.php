@@ -48,10 +48,11 @@ global $database;
 ?>
 <html>
 <head>
-	<title>Upload Excel Sample Here</title>
+	 <title>Aptifiers! | Upload from Excel</title>
+	     <link href="../assets/data2/images/faviconb.png" rel="icon" type="image/png">
 </head>
 <body>
-	<h1>Upload your .csv files here</h1>
+	<h1>Upload your .csv/.xsl files here</h1>
 	<form action="" method="post" enctype="multipart/form-data">
 	<input type="file" name="csv_file">
 	<input type="submit" name="upload" value="Press here">
