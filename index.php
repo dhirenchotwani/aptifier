@@ -72,6 +72,18 @@ else{
 			margin-bottom: 20px;
 			padding: 8px 15px;
 		}
+		
+		.pics{
+			border-radius: 50%;
+			width: 180px;
+			height: 180px;
+		}
+		
+		.pics:hover{
+			 box-shadow: 0 0 10px 5px rgba(0, 140, 186, 0.5); 
+		}
+		
+
 
 		/*
 
@@ -158,26 +170,19 @@ else{
 					<div class="contact-left">
 
 
-						<div class="contact-info" id="contact">
-							<address style="margin-top: 30px;">
- 									<strong>Headquaters</strong>
- 									<p style="padding-top: 20px;">313,Evergreen CHS <br>
- 									Airoli sector 15, <br>
- 									New Bombay, <br>
- 									Mumbai-55.
- 									</p>
- 								</address>
-
-							<div class="phone-fax-email">
-								<p>
-									<strong>Phone:</strong> <span>(719)-778-8804</span>
-									<br/>
-									<strong>Fax:</strong> <span>(719)-778-8804 8890</span>
-									<br/>
-									<strong>Email:</strong> <span>info@Aptifier.in</span>
-									<br/>
-								</p>
+						<div class="contact-info" style="color:white;" id="contact">
+						<strong>Created By Students of VESIT D12(CMPN Batch 2020)</strong><br>
+							<div class="dev-info">
+							<br>
+							<img class="pics" src="assets/img/brand/chirag.png" alt="Chirag Raghani" >
+								<img class="pics" src="assets/img/brand/dhiren.png" alt="Dhiren Chotwani"  style="margin-left:70px;">
+								<br><br>
+								<img class="pics" src="assets/img/brand/priyanka.jpg" alt="Priyanka Lalchandani" >
+								<img class="pics" src="" alt="P"  style="margin-left:70px;">
+								
 							</div>
+
+							
 						</div>
 
 					</div>
