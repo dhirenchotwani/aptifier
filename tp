@@ -12,3 +12,6 @@
     
 //     $db = new Database();
 //    $connection = $db->getConnection();
+
+query for student has this much test in particular subj i.e java ki 10 tests hui h aaj tak
+SELECT * from subject INNER JOIN chapter on subject.subject_id=chapter.chapter_subject_id INNER JOIN test on chapter.chapter_id = test.test_chapter_id WHERE chapter.chapter_id = 4

@@ -206,7 +206,7 @@ return($database->query($sql));
 		return($database->query($sql));
 	}
 	public function selectNewQuestions($user_id){
-        $sql = "SELECT questions_id FROM question WHERE created_by={$user_id} and is_deleted=0";
+        $sql = "SELECT questions_id,question_chapter_id FROM question WHERE created_by={$user_id} and is_deleted=0";
         global $database;
         $res=$database->query($sql);
         return $res;

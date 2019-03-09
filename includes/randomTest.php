@@ -43,6 +43,7 @@ session_start();
             $res = $obj->selectNewQuestions($user_id);
                 while($row=mysqli_fetch_assoc($res)){
                     extract($row);
+                    $_SESSION['chapter_id'] = $question_chapter_id;
                     array_push($array2,$questions_id);
                 }
                 
@@ -58,6 +59,7 @@ session_start();
                     $result = $obj->countQuestions($test_id);
                         //here $test_id is $question_chapter_id
                 $array2 = array();
+                $_SESSION['chapter_id'] = $test_id;
             $res = $obj->selectOldQuestions($user_id,$test_id);
                 while($row=mysqli_fetch_assoc($res)){
                     extract($row);

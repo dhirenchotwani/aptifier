@@ -14,47 +14,47 @@ echo "<a href='dashboard.php'>Go to dashboard</a>";
 	
 }
 else{
-if(isset($_POST['check-photos'])){
-	global $database;
-	$user_id=$_SESSION['user_id'];
-	$res=$database->query("select user_profile_pic,user_first_name from users where user_id=$user_id");
-	if($row=mysqli_fetch_assoc($res))
-		extract($row);
+    Functions::redirect("student_test.php");
+//if(isset($_POST['check-photos'])){
+//	global $database;
+//	$user_id=$_SESSION['user_id'];
+//	$res=$database->query("select user_profile_pic,user_first_name from users where user_id=$user_id");
+//	if($row=mysqli_fetch_assoc($res))
+//		extract($row);
+//
+//   $obj=new Detection();
+//    $image = $_POST['image'];
+//   // $image_parts = explode(";base64,", $img);
+//	$image_parts = explode(";base64,", $image);
+//    $image_type_aux = explode("image/", $image_parts[0]);
+//    $image_type = $image_type_aux[1];
+//    $image_base64 = base64_decode($image_parts[1]);
+//    $file = UPLOAD_DIR . $user_first_name. '.png';
+//    file_put_contents($file, $image_base64);
+//	
+//	if($obj->countFaces(realpath($file))){
+//		unlink($file);
+//    $res=$obj->performDetection($image_parts[1],$user_profile_pic);
+//	if($res['confidence']>0.4){
 
-   $obj=new Detection();
-    $image = $_POST['image'];
-   // $image_parts = explode(";base64,", $img);
-	$image_parts = explode(";base64,", $image);
-    $image_type_aux = explode("image/", $image_parts[0]);
-    $image_type = $image_type_aux[1];
-    $image_base64 = base64_decode($image_parts[1]);
-    $file = UPLOAD_DIR . $user_first_name. '.png';
-    file_put_contents($file, $image_base64);
-	
-	if($obj->countFaces(realpath($file))){
-		unlink($file);
-    $res=$obj->performDetection($image_parts[1],$user_profile_pic);
-	if($res['confidence']>0.4){
-		?>
-		<script>window.alert("face matched answer question!!");</script>
-		<?php
-		Functions::redirect("student_test.php");
-	}else{
-		?>
-		<script>window.alert("face did not match current-1 attempts left!!");</script>
-		<?php
-	}
-	}
-	else{
-		?>
-		<script>window.alert("multiple faces detected!!!");</script>
-		<?php
-	}
-//	echo $data->{'confidence'};
+//<!--		<script>window.alert("face matched answer question!!");</script>-->
 
-		
+//		Functions::redirect("student_test.php");
+////	}else{
+    
+
+//	}
+//	}
+//	else{
+//		
+//		<script>window.alert("multiple faces detected!!!");</script>
+//		<?php
+//	}
+////	echo $data->{'confidence'};
+//
+//		
 }
-}
+
 ?>
 <!DOCTYPE html>
 <html>

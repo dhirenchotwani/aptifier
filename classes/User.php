@@ -4,7 +4,7 @@
     include_once("Functions.php");
    	include_once("Detection.php");
 	include_once("Mailer.php");
-	include_once("Cipher.php");
+	//include_once("Cipher.php");
     class User{
         
     private $table = "users";
@@ -98,20 +98,20 @@
 		}
 
 		private function setCookies($user_id,$signed_in){
-					$cip=new Cipher();
+				//	$cip=new Cipher();
 			if($signed_in){
                     $cookie_name = "Quiz_Handler_User";
-                    $user_id_to_login = $cip->encrypt($user_id);
+                   // $user_id_to_login = $cip->encrypt($user_id);
 //                    $encrypt_id =encrypt($user_id_to_login);
-                    $cookie_content = $user_id_to_login;
+                    $cookie_content = $user_id;
                     $cookie_time = time() + 86400 * 30;
                     $path = "/";
                     setcookie($cookie_name, $cookie_content, $cookie_time, $path);
                 } else{
                     $cookie_name = "Quiz_Handler_User";
-                    $user_id_to_login = $cip->encrypt($user_id);;
+//                    $user_id_to_login = $cip->encrypt($user_id);;
                   
-                    $cookie_content = $user_id_to_login;
+                    $cookie_content = $user_id;
                     $cookie_time = time() + 3600;
                     $path = "/";
                     setcookie($cookie_name, $cookie_content, $cookie_time, $path);
@@ -119,20 +119,20 @@
 		}
 		
 		public function deleteCookies(){
-					$cip=new Cipher();
+					
 		   $cookie_name = "Quiz_Handler_User";
-        $user_id_to_logout = $_SESSION['user_id'];
-        $cookie_content = $cip->encrypt($user_id_to_logout);
+        $user_id_to_logout = $_SESSION['user_id'];  
+        $cookie_content = $user_id_to_logout;
         $cookie_time = time() - 86400 * 30;
         $path = "/";
         setcookie($cookie_name, $cookie_content, $cookie_time, $path);
 		}
 
 		public function isCookieSet(){
-			$cip=new Cipher();
+			//$cip=new Cipher();
 			global $database;
 			if(isset($_COOKIE["Quiz_Handler_User"])){
-            $user_id = $cip->decrypt($_COOKIE["Quiz_Handler_User"]);
+            $user_id = $_COOKIE["Quiz_Handler_User"];
 		
 				$res=$database->query("select * from users where user_id='$user_id'");
 			if($row=mysqli_fetch_assoc($res)){	
