@@ -156,11 +156,11 @@
        
         $mailer = new Mailer();
 
-        $subject = "Quiz-Handlers Account Confirmation";
+        $subject = "Aptifier Account Confirmation";
 
         $base_url_link ="http://localhost/quiz-handlers/includes/register.php?XSRS=$email";
         $body = "<div style='font-family:Roboto; font-size:16px; max-width: 600px; line-height: 21px;'>     <h4>Hello,</h4>
-            <h3>Your Quiz Handler Account is Ready.</h3>
+            <h3>Your Aptifier Account is Ready.</h3>
             <br>  
             <a style='text-decoration:none; color:#fff; background-color:#348eda;border:solid #348eda; border-width:2px 10px; line-height:2;font-weight:bold; text-align:center; display:inline-block;border-radius:4px' href='$base_url_link'>
             Activate your account </a>
@@ -169,7 +169,7 @@
             <br>
             <br>
             <h4>Sincerely,</h4>
-            <h5>The Quiz Handler Team.</h5>
+            <h5>The Aptifer Team.</h5>
 			  <img src='cid:logo' alt='hahahahah'>
             </div>";
 
@@ -179,7 +179,7 @@
 	    
         $mailer = new Mailer();
 
-        $subject = "Quiz-Handlers Forgot Password Confirmation";
+        $subject = "Aptifier Forgot Password Confirmation";
 
         $base_url_link ="http://localhost/quiz-handlers/includes/resetPassword.php?XSRS=$email";
         $body = "<div style='font-family:Roboto; font-size:16px; max-width: 600px; line-height: 21px;'>     <h4>Hello,</h4>
@@ -188,11 +188,11 @@
             <a style='text-decoration:none; color:#fff; background-color:#348eda;border:solid #348eda; border-width:2px 10px; line-height:2;font-weight:bold; text-align:center; display:inline-block;border-radius:4px' href='$base_url_link'>
             Reset Your Password</a>
             <br>  
-            <h3>Thank you for Choosing Quiz-Handlers.</h3>
+            <h3>Thank you for Choosing Aptifier.</h3>
             <br>
             <br>
             <h4>Sincerely,</h4>
-            <h5>The Quiz Handler Team.</h5>
+            <h5>The Aptifier Team.</h5>
 			 <img src='cid:logo' alt='hahahahah'>
 		
             </div>";
@@ -204,23 +204,22 @@
 	    
         $mailer = new Mailer();
 
-        $subject = "Quiz-Handlers Reset Password Confirmation";
+        $subject = "Aptifer Change Password Confirmation";
 
         $base_url_link ="http://localhost/quiz-handlers/includes/resetPassword.php?XSRS=$email&action=reset";
-        $body = "<div style='font-family:Roboto; font-size:16px; max-width: 600px; line-height: 21px;'>   
-            <h3>Hey, XXX a Test has been scheduled</h3>
+       $body = "<div style='font-family:Roboto; font-size:16px; max-width: 600px; line-height: 21px;'>     <h4>Hello,</h4>
+            <h3>Change your Account Password here!</h3>
             <br>  
-            <p style='text-decoration:none; color:#fff; background-color:#08476e;border:solid #08476e; border-width:2px 10px; line-height:2;font-weight:bold; text-align:center; display:inline-block;border-radius:4px'>
-			XYZ has been scheduled for you by Professor 123 on 5th nov,2018
-			</p>
+            <a style='text-decoration:none; color:#fff; background-color:#348eda;border:solid #348eda; border-width:2px 10px; line-height:2;font-weight:bold; text-align:center; display:inline-block;border-radius:4px' href='$base_url_link'>
+            Change Your Password</a>
             <br>  
-            <h3>Thank you for Choosing XXX.</h3>
+            <h3>Thank you for Choosing Aptifier.</h3>
             <br>
             <br>
             <h4>Sincerely,</h4>
-            <h5>The XXX Team.</h5>
+            <h5>The Aptifier Team.</h5>
 			 <img src='cid:logo' alt='hahahahah'>
-			 
+		
             </div>";
 
        return( $mailer->send_mail($email, $body, $subject));

@@ -1,10 +1,15 @@
 <?php
 class Mailer{
-    public function  __construct()
+    public function  __construct($page='none')
     {
-        require_once("../third_party/phpmailer/src/PHPMailer.php");
-        require_once("../third_party/phpmailer/src/PHPMailer.php");
-
+		if($page=="index"){
+			 include_once('third_party/phpmailer/src/PHPMailer.php');
+        include_once('third_party/phpmailer/src/PHPMailer.php');
+		}else{
+        include_once('../third_party/phpmailer/src/PHPMailer.php');
+        include_once('../third_party/phpmailer/src/PHPMailer.php');
+		}
+		
         $this->mail =new PHPMailer\PHPMailer\PHPMailer();
         $this->mail->IsSMTP();                    // enable SMTP
 
@@ -21,7 +26,7 @@ class Mailer{
 
 		 $this->mail->Username = "handlesquizlikeaboss@gmail.com";
 		$this->mail->Password = "quizhandlers123";
-        $this->mail->SetFrom("handlesquizlikeaboss@gmail.com", "Quiz Handlers");
+        $this->mail->SetFrom("handlesquizlikeaboss@gmail.com", "Aptifier");
         $this->mail->Subject = $subject;
         $this->mail->Body =$body;
 		$this->mail->addEmbeddedImage('img/final1.png', 'logo');	

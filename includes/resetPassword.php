@@ -46,7 +46,7 @@ if(count($action)>2){
   <meta name="author" content="">
    <title>Aptifiers! | Reset Password</title>
   <!-- Favicon -->
-  <link href="../assets/img/brand/favicon.png" rel="icon" type="image/png">
+  <link href="../assets/data2/images/faviconb.png" rel="icon" type="image/png">
   <!-- Fonts -->
 <!--  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">-->
   <!-- Icons -->
@@ -62,7 +62,7 @@ if(count($action)>2){
     <nav class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark">
       <div class="container px-4">
         <a class="navbar-brand" href="">
-          <img src="../assets/img/brand/white.png" />
+          <img src="../assets/img/brand/trans_white.png" />
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
