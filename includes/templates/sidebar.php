@@ -112,6 +112,22 @@
  <?php
 }
 			?>
+        <li class="nav-item">
+           <?php
+			if($user_role_id==3){
+			?>
+            <a class="nav-link" href="graphsForTeacher.php"><i class="ni ni-tv-2 text-primary"></i> Graphs</a>
+             <?php
+			}else if($user_role_id==5){
+			?>
+			<a class="nav-link" href="graphsForStudent.php"><i class="ni ni-tv-2 text-primary"></i> Graphs
+				</a>
+			<?php
+			}
+				?>
+              
+            
+          </li>
         </ul>
         <!-- Divider -->
         <hr class="my-3">

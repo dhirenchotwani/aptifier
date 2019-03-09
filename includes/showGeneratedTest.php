@@ -24,7 +24,9 @@ echo "you inserted new ".$result." Questions";
 
 <html>
     <head>
-        
+           
+         <title>Aptifiers! | Create Test</title>
+          <link href="../assets/data2/images/faviconb.png" rel="icon" type="image/png">
     </head>
     <body>
        <form action="randomTest.php" method="post">
