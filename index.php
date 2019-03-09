@@ -1,7 +1,10 @@
 <?php
 include_once('classes/Functions.php');
 include_once('classes/User.php');
+
+include_once('classes/Mailer.php');
 $obj=new User();
+
 if($obj->isCookieSet()){
 	Functions::redirect('includes/dashboard.php');
 }
@@ -236,12 +239,12 @@ else{
 					<div class="col-md-6 col-sm-6">
 						<div class="contact-right">
 							<h2 style="font-weight: 300;letter-spacing: 3px;color: white;padding-bottom: 20px;">Contact Us</h2>
-							<form action="#">
-								<input type="text" name="full-name" placeholder="Full Name" class="form-control">
+							<form action="" method="post">
+								<input type="text" name="full_name" placeholder="Full Name" class="form-control">
 								<input type="email" name="email" placeholder="Email Address" class="form-control">
 								<textarea name="message" rows="3" placeholder="your message.." class="form-control"></textarea>
 
-								<div class="send-btn"><a href="" class="btn" style="color:#066fac;background: #fff;font-weight:500;width:200px;">SEND</a></div>
+								<div class="send-btn"><button class="btn" style="color:#066fac;background: #fff;font-weight:500;width:200px;" name="send_enquiry_msg">SEND</button></div>
 							</form>
 						</div>
 					</div>
@@ -263,5 +266,40 @@ else{
 
 
 	<?php
+}
+if(isset($_POST['send_enquiry_msg'])){
+
+	$mailer=new Mailer("index");
+	extract($_POST);
+	$subject="A new user $full_name sent an Enquiry";
+	$body = "<div style='font-family:Roboto; font-size:16px; max-width: 600px; line-height: 21px;'>   
+          
+            <br>  
+            <p style='text-decoration:none; color:#fff; background-color:#08476E;border:solid #08476E; border-width:2px 10px; line-height:2;font-weight:bold; text-align:center; display:inline-block;border-radius:4px'>
+            $email says <br> $message </p>
+            <br>  
+          
+            <br>
+            <br>
+			  <img src='cid:logo' alt='hahahahah'>
+            </div>";
+	$mailer->send_mail("handlesquizlikeaboss@gmail.com",$body,$subject);
+	
+	$subject="Your Enquiry is under Process";
+	$body = "<div style='font-family:Roboto; font-size:16px; max-width: 600px; line-height: 21px;'>     <h4>Hello,</h4>
+            <h3>Hello, We're from The Aptifier!</h3>
+            <br>  
+            <p style='text-decoration:none; color:#fff; background-color:#08476E;border:solid #08476E; border-width:2px 10px; line-height:2;font-weight:bold; text-align:center; display:inline-block;border-radius:4px'>
+            We,ve received your enquiry,our representative will get back to you soon! </p>
+            <br>  
+            <h3>Thank you for choosing The Aptifiers!.</h3>
+            <br>
+            <br>
+            <h4>Sincerely,</h4>
+            <h5>The Aptifier Team.</h5>
+			  <img src='cid:logo' alt='hahahahah'>
+            </div>";
+	
+	$mailer->send_mail($email,$body,$subject);
 }
 ?>
