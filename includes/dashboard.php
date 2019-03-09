@@ -47,7 +47,7 @@ else if($user_role_id==3){
   <link href="../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
 <!--  <link type="text/css" href="../assets/css/argon.min.css" rel="stylesheet">-->
-  <link type="text/css" href="../assets/css/argon.css" rel="stylesheet">
+  <link type="text/css" href="../assets/css/argon.min.css" rel="stylesheet">
 </head>
 
 <body>

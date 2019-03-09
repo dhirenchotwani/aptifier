@@ -119,9 +119,26 @@ while($row = mysqli_fetch_assoc($result_set)){
    
     </form>
     
+            <script>
+        $(window).blur(function(){
+            window.alert("dont switch or you will be logged out!");
+            
+        });
+        
+        </script>
+<script>
+document.getElementsByTagName("BODY")[0].onresize = function() {myFunction()};
+
+var x = 0;
+function myFunction() {
+  var x = 0;
+  Window.alert("Dont resize the page! you have "+(3-x)+" turns left");
+    x++;
+}
+</script>
 
      <script>
-            console.log("hii");
+            //console.log("hii");
          var i = 0;
 //         var conversion = i.toString();
 //         var myDiv = "myDiv";

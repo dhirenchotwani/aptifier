@@ -42,6 +42,7 @@ echo "you inserted new ".$result." Questions";
            $result2 = $obj->countoldInsertedQuestions($user_id);
            while($row = mysqli_fetch_assoc($result2)){
                extract($row);
+//               $_SESSION['chapter_id'] = $question_chapter_id;
                $res = $obj->getChapterName($question_chapter_id);
         echo "<option value = '$question_chapter_id' type='submit' name='generateRandom'>Generate Random Test on {$res}</option>";
            }

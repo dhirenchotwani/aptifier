@@ -92,6 +92,17 @@
               <i class="ni ni-tv-2 text-primary"></i> Dashboard
             </a>
           </li>
+          <?php
+            if($user_role_id == 5){
+            ?>
+            <li class="nav-item">
+            <a class="nav-link" href="chartSubject.php">
+              <i class="ni ni-tv-2 text-primary"></i> Chart
+            </a>
+          </li>
+          <?php
+            }
+            ?>
           <?php if($user_role_id == 3){?>
           <li class="nav-item">
             <a class="nav-link" href="test.php">

@@ -14,7 +14,8 @@ session_start();
         $obj = new Test();
 		$msg= new Message();
         
-        $array = array("test_name"=>$test_name,"test_date"=>$test_date,"test_class_id"=>$test_class_id,"test_division"=>$test_division,"test_level"=>$test_level,"created_at" => date("Y-m-d h:i:sa"),"created_by"=> $user_id,"updated_at" => date("Y-m-d h:i:sa"),"updated_by"=> $user_id);
+        
+        $array = array("test_name"=>$test_name,"test_date"=>$test_date,"test_class_id"=>$test_class_id,"test_chapter_id"=>$_SESSION['chapter_id'],"test_division"=>$test_division,"test_level"=>$test_level,"created_at" => date("Y-m-d h:i:sa"),"created_by"=> $user_id,"updated_at" => date("Y-m-d h:i:sa"),"updated_by"=> $user_id);
        	$res2 = $obj->insert($array,"test");
 		
 		$res=$obj->getPhoneOfAllTestStudents("select user_phone,user_email,user_first_name,user_last_name from test inner join student on test.test_class_id=student.student_class_id inner join users on student.user_id=users.user_id where test.test_name='$test_name'");
