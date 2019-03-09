@@ -8,8 +8,8 @@
 
         public function __construct(){
             $this->host = "localhost";
-            $this->username = "chirag Raghani";
-            $this->password = "7744824253";
+            $this->username = "Dhiren Chotwani";
+            $this->password = "Activa9015";
             $this->database = "quiz_handlers";
             $this->connectDB();
         }

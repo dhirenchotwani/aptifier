@@ -42,6 +42,7 @@ if(isset($_POST['check-photos'])){
 			</script>
     	<?php	
 	}
+	unlink($file);
 }
 
 if(isset($_GET['p'])){
