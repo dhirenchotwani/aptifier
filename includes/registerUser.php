@@ -14,6 +14,7 @@ if(isset($_POST['submit_user_details'])){
 	$ext = $info['extension']; // get the extension of the file
 	$newname = "$user_name.".$ext; 
 	$target = 'images/'.$newname;
+
 	move_uploaded_file( $_FILES['user_profile_pic']['tmp_name'], $target);
 //	
    $result = $user->insertUserDetails($user_first_name, $user_last_name, $user_flat, $user_building, $user_street, $user_city, $user_state, $user_nationality,$user_role_id,$newname);
@@ -32,6 +33,14 @@ if(isset($_POST['submit_user_details'])){
     }
     
 	
+
+	  $file_tmp= $_FILES['user_profile_pic']['tmp_name'];
+	move_uploaded_file( $file_tmp, $target);
+	$img_data = base64_encode(file_get_contents( $target ));
+
+   $result = $user->insertUserDetails($user_first_name, $user_last_name, $user_flat, $user_building, $user_street, $user_city, $user_state, $user_nationality,$user_role_id,$newname);
+////	
+
 	Functions::redirect('dashboard.php');
 }
 

@@ -21,12 +21,12 @@ session_start();
 		$res=$obj->getPhoneOfAllTestStudents("select user_phone,user_email,user_first_name,user_last_name from test inner join student on test.test_class_id=student.student_class_id inner join users on student.user_id=users.user_id where test.test_name='$test_name'");
 		$name=$_SESSION['user_name'];
 		$msgg="$test_name test scheduled on $test_date by Proffessor $name! Team Aptifier";
-//		foreach($res as $row){
-//			extract($row);
-//			$student_name=$user_first_name. " ".$user_last_name;
-//			$obj->sendScheduledTestMail($user_email,$student_name,$name,$test_name,$test_date);
-//			$msg->sendMessage("$user_phone","$msgg");
-//		}
+		foreach($res as $row){
+			extract($row);
+			$student_name=$user_first_name. " ".$user_last_name;
+			$obj->sendScheduledTestMail($user_email,$student_name,$name,$test_name,$test_date);
+			$msg->sendMessage("$user_phone","$msgg");
+		}
 
         $res3 = $obj->lastTestID();
         

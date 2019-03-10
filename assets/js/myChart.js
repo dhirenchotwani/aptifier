@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-function renderChart(data, labels) {
-    var ctx = document.getElementById("myChart").getContext('2d');
-=======
 
 
 function renderChart(data, labels,typeG) {
@@ -91,28 +87,11 @@ var myChart = new Chart(pie, {
 
 function renderLineChart(data,labels){
 	 var ctx = document.getElementById("class").getContext('2d');
->>>>>>> 7559023526411b2e7378706a6d7cfeb0e8f53220
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: labels,
             datasets: [{
-<<<<<<< HEAD
-                label: 'This week',
-                data: data,
-            }]
-        },
-    });
-}
-
-$("#renderBtn").click(
-    function () {
-        data = [20000, 14000, 12000, 15000, 18000, 19000, 22000];
-        labels =  ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
-        renderChart(data, labels);
-    }
-);
-=======
                 label: 'All time',
                 data: data,
                 borderColor: 'rgba(8, 71, 110, 1)',
@@ -153,4 +132,3 @@ new Chart(document.getElementById("class"), {
     }
 });
 }
->>>>>>> 7559023526411b2e7378706a6d7cfeb0e8f53220

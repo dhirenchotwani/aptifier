@@ -260,6 +260,17 @@ return($database->query($sql));
         $row = $res->fetch_assoc();
         return $row['chapter_name'];
     }
+	
+	public function getResultsForTeacher($user_id){
+		global $database;
+		$sql="SELECT max(score) as score,test_name,test_class_id,test_division,test_date,test_level ,user_first_name,user_last_name from test_student INNER join test on test_student.test_id=test.test_id inner join users on test_student.student_id=users.user_id where test.created_by=$user_id group by test.test_id";
+		return($database->query($sql));
+	}
+	public function getResultsForStudent($user_id){
+		global $database;
+		$sql="select score,test_name,test_date,test_level,test_student.created_at from test_student inner join test on test_student.test_id=test.test_id where student_id=$user_id";
+		return($database->query($sql));
+	}
 }
 ?>
 
