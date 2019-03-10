@@ -12,19 +12,22 @@ if($row=mysqli_fetch_assoc($res))
 
 if($user_role_id==5){
 	$res=$obj->getUserWithJoinCondition("INNER JOIN student on users.user_id = student.user_id INNER JOIN student_class on student.student_class_id=student_class.student_class_id INNER JOIN branch on student.student_branch=branch.branch_id","users.user_id",$_SESSION['user_id']);
+	if(mysqli_num_rows($res)>0){
 $row=mysqli_fetch_assoc($res);
 extract($row);
 	$res=$test->getAllTestForStudent($student_class_id,"=");		
 	}
-
+}
 
 else if($user_role_id==3){
 	$res=$test->getAllTestForTeacher($user_id,"=");
+	if(mysqli_num_rows($res)>0){
 	if($row=mysqli_fetch_assoc($res)){
 		extract($row);
 	$_SESSION['test_id']=$test_id;
 		$test_set=1;
 	}
+}
 }
 //Functions::redirect('includes/login.php');
 
@@ -48,6 +51,7 @@ else if($user_role_id==3){
   <!-- Argon CSS -->
 <!--  <link type="text/css" href="../assets/css/argon.min.css" rel="stylesheet">-->
   <link type="text/css" href="../assets/css/argon.css" rel="stylesheet">
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </head>
 
 <body>
@@ -62,17 +66,18 @@ else if($user_role_id==3){
       <!-- Top navbar here -->
     <!-- Header -->
     <?php
+	$flag=0;
 	  if($user_role_id==5){
 		    $cnt=$test->getTestAndScoreCount($_SESSION['user_id']);
 	  if($row=mysqli_fetch_assoc($cnt))
 		  extract($row);
-	  $src=$test->getLastScoreAndTest($_SESSION['user_id']);{
+	  $src=$test->getLastScoreAndTest($_SESSION['user_id']);
 		  if($row=mysqli_fetch_assoc($src))
 			  extract($row);
 	$prevsrc=$test->getPrevHighScore($_SESSION['user_id']);
 		  if($row=mysqli_fetch_assoc($prevsrc))
 			  extract($row);
-	  }
+	  }if(mysqli_num_rows($cnt) == 1 && mysqli_num_rows($src) == 1 &&mysqli_num_rows($prevsrc) == 1){
 		  ?>
     <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
       <div class="container-fluid">

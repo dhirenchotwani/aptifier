@@ -37,11 +37,9 @@ if(isset($_POST['check-photos'])){
 		unlink($file);
 		 Functions::redirect("dashboard.php");
 	}else{
-        $flag = 1;
+   
     	?>
-    	<script>
-    	window.alert('login failed');
-			</script>
+    
     	<?php	
 	}
 	unlink($file);
