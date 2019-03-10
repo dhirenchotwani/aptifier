@@ -6,6 +6,7 @@ include_once('../classes/Functions.php');
 if(isset($_POST['register_submit'])){
 	$obj=new User();
 	extract($_POST);
+    $_SESSION['user_email'] = $user_email;
 	if($obj->sendEmailToRecipient($user_email)){
 	$obj->insertUserEmail($user_email,$user_password);
 		Functions::redirect("login.php");

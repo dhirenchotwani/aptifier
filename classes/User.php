@@ -24,6 +24,30 @@
         # It is responsibility of CALEE to start the session
         # returns true if credentials were correct otherwise false
         **********************************************************/
+        
+//       public function insertStudent($user_id,$student_class_id,$student_division,$student_branch){
+//           $sql = "INSERT INTO student (user_id,student_class_id,student_division,student_branch) VALUES ($user_id,$student_class_id,$student_division,$student_branch)";
+//           global $database;
+//           $res=$database->query($sql);
+//           return $res;
+//           
+//       }
+        
+        public function insert($data, $table){
+        
+        $keys = array_keys($data);
+        
+        for($i=0;$i<count($keys);$i++){
+            $data[$keys[$i]] = mysqli_real_escape_string($this->connection,$data[$keys[$i]]);
+        }
+        $columnString = implode(", ", array_keys($data));
+        $valueString = "'".implode("', '", array_values($data))."'";
+        $sql = "INSERT INTO {$table} ({$columnString}) VALUES ({$valueString})";
+        global $database;
+        $res=$database->query($sql);
+        return mysqli_insert_id($this->connection);
+    }
+        
         public function processLogin($email, $password,$signed_in){
 			global $database;
 
@@ -251,18 +275,24 @@
 		}
         
         
+
+
         public function insertUserDetails($user_first_name, $user_last_name, $user_flat, $user_building, $user_street, $user_city, $user_state, $user_nationality,$user_role_id,$img_name,$img_data){
+
 			
 			global $database;
 			
 			
-			$img1 = file_get_contents("images/$img_name");
-			$data1 = base64_encode($img1);
+
 			
 			$created_by = $_SESSION['user_id'];
         	$current_date = date("Y-m-d h:i:sa");
         	$is_email_verified = 1;
-			$sql = "UPDATE $this->table set user_first_name='$user_first_name', user_last_name='$user_last_name', user_flat='$user_flat', user_building='$user_building', user_street='$user_street', user_city='$user_city', user_state='$user_state', user_nationality='$user_nationality', user_role_id= $user_role_id,is_email_verified=1,is_first_login=0, created_by=$created_by, updated_by=$created_by,is_deleted=0 where user_id=$created_by";
+
+
+			$sql = "UPDATE $this->table set user_first_name='$user_first_name', user_last_name='$user_last_name', user_flat='$user_flat', user_building='$user_building', user_street='$user_street', user_city='$user_city', user_state='$user_state', user_nationality='$user_nationality', user_role_id= $user_role_id,user_profile_pic='$img_data',is_email_verified=1,is_first_login=0, created_by=$created_by, updated_by=$created_by,is_deleted=0 where user_id=$created_by";
+
+
 			
 			
 			$res=$database->query($sql);
@@ -271,11 +301,19 @@
 			$user_name=$user_first_name." ".$user_last_name;
 			$this->setSession($created_by,$user_name,$user_role_id);
 			
-			unlink("images/$img_name");
-
+			unlink("images/$newname");
+            
 			
 			
 		}
+        
+        public function selectUserByEmailId($user_email){
+            global $database;
+            $sql = "SELECT user_id as id FROM users WHERE user_email = '{$user_email}'";
+            $res=$database->query($sql);
+            $row = $res->fetch_assoc();
+            return $row['id'];
+        }
 		
 		public function updateUser($user_first_name,$user_last_name,$user_pincode){
 			global $database;
