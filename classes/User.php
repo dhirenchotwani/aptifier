@@ -51,7 +51,7 @@
         public function processLogin($email, $password,$signed_in){
 			global $database;
 
-				
+				$_SESSION['user_email']=$email;
 				$res=$database->query("select * from users where user_email='$email'");
 			if($row=mysqli_fetch_assoc($res)){	
 					extract($row);
@@ -66,7 +66,7 @@
 							
 				$user_name=$user_first_name." ".$user_last_name;
 //					// Setting the session variables here for further use 
-				$this->setSession($user_id,$user_name,$user_role_id);
+				$this->setSession($user_id,$user_name,$user_role_id,$user_email);
 							
 								return true;
 						}
@@ -115,11 +115,12 @@
             session_destroy();
         }
 
-		private function setSession($user_id,$user_name,$user_role){
+		private function setSession($user_id,$user_name,$user_role,$email){
 			 		$_SESSION['login'] = true;
                     $_SESSION['user_id'] = $user_id;
                     $_SESSION['user_name'] = $user_name;
                     $_SESSION['user_role'] = $user_role;
+			$_SESSION['user_email']=$email;
 		}
 
 		private function setCookies($user_id,$signed_in){
@@ -277,7 +278,7 @@
         
 
 
-        public function insertUserDetails($user_first_name, $user_last_name, $user_flat, $user_building, $user_street, $user_city, $user_state, $user_nationality,$user_role_id,$img_name,$img_data){
+        public function insertUserDetails($user_first_name, $user_last_name, $user_flat, $user_building, $user_street, $user_city, $user_state, $user_nationality,$user_role_id){
 
 			
 			global $database;
@@ -290,7 +291,7 @@
         	$is_email_verified = 1;
 
 
-			$sql = "UPDATE $this->table set user_first_name='$user_first_name', user_last_name='$user_last_name', user_flat='$user_flat', user_building='$user_building', user_street='$user_street', user_city='$user_city', user_state='$user_state', user_nationality='$user_nationality', user_role_id= $user_role_id,user_profile_pic='$img_data',is_email_verified=1,is_first_login=0, created_by=$created_by, updated_by=$created_by,is_deleted=0 where user_id=$created_by";
+			$sql = "UPDATE $this->table set user_first_name='$user_first_name', user_last_name='$user_last_name', user_flat='$user_flat', user_building='$user_building', user_street='$user_street', user_city='$user_city', user_state='$user_state', user_nationality='$user_nationality', user_role_id= $user_role_id,is_email_verified=1,is_first_login=0, created_by=$created_by, updated_by=$created_by,is_deleted=0 where user_id=$created_by";
 
 
 			
@@ -299,9 +300,9 @@
 			
 		
 			$user_name=$user_first_name." ".$user_last_name;
-			$this->setSession($created_by,$user_name,$user_role_id);
+			$this->setSession($created_by,$user_name,$user_role_id,$_SESSION['user_email']);
 			
-			unlink("images/$newname");
+			//unlink("images/$img_name");
             
 			
 			

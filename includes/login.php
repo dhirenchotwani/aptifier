@@ -8,6 +8,7 @@ if(isset($_POST['login_submit'])){
 	extract($_POST);
 	$obj = new User();
 	$signed_in=($_POST['signed_in']==='Remember me') ? 1 : 0;
+	
     if( $obj->processLogin( $user_email, $user_password,$signed_in) ) {
         Functions::redirect("dashboard.php");
     } else{

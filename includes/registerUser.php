@@ -1,7 +1,7 @@
 
 <?php
 include_once("bootstrap.php");
-//Session::startSession();
+Session::startSession();
 ?>
 
 
@@ -9,18 +9,18 @@ include_once("bootstrap.php");
 if(isset($_POST['submit_user_details'])){
     extract($_POST);
     $user = new User();
-    $user_name=$user_first_name." ".$user_last_name;
-	$info = pathinfo($_FILES['user_profile_pic']['name']);
-	$ext = $info['extension']; // get the extension of the file
-	$newname = "$user_name.".$ext; 
-	$target = 'images/'.$newname;
-
-	move_uploaded_file( $_FILES['user_profile_pic']['tmp_name'], $target);
+//    $user_name=$user_first_name." ".$user_last_name;
+//	$info = pathinfo($_FILES['user_profile_pic']['name']);
+//	$ext = $info['extension']; // get the extension of the file
+//	$newname = "$user_name.".$ext; 
+//	$target = 'images/'.$newname;
+//
+//	move_uploaded_file( $_FILES['user_profile_pic']['tmp_name'], $target);
 //	
-   $result = $user->insertUserDetails($user_first_name, $user_last_name, $user_flat, $user_building, $user_street, $user_city, $user_state, $user_nationality,$user_role_id,$newname);
-
-    $res = $user->selectUserByEmailId($_SESSION['user_email']);
-
+   $result = $user->insertUserDetails($user_first_name, $user_last_name, $user_flat, $user_building, $user_street, $user_city, $user_state, $user_nationality,$user_role_id);
+	
+    $res = $_SESSION['user_id'];;
+	
     if($_POST['user_role_id'] == 5){
     $data = array("user_id"=>$res,"student_class_id"=>$user_class_id,"student_division"=>$user_division,"student_branch"=>$user_branch);
     
@@ -32,13 +32,7 @@ if(isset($_POST['submit_user_details'])){
     
     }
     
-	
 
-	  $file_tmp= $_FILES['user_profile_pic']['tmp_name'];
-	move_uploaded_file( $file_tmp, $target);
-	$img_data = base64_encode(file_get_contents( $target ));
-
-   $result = $user->insertUserDetails($user_first_name, $user_last_name, $user_flat, $user_building, $user_street, $user_city, $user_state, $user_nationality,$user_role_id,$newname);
 ////	
 
 	Functions::redirect('dashboard.php');
