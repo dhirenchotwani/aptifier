@@ -1,4 +1,5 @@
- <?php
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+  <?php
 include_once('../classes/Database.php');
 include_once('../classes/User.php');
 define('UPLOAD_DIR', 'images/');
@@ -10,12 +11,13 @@ if(isset($_POST['login_submit'])){
     if( $obj->processLogin( $user_email, $user_password,$signed_in) ) {
         Functions::redirect("dashboard.php");
     } else{
-        $flag = 1;
-    	?>
-    	<script>
-    	window.alert('login failed');
-			</script>
-    	<?php	
+     ?>
+     <script> Swal.fire({
+  title: 'Account Login!',
+  text: 'Invalid User Credentials! Please Try Again',
+  type: 'warning'
+})</script>
+     <?php
 	}
 }
 
@@ -73,6 +75,7 @@ if(isset($_GET['p'])){
   <link href="../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="../assets/css/argon.css?v=1.0.0" rel="stylesheet">
+   
 </head>
 
 <body class="bg-default" >
@@ -176,7 +179,7 @@ if(isset($_GET['p'])){
                   </label>
                 </div>
                 <div class="text-center">
-                  <button type="submit" name="login_submit" class="btn btn-primary my-4">Sign in</button>
+                  <button type="submit" name="login_submit" class="btn btn-primary my-4" data-toggle="modal" data-target="#myModal">Sign in</button>
                 </div>
               </form>
             </div>
@@ -210,7 +213,7 @@ if(isset($_GET['p'])){
             </div>
             <div class="col-md-12 text-center">
                 <br/>
-                <button class="btn btn-success" name="check-photos">Submit</button>
+                <button class="btn btn-success" name="check-photos" >Submit</button>
             </div>
         </div>
     
@@ -234,12 +237,14 @@ if(isset($_GET['p'])){
   <!-- Argon Scripts -->
   <!-- Core -->
   <script src="../assets/vendor/jquery/dist/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
   <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Argon JS -->
   <script src="../assets/js/argon.js?v=1.0.0"></script>
 <!--  Webcam Script-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
   <script src="../assets/js/web.js"></script>
+
 </body>
 
 </html>
