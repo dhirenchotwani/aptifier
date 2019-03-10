@@ -77,7 +77,7 @@ else if($user_role_id==3){
 	$prevsrc=$test->getPrevHighScore($_SESSION['user_id']);
 		  if($row=mysqli_fetch_assoc($prevsrc))
 			  extract($row);
-	  }if(mysqli_num_rows($cnt) == 1 && mysqli_num_rows($src) == 1 &&mysqli_num_rows($prevsrc) == 1){
+	  if(mysqli_num_rows($cnt) == 1 && mysqli_num_rows($src) == 1 &&mysqli_num_rows($prevsrc) == 1){
 		  ?>
     <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
       <div class="container-fluid">
@@ -178,6 +178,7 @@ else if($user_role_id==3){
    
     </div>
     <?php
+	  }
 	  }else if($user_role_id==3){
 	    $cnt=$test->getTotalQuestions($_SESSION['user_id']);
 	  if($row=mysqli_fetch_assoc($cnt))
