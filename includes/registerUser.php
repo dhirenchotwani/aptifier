@@ -1,6 +1,7 @@
 
 <?php
 include_once("bootstrap.php");
+//Session::startSession();
 ?>
 
 
@@ -14,9 +15,23 @@ if(isset($_POST['submit_user_details'])){
 	$newname = "$user_name.".$ext; 
 	$target = 'images/'.$newname;
 	move_uploaded_file( $_FILES['user_profile_pic']['tmp_name'], $target);
-	
-    $result = $user->insertUserDetails($user_first_name, $user_last_name, $user_flat, $user_building, $user_street, $user_city, $user_state, $user_nationality,$user_role_id,$newname);
 //	
+   $result = $user->insertUserDetails($user_first_name, $user_last_name, $user_flat, $user_building, $user_street, $user_city, $user_state, $user_nationality,$user_role_id,$newname);
+
+    $res = $user->selectUserByEmailId($_SESSION['user_email']);
+
+    if($_POST['user_role_id'] == 5){
+    $data = array("user_id"=>$res,"student_class_id"=>$user_class_id,"student_division"=>$user_division,"student_branch"=>$user_branch);
+    
+    $res1 = $user->insert($data,"student");
+    }
+    if($_POST['user_role_id'] == 3){
+    $data = array("user_id"=>$res,"teacher_branch_id"=>$user_branch,"teacher_designation_id"=>$user_designation);
+    $res2 = $user->insert($data,"teacher");
+    
+    }
+    
+	
 	Functions::redirect('dashboard.php');
 }
 
@@ -59,8 +74,22 @@ if(isset($_POST['submit_user_details'])){
                 <input type="text" class="form-control" name="user_nationality" id="user_nationality">
                 <br>
                 <label for="">You are a :</label>
-                <input type="number" name="user_role_id" class="form-control" id="user_role_id" min="1" max="5">
+                <select name="user_role_id" style="width: 100px;margin: 20px;" id="user_role_id">
+                <option value="">..</option>
+                <?php 
+                $obj = new Test();
+                $res = $obj->userTypes();
+                
+                while($row = mysqli_fetch_assoc($res)){
+                    extract($row);
+                ?>
+                <option value="<?php echo $user_type_id;?>" name="user_role_id"><?php echo $user_type_name;?></option>
+                <?php
+                }
+                ?>
+                </select>
                 <br>
+                <div id="div"></div>
                 <div class="inputoutput">
     			<img id="imageSrc" alt="No Image" style="display: block" />
     			<div class="caption"><input type="file" id="fileInput" name="user_profile_pic" /></div>
@@ -80,6 +109,35 @@ if(isset($_POST['submit_user_details'])){
   			imgElement.src = URL.createObjectURL(e.target.files[0]);
 			}, false);	
 		</script>
+     <script>
+            console.log("hii");
+            document.getElementById("user_role_id").addEventListener("change",function(){
+                
+//                console.log("hello");
+                
+                var strUser = this.options[this.selectedIndex].value;
+                //console.log(strUser);
+                
+                
+            $.ajax({
+				url :"fetch2.php",
+				method:"post",
+				data:{user_type_id : strUser},
+				dataType:"html",
+				success:function(data)
+                {
+                    $("#div").empty();
+                    $("#div").append(data);
+                },
+                error:function(data){
+                    console.log("not working");
+                }
+    });
+                
+            });
+        </script>
+        <script src="../assets/vendor/jquery/dist/jquery.min.js"></script>
+   
     </body>
 </html>
 

@@ -297,7 +297,7 @@ else if($user_role_id==3){
               <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body" >
                  <?php
-							echo "<a href='showTestStatistics.php?q=$test_id'>$test_name</a>";
+							echo "<a href='showTestStatistics.php?q=$test_id' data-toggle='modal' data-target='#flipFlop'>$test_name</a>";
 						echo "<p>Test Class:D$test_class_id$test_division</p>";
 					
 						echo "<p>Test Date:$test_date</p>";

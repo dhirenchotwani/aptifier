@@ -32,6 +32,13 @@ class Test{
         return $res;
     }
     
+    public function userTypes(){
+        $sql = "SELECT * FROM user_type";
+        global $database;
+        $res=$database->query($sql);
+        return $res;
+    }
+    
     public function readAllSubjects(){
         $sql = "SELECT * FROM subject";
         global $database;
