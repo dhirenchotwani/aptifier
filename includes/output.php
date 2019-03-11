@@ -33,7 +33,7 @@ if(isset($_POST['submit_test'])){
 		extract($row);
 	$msg->sendMessage("$user_phone","You scored $score in test $test_name");
     echo "Your score is:".$score;
-	Fucntions::redirect("dashboard.php");
+	Functions::redirect("dashboard.php");
 
 }
 ?>

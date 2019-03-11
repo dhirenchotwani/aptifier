@@ -29,7 +29,8 @@ class Mailer{
         $this->mail->SetFrom("handlesquizlikeaboss@gmail.com", "Aptifier");
         $this->mail->Subject = $subject;
         $this->mail->Body =$body;
-		$this->mail->addEmbeddedImage('../classes/img/final1.png', 'logo');	
+		$this->mail->addEmbeddedImage('../classes/img/mail.png', 'logo');
+		$this->mail->addEmbeddedImage('../classes/img/faviconb.png', 'favicon');
 		
 		
         $this->mail->AddAddress("$user_mail");

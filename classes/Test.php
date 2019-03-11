@@ -145,27 +145,14 @@ class Test{
         $res=$database->query($sql);
         return $res;
     }
-	
+	$test_name has been scheduled for you by Professor $faculty_name on $date
 	public function sendScheduledTestMail($email,$user_name,$faculty_name,$test_name,$date){
 	    
         $mailer = new Mailer();
 
-        $subject = "A quiz has beeen scheduled for You!";
+        $subject = "A Test has beeen scheduled for You!";
 
-        $body = "<div style='font-family:Roboto; font-size:16px; max-width: 600px; line-height: 21px;'>   
-            <h3>Hey, $user_name a Test has been scheduled</h3>
-            <br>  
-            <p style='text-decoration:none; color:#fff; background-color:#08476e;border:solid #348eda; border-width:2px 10px; line-height:2;font-weight:bold; text-align:center; display:inline-block;border-radius:4px'>
-			$test_name has been scheduled for you by Professor $faculty_name on $date
-			</p>
-            <br>  
-            <h3>Thank you for Choosing Aptifiers.</h3>
-            <br>
-            <br>
-            <h4>Sincerely,</h4>
-            <h5>The Aptifiers Team.</h5>
-			 <img src='cid:logo_2u'>
-            </div>";
+        $body = "<div><table border='0' cellpadding='0' cellspacing='0' height='100%' style='font-family:&quot;Arial&quot;' width='100%'><tbody><tr><td align='center' valign='top'><table border='0' cellpadding='0' cellspacing='0' style='font-family:&quot;Arial&quot;;border:1px solid #b2b2b2' width='600'><tbody><tr><td align='center' valign='top'><table border='0' cellpadding='0' cellspacing='0' style='font-family:&quot;Arial&quot;;background-color:#fff;font-size:14px;color:#46535e;border-radius:3px;' width='100%'><tbody><tr><td align='left' valign='top'><div style='color:#fff;background:white;padding:0px 20px 0px 20px;text-align:center;'><img align='center' height='auto' src='cid:logo' style='height:auto'></div><hr><div style='margin:0 30px 36px 30px'><span style='display:block;margin:0 0 18px 0;font-size:14px;line-height:2;color:black'><h3>Hi $email,</h3><br>A test $test_name has been scheduled for you by Professor $faculty_name on $date </span></div><div style='line-height:2;margin:30px 0 18px 30px;color:black'>Thank you for registering<br><div>Sincerely,</div><div>Team Aptifier</div></div></td></tr></tbody></table></td></tr><tr><td align='center' valign='top'><table border='0' cellpadding='0' cellspacing='0' style='font-family:&quot;Arial&quot;;font-size:12px;color:#666;padding-top:30px' width='100%'><tbody><tr><td align='left' style='padding:0 20px;font-size:12px;color:#90979e' valign='top'></td></tr><tr><td style='background-color: lightgray;border-top:1px solid #b2b2b2 '><p  style='margin-left: 85px;padding-bottom: 20px;padding-top: 20px;color:gray;'>This email was sent to <span style='color:#08476E'>$email</span> to confirm your Firebase registration.</p></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></div>";
 
        return( $mailer->send_mail($email, $body, $subject));
 		}
