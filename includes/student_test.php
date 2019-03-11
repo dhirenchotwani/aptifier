@@ -96,8 +96,8 @@ while($row = mysqli_fetch_assoc($result_set)){
 								<li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="c"><span>C. </span><?php echo $question_option3 ?></li>
 								<li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="d"><span>D. </span><?php echo $question_option4 ?></li>
 							</ul>
-							<a style="padding:10px; margin-bottom: 15px; width: 100px; border: none; text-align:center; margin-top: 20px;" class="btn btn-primary" <?php if($j!=0)echo 'onclick="previous()"';?>>Prev</a>
-							<a style="padding:10px; margin-bottom: 15px; width: 100px; border: none; text-align:center; float: right; margin-top: 20px;" class="btn btn-primary" id="nextQuestion" 
+							<a style="padding:10px; margin-bottom: 15px; width: 100px; border: none;color:white; text-align:center; margin-top: 20px;" class="btn btn-primary" <?php if($j!=0)echo 'onclick="previous()"';?>>Prev</a>
+							<a style="padding:10px; margin-bottom: 15px; width: 100px; border: none; text-align:center; float: right; margin-top: 20px;color:white" class="btn btn-primary" id="nextQuestion" 
 							<?php if($j != $count-1)echo 'onclick="next()"';?>>Next</a>
 
 
@@ -115,9 +115,31 @@ while($row = mysqli_fetch_assoc($result_set)){
        }
             ?>
    
-	<button type="submit" name="submit_test" class="btn btn-blue">Submit</button>
+	<button type="submit" name="submit_test" class="btn btn-blue" id="submit_test">Submit Test</button>
    
     </form>
+    <form method="POST" action="" >
+        <div class="row">
+            <div style="margin-left:550px;">
+                <div id="my_camera" style="display:none"></div>
+                <br/>
+                <input type=button value="Take Snapshot" onClick="take_snapshot()" id="check" style="display:none">
+                <input type="hidden" name="image" class="image-tag" id="photo">
+            </div>
+            <div>
+                <div id="results">Your captured image will appear here...</div>
+            </div>
+<!--
+            <div class="col-md-12 text-center">
+                <br/>
+                <button class="btn btn-success" name="check-photos" >Submit</button>
+            </div>
+-->
+        </div>
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
+    <script src="../assets/js/web.js"></script>
     
             <script>
         $(window).blur(function(){
@@ -126,6 +148,42 @@ while($row = mysqli_fetch_assoc($result_set)){
         });
         
         </script>
+<script>
+	
+	var j=0;
+	var cnt=0;
+	setInterval(function(){
+	document.getElementById("check").click();
+	var img = document.getElementById('photo').value;
+	j++;
+	
+  
+		$.ajax({
+		url: "fetch3.php",
+		method:"post",
+		data:{img : img,i:j},
+		dataType: "html",
+		success:function(data)
+		{
+			console.log(data);
+			
+			//echo false return length as 9 therefore 9 check this
+			if(data.length===9){
+				cnt++;
+				if(cnt==1){
+					document.getElementById("submit_test").click();
+				}
+			}
+			else{
+				console.log("not logging you out");
+			}
+			
+		}
+	});
+		
+	},10000);
+
+	</script>
 <script>
 document.getElementsByTagName("BODY")[0].onresize = function() {myFunction()};
 
@@ -190,6 +248,7 @@ function myFunction() {
 	<script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- Argon JS -->
 	<script src="../assets/js/argon.js?v=1.0.0"></script>
+	
 </body>
 
 </html>
