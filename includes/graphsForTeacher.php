@@ -39,11 +39,11 @@ foreach($res as $row){
 	$type=2;
 }
 else if(isset($_POST['maxscoreeachtest'])){
-	$res=$database->query("select max(score) as max,test.test_name,users.user_first_name as name from test_student inner join test on test_student.test_id=test.test_id inner join users on test_student.student_id=users.user_id where test.created_by=$user_id GROUP by test.test_name");
+	$res=$database->query("select max(score) as max,test.test_name,users.user_first_name from test_student inner join test on test_student.test_id=test.test_id inner join users on test_student.student_id=users.user_id where test.created_by=$user_id GROUP by test.test_name");
 foreach($res as $row){
 	extract($row);
 	array_push($data,$max);
-	array_push($labels,($test_name." by ".$name));
+	array_push($labels,($test_name." by ".$user_first_name));
 }
 	$headline=" Max score for each test taken (All Time)";
 	$type=3;
@@ -85,9 +85,9 @@ foreach($res as $row){
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-   <title>Aptifiers! | Teacher Graphs</title>
+  <title>Quiz Handlers</title>
   <!-- Favicon -->
-  <link href="../assets/data2/images/faviconb.png" rel="icon" type="image/png">
+  <link href="../assets/img/brand/favicon.png" rel="icon" type="image/png">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
   <!-- Icons -->
@@ -111,11 +111,11 @@ foreach($res as $row){
     <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
       <div class="container-fluid">
         <form action="" method="post">
-	 <input type="submit" name="class" value="Class">
-   <input type="submit" name="subject" value="Subject">
-    <input type="submit" name="chapter" value="Chapter">
-    <input type="submit" name="chapterMonth" value="Chapter for last 2 Months">
-     <input type="submit" name="maxscoreeachtest" value="Max Score">
+	 <input type="submit" name="class" value="Class" class="btn" style="background:#f9f9f9;color:#04456B;margin-bottom:15px;px;">
+   <input type="submit" name="subject" value="Subject" class="btn" style="background:#f9f9f9;color:#04456B;margin-bottom:15px;px;">
+    <input type="submit" name="chapter" value="Chapter" class="btn" style="background:#f9f9f9;color:#04456B;margin-bottom:15px;px;">
+    <input type="submit" name="chapterMonth" value="Chapter for last 2 Months" class="btn" style="background:#f9f9f9;color:#04456B;margin-bottom:15px;px;">
+     <input type="submit" name="maxscoreeachtest" value="Max Score" class="btn" style="background:#f9f9f9;color:#04456B;margin-bottom:15px;px;">
 	 <div id="container" style="height:550px; width:1000px; display:none; background-color: white;">
        <?php echo $headline; ?>
         <canvas id="class" ></canvas>

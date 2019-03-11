@@ -23,12 +23,13 @@ session_start();
     <link type="text/css" href="../assets/css/argon.css?v=1.0.0" rel="stylesheet">
 </head>
 
-<body class="">
+<body class="" style="background-color:#04456B">
+   <h2 style="text-align:center;color:#fff;padding:20px;">Solve the below questions|</h2>
     
     <form method="post" action="test_scheduled.php">
         <div class="main-content">
             <!-- Header -->
-            <div class="header py-lg-8"></div>
+<!--            <div class="header py-lg-8"></div>-->
             <?php
             $user_id = $_SESSION['user_id'];
             $obj = new Test();
@@ -103,28 +104,28 @@ session_start();
                 <!-- Page content -->
                  <div class="main-content">
 		<!-- Header -->
-		<div class="header    py-lg-8"></div>
+		<div class="header" style="margin-bottom:100px;"></div>
 		<!-- Page content -->
 		<div class="container mt--8 pb-5">
 			<div class="row justify-content-center">
-				<div class="col-lg-6 col-md-7">
-					<div class="card bg-secondary shadow border-0">
-						<div class="card-header bg-transparent pb-5">
+				<div class="col-lg-5 col-md-7">
+					<div class="card bg-secondary shadow border-0" style="border-radius:50px;background-color:#f9f9f9;">
+						<div class="card-header bg-transparent">
 							<?php
                 if($is_question_image == 1){
                     echo '<img src="data:image/jpeg;base64,'.base64_encode($row['question_image']).'" width="200px" height="200px"/>';
                 }
                         ?>
 							<div class="">
-								<p id="<?php echo $questions_id;?>" ><span><?php echo $k.")";?> </span><?php echo $question_text; ?></p>
+								<p style="padding-left:20px;"id="<?php echo $questions_id;?>" ><span><?php echo $k.")";?> </span><?php echo $question_text; ?></p>
 							</div>
 						</div>
 						<div class="card-body">
 							<ul style="margin: 0px; list-style: none;">
-								<li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="a"><span>A. </span><?php echo $question_option1 ?></li>
-								<li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="b"><span>B. </span><?php echo $question_option2 ?></li>
-								<li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="c"><span>C. </span><?php echo $question_option3 ?></li>
-								<li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="d"><span>D. </span><?php echo $question_option4 ?></li>
+								<li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="a"><span>A.&nbsp</span><?php echo $question_option1 ?></li>
+								<li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="b"><span>B.&nbsp </span><?php echo $question_option2 ?></li>
+								<li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="c"><span>C.&nbsp </span><?php echo $question_option3 ?></li>
+								<li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="d"><span>D.&nbsp </span><?php echo $question_option4 ?></li>
 							</ul>
 						</div>
 					</div>
@@ -138,18 +139,18 @@ session_start();
 }//end of loop
     }//end of if
             ?>
-            <p>Name of the Test</p>
-           <input type="text" name="test_name"> 
-        <p>Date To be conducted on:</p>
-        <input type="date" name="test_date">
+            <div class="container">
+            <label style="color:#fff;">Name of the Test: <input type="text" name="test_name"></label>
+            
+        <label style="color:#fff;padding-left:15px;">Date To be conducted on: <input type="date" name="test_date"></label>
+       
 <!--
 				<p>Start Time:</p>
 				<input type="time" name="start_time">
 				<p>End Time:</p>
 				<input type="time" name="end_time">
 -->
-        <p>Class:</p>
-        <select name="test_class_id" id="test_division">
+        <label style="color:#fff;padding-left:15px;">Class:<select name="test_class_id" id="test_division">
             <option value="1">D1</option>
             <option value="2">D2</option>
             <option value="3">D3</option>
@@ -171,23 +172,25 @@ session_start();
             <option value="19">D19</option>
             <option value="20">D20</option>
         </select>
-        
-        <p>Test Level:</p>         
-        <select name="test_level" id="">
+        </label>
+     
+        <label style="color:#fff;padding-left:15px;">Test Level:  <select name="test_level" id="">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
-        </select>
+        </select></label>         
+      
                    
-        <p>Test Level:</p>         
-        <select name="test_division" id="">
+        <label style="color:#fff;padding-left:15px;">Test Level:<select name="test_division" id="">
             <option value="A">A</option>
             <option value="B">B</option>
             <option value="C">C</option>
-        </select>
-                    <button type="submit" name="submit_test" class="btn btn-blue">SET TEST</button>
-                    <a href="<?php echo BASEURL."includes/showGeneratedTest.php "?>" class="btn">Generate Again!</a>
+        </select></label>         
+        
+                    <button type="submit" name="submit_test" class="btn"style="background-color:white;color:#04456B;margin-left:400px;margin-top:30px;margin-bottom:30px ">SET TEST</button>
+                    <a href="<?php echo BASEURL."includes/showGeneratedTest.php "?>" class="btn" style="background-color:white;color:#04456B;margin-top:30px;margin-bottom:30px">Generate Again!</a>
         </div>
+		</div>
 
     </form>
 

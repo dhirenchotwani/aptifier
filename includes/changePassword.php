@@ -29,7 +29,7 @@ if(isset($_POST['recovery_submit']) && (isset($_GET['action']) == "reset")){
   <meta name="author" content="">
   <title>Quiz Handlers</title>
   <!-- Favicon -->
-  <link href="../assets/data2/images/faviconb.png" rel="icon" type="image/png">
+  <link href="../assets/img/brand/favicon.png" rel="icon" type="image/png">
   <!-- Fonts -->
 <!--  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">-->
   <!-- Icons -->
@@ -41,49 +41,15 @@ if(isset($_POST['recovery_submit']) && (isset($_GET['action']) == "reset")){
 
 <body class="bg-default">
   <div class="main-content">
-    <!-- Navbar -->
-    <nav class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark">
-      <div class="container px-4">
-        <a class="navbar-brand" href="">
-          <img src="../assets/img/brand/trans_white.png" />
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbar-collapse-main">
-<!--
-           Collapse header 
-          <div class="navbar-collapse-header d-md-none">
-            <div class="row">
-              <div class="col-6 collapse-brand">
-                <a href="../index.html">
-                  <img src="../../assets/img/brand/blue.png">
-                </a>
-              </div>
-              <div class="col-6 collapse-close">
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
-                  <span></span>
-                  <span></span>
-                </button>
-              </div>
-            </div>
-          </div>
--->
-          <!-- Navbar items -->
-          <ul class="navbar-nav ml-auto">
+   
 
-          </ul>
-        </div>
-      </div>
-    </nav>
     <!-- Header -->
     <div class="header bg-gradient-primary py-7 py-lg-8">
       <div class="container">
         <div class="header-body text-center mb-7">
           <div class="row justify-content-center">
             <div class="col-lg-5 col-md-6">
-              <h1 class="text-white">Welcome!</h1>
-              <p class="text-lead text-light">This is a place where you can test your brains!</p>
+             <img src="../assets/img/brand/trans_white.png" width="300px" height="140px" style="margin-left:15px;"/>
             </div>
           </div>
         </div>

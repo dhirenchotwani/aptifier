@@ -1,6 +1,6 @@
 <?php
 include_once("bootstrap.php");
-session_start();
+Session::startSession();
 ?>
 
 <?php
@@ -82,9 +82,9 @@ if(isset($_POST['finish_inserting_question'])){
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-         <title>Aptifiers! | Insert Questions</title>
+        <title>Quiz Handlers</title>
         <!-- Favicon -->
-        <link href="../assets/data2/images/faviconb.png" rel="icon" type="image/png">
+        <link href="../assets/img/brand/favicon.png" rel="icon" type="image/png">
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
         <!-- Icons -->
@@ -94,18 +94,21 @@ if(isset($_POST['finish_inserting_question'])){
         <link type="text/css" href="../assets/css/argon.css?v=1.0.0" rel="stylesheet">
     </head>
 
-    <body class="">
+    <body class="" style="background:#04456B">
        
+<!--
         <div class="container-fluid">
-            <!-- Brand -->
+             
             <a class="navbar-brand pt-0" href="../index.html">
-        <img src="../assets/img/brand/blue.png" alt="..." width="180px">
+        <img src="../assets/img/brand/logo_blue.png" width="225px" height="73px" style="margin-left:15px;"/>
       </a>
         </div>
-        <h2 style="text-align: center; padding-top: 30px;">Add|Questions</h2>
-        <div class="container" style="border: 1px solid #ddd; background-color: #fff; margin:0 auto;width: 800px;">
+-->
+        
+        <h2 style="text-align: center; padding-top: 30px; padding-left:150px;color:#fff">Add|Questions</h2>
+        <div class="container" style="border: 1px solid #ddd; background-color: #fff; margin:0 auto;width: 600px;margin-right:300px;padding:70px;padding-left:90px;margin-top:0px;">
 		<a href="insertQuestionFromExcel.php">Insert From EXCEL</a>
-            <form method="post" enctype="multipart/form-data" action="" class="" style=>
+            <form method="post" enctype="multipart/form-data" action="" class="" >
               
               <label for="">Subject:</label>
                <select name="subject_name" style="width: 80px;margin: 20px;" id="subject_name">
@@ -153,9 +156,10 @@ if(isset($_POST['finish_inserting_question'])){
                 <b>Note:</b>
                 <p>skip if your question does not have any image</p>
                 <br>
-                <button type="submit" class="btn btn-primary" style="margin-left:350px; margin-bottom: 20px;" name="submit_question">ADD</button>
                 
-                <button type="submit" class="btn btn-primary" style="margin-left:350px; margin-bottom: 20px;" name="finish_inserting_question">Finish</button>
+                <button type="submit" class="btn btn-primary" style="margin-left:100px; margin-bottom: 20px;" name="submit_question">ADD</button>
+                
+                <button type="submit" class="btn btn-primary" style="margin-bottom:21px;margin-left:50px;" name="finish_inserting_question">Finish</button>
 
             </form>
 

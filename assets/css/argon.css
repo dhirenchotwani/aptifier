@@ -867,6 +867,7 @@ pre code
     min-height: 1px;
     padding-right: 15px;
     padding-left: 15px;
+	margin-bottom: 20px;
 }
 
 .col
@@ -5682,7 +5683,7 @@ input[type='button'].btn-block
 
     word-wrap: break-word;
 
-    border: 1px solid rgba(0, 0, 0, .05);
+    border: 1px solid #04456B;
     border-radius: .375rem; 
     background-color: #fff;
     background-clip: border-box;
@@ -5705,7 +5706,7 @@ input[type='button'].btn-block
 
 .card-body
 {
-    padding: 1.5rem; 
+    padding: 1.5rem;
 
     flex: 1 1 auto;
 }
@@ -9639,11 +9640,13 @@ button.bg-darker:focus
     margin-right: 1.5rem !important;
 }
 
+/*
 .mb-4,
 .my-4
 {
-    margin-bottom: 1.5rem !important;
+    margin-bottom: rem !important;
 }
+*/
 
 .ml-4,
 .mx-4
@@ -10210,7 +10213,7 @@ button.bg-darker:focus
 .pt-5,
 .py-5
 {
-    padding-top: 3rem !important;
+    padding-top: 7rem !important;
 }
 
 .pr-5,
@@ -10568,7 +10571,7 @@ button.bg-darker:focus
 }
 
 .pb-8,
-.py-8
+
 {
     padding-bottom: 8rem !important;
 }
@@ -12448,7 +12451,7 @@ button.bg-darker:focus
         padding: 8rem !important;
     }
     .pt-md-8,
-    .py-md-8
+    
     {
         padding-top: 8rem !important;
     }

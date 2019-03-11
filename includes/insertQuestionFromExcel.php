@@ -46,16 +46,35 @@ global $database;
   }
 
 ?>
-<html>
-<head>
-	 <title>Aptifiers! | Upload from Excel</title>
-	     <link href="../assets/data2/images/faviconb.png" rel="icon" type="image/png">
-</head>
-<body>
-	<h1>Upload your .csv/.xsl files here</h1>
-	<form action="" method="post" enctype="multipart/form-data">
-	<input type="file" name="csv_file">
-	<input type="submit" name="upload" value="Press here">
-	</form>
-</body>
-</html>
+	<html>
+
+	<head>
+		<title>Upload Excel Sample Here</title>
+		<!-- Argon CSS -->
+		<link type="text/css" href="../assets/css/argon.css?v=1.0.0" rel="stylesheet">
+		 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+ 
+	</head>
+
+	<body style="background:#fff">
+	 <!-- Sidenav -->
+ 
+
+<!--
+
+		<a class="navbar-brand pt-0" href="../index.html">
+        <img src="../assets/data2/images/155120841628803503.png" width="365px" height="76px" style="margin-left:15px;"/>
+      </a>
+-->
+
+		<h1 style="text-align:center; padding-top:75px;">Upload your .csv files here</h1>
+		<div class="container" style="border: 1px solid #ddd; background-color: #f9f9f9; margin:0 auto;width: 400px;margin-right:490px;padding:70px;padding-left:90px;">
+
+			<form action="" method="post" enctype="multipart/form-data">
+				<input type="file" name="csv_file" style="padding-right:25px;">
+				<input type="submit" name="upload" value="Press here" class="btn btn-primary" style="margin-top:25px;margin-left:40px;">
+			</form>
+		</div>
+	</body>
+
+	</html>

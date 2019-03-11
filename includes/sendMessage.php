@@ -30,5 +30,5 @@ public function sendMessage($mobile_no, $message){
 
 $msg = new Message();
 
-$msg->sendMessage("XXXXXXXXXX","Your Message here");
+//$msg->sendMessage("XXXXXXXXXX","Your Message here");
 ?>

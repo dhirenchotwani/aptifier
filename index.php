@@ -90,6 +90,7 @@ else{
 			.hovering {
 				position: relative;
 				display: inline-block;
+				
 
 			}
 
@@ -109,6 +110,7 @@ else{
 				box-sizing: border-box;
 				display: none;
 				font-size: 14px;
+				
 			}
 
 			.hovering:hover h2 {
@@ -216,7 +218,7 @@ else{
                                    
                                     <div class="hovering">
                                     	<img class="pics" src="assets/img/brand/dhiren.png" alt="Dhiren Chotwani" style="margin-left:40px">
-                                    	<h2><span style="margin-left:40px">Dhiren Chotwani</span><span style="line-height:0px; "><br >Backend Support</span></h2>
+                                    	<h2  style="margin-left:40px;"><span style="margin-left:40px">Dhiren Chotwani</span><span style="line-height:0px; "><br >Backend Support</span></h2>
 								
                                     </div>
 									<div class="hovering">
@@ -225,7 +227,7 @@ else{
 									</div>
 									<div class="hovering">
 										<img class="pics" src="assets/img/brand/puja.jpg" alt="Puja mahtani" style="margin-left:40px; margin-top:30px;">
-										<h2><span>Puja Mahtani</span><span style="line-height:0px;"><br>UI/UX</span></h2>
+										<h2  style="margin-left:40px;"><span>Puja Mahtani</span><span style="line-height:0px;"><br>UI/UX</span></h2>
 									</div>
 									
 
