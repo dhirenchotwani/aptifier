@@ -24,7 +24,7 @@ session_start();
 </head>
 
 <body class="" style="background-color:#04456B">
-   <h2 style="text-align:center;color:#fff;padding:20px;">Solve the below questions|</h2>
+   <h2 style="text-align:center;color:#fff;padding:20px;">Questions for your test are:</h2>
     
     <form method="post" action="test_scheduled.php">
         <div class="main-content">
@@ -106,10 +106,11 @@ session_start();
 		<!-- Header -->
 		<div class="header" style="margin-bottom:100px;"></div>
 		<!-- Page content -->
+			<!-- Page content -->
 		<div class="container mt--8 pb-5">
 			<div class="row justify-content-center">
 				<div class="col-lg-5 col-md-7">
-					<div class="card bg-secondary shadow border-0" style="border-radius:50px;background-color:#f9f9f9;">
+					<div class="card bg-secondary shadow border-0" style="border-radius:10px;background-color:#E1E2E1">
 						<div class="card-header bg-transparent">
 							<?php
                 if($is_question_image == 1){
@@ -117,23 +118,23 @@ session_start();
                 }
                         ?>
 							<div class="">
-								<p style="padding-left:20px;"id="<?php echo $questions_id;?>" ><span><?php echo $k.")";?> </span><?php echo $question_text; ?></p>
+								<p style="padding-left:20px;color:#08476E"id="<?php echo $questions_id;?>" ><span><?php echo $k.")";?> </span><?php echo $question_text; ?></p>
 							</div>
 						</div>
 						<div class="card-body">
-							<ul style="margin: 0px; list-style: none;">
-								<li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="a"><span>A.&nbsp</span><?php echo $question_option1 ?></li>
-								<li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="b"><span>B.&nbsp </span><?php echo $question_option2 ?></li>
-								<li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="c"><span>C.&nbsp </span><?php echo $question_option3 ?></li>
-								<li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="d"><span>D.&nbsp </span><?php echo $question_option4 ?></li>
+							<ul style="margin-left:0px; list-style: none;">
+								<div style="width:250px;height:40px;box-shadow:5px 12px 25px -10px #08476E;padding-left:20px;padding-top:8px;margin-bottom:15px;margin-left:20px;"><li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="a"><span style="color:#04456B;font-size:16px;">A.&nbsp</span><?php echo $question_option1 ?></li></div>
+								<div style="width:250px;height:40px;box-shadow:5px 12px 25px -10px #08476E;padding-left:20px;padding-top:8px;margin-bottom:15px;margin-left:20px;"><li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="b"><span style="color:#04456B;font-size:18px;">B.&nbsp</span><?php echo $question_option2 ?></li></div>
+								<div style="width:250px;height:40px;box-shadow:5px 12px 25px -10px #08476E;padding-left:20px;padding-top:8px;margin-bottom:15px;margin-left:20px;"><li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="c"><span style="color:#04456B;font-size:18px;">C.&nbsp</span><?php echo $question_option3 ?></li></div>
+								<div style="width:250px;height:40px;box-shadow:5px 12px 25px -10px #08476E;padding-left:20px;padding-top:8px;margin-bottom:15px;margin-left:20px; "><li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="d"><span style="color:#04456B;font-size:18px;">D.&nbsp</span><?php echo $question_option4 ?></li></div>
 							</ul>
 						</div>
 					</div>
 
 				</div>
 			</div>
-		</div>
 	</div>
+			</div>
                 <?php
             $k++;
 }//end of loop
@@ -142,7 +143,7 @@ session_start();
             <div class="container">
             <label style="color:#fff;">Name of the Test: <input type="text" name="test_name"></label>
             
-        <label style="color:#fff;padding-left:15px;">Date To be conducted on: <input type="date" name="test_date"></label>
+        <label style="color:#fff;padding-left:10px;">Date To be conducted on: <input type="date" name="test_date"></label>
        
 <!--
 				<p>Start Time:</p>
@@ -150,7 +151,7 @@ session_start();
 				<p>End Time:</p>
 				<input type="time" name="end_time">
 -->
-        <label style="color:#fff;padding-left:15px;">Class:<select name="test_class_id" id="test_division">
+        <label style="color:#fff;padding-left:10px;">Class:<select name="test_class_id" id="test_division">
             <option value="1">D1</option>
             <option value="2">D2</option>
             <option value="3">D3</option>
@@ -174,14 +175,14 @@ session_start();
         </select>
         </label>
      
-        <label style="color:#fff;padding-left:15px;">Test Level:  <select name="test_level" id="">
+        <label style="color:#fff;padding-left:10px;">Test Level:  <select name="test_level" id="">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
         </select></label>         
       
                    
-        <label style="color:#fff;padding-left:15px;">Test Level:<select name="test_division" id="">
+        <label style="color:#fff;padding-left:10px;">Test Level:<select name="test_division" id="">
             <option value="A">A</option>
             <option value="B">B</option>
             <option value="C">C</option>

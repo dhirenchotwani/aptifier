@@ -15,7 +15,7 @@ include_once("bootstrap.php");
 	<meta name="author" content="">
 	<title>Quiz Handlers</title>
 	<!-- Favicon -->
-	<link href="../assets/img/brand/favicon.png" rel="icon" type="image/png">
+	<link href="../assets/data2/images/faviconb.png" rel="icon" type="image/png">
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 	<!-- Icons -->
@@ -31,7 +31,7 @@ include_once("bootstrap.php");
 		<div class="container-fluid">
 		<!-- Brand -->
 			<a class="navbar-brand pt-0" href="../index.html">
-        <img src="../assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
+        <img src="../assets/img/brand/logo_blue.png" class="navbar-brand-img" alt="...">
       </a>
      <!-- Collapse -->
 			<div class="collapse navbar-collapse" id="sidenav-collapse-main">
@@ -84,21 +84,21 @@ while($row = mysqli_fetch_assoc($result_set)){
                     echo '<img src="data:image/jpeg;base64,'.base64_encode($row['question_image']).'" width="200px" height="200px"/>';
                 }
                         ?>
-							<div class="text-muted mt-2 mb-3"><small>Time Left:10min</small></div>
+							<div class="text-muted mt-2 mb-3">Time Left: <strong style="font-size:16px;">10min</strong><small style="margin-left:260px;">Questions:<strong style="font-size:16px;">1/1</strong></small></div>
 							<div class="" id="question_text">
 								<p id="questionID" value="<?php echo $questions_id;?>"><span><?php echo $i.")";?> </span><?php echo $question_text; ?></p>
 							</div>
 						</div>
-						<div class="card-body">
-							<ul style="margin: 0px; list-style: none;">
-								<li id="question_option1"><li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="a"><span>A. </span><?php echo $question_option1 ?></li>
-								<li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="b"><span>B. </span><?php echo $question_option2 ?></li>
-								<li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="c"><span>C. </span><?php echo $question_option3 ?></li>
-								<li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="d"><span>D. </span><?php echo $question_option4 ?></li>
+						<div class="card-body" style="background=#f9f9f9;margin:0px;">
+							<ul style="list-style: none;">
+								<div style="width:350px;height:40px;box-shadow:5px 12px 25px -10px #08476E;padding-left:20px;padding-top:8px;margin-bottom:15px;"><li id="question_option1"><li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="a"><span>A. </span><?php echo $question_option1 ?></li></div>
+								<div style="width:350px;height:40px;box-shadow:5px 12px 25px -10px #08476E;padding-left:20px;padding-top:8px;margin-bottom:15px;"><li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="b"><span>B. </span><?php echo $question_option2 ?></li></div>
+								<div style="width:350px;height:40px;box-shadow:5px 12px 25px -10px #08476E;padding-left:20px;padding-top:8px;margin-bottom:15px;"><li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="c"><span>C. </span><?php echo $question_option3 ?></li></div>
+								<div style="width:350px;height:40px;box-shadow:5px 12px 25px -10px #08476E;padding-left:20px;padding-top:8px;margin-bottom:15px;"><li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="d"><span>D. </span><?php echo $question_option4 ?></li></div>
 							</ul>
-							<a style="padding:10px; margin-bottom: 15px; width: 100px; border: none;color:white; text-align:center; margin-top: 20px;" class="btn btn-primary" <?php if($j!=0)echo 'onclick="previous()"';?>>Prev</a>
-							<a style="padding:10px; margin-bottom: 15px; width: 100px; border: none; text-align:center; float: right; margin-top: 20px;color:white" class="btn btn-primary" id="nextQuestion" 
-							<?php if($j != $count-1)echo 'onclick="next()"';?>>Next</a>
+							<a style="padding:15px; margin-bottom: 15px; width:50px;height:50px; border: none; text-align:center; margin-top: 20px;border-radius:50px;color:white;font-weight:400;box-shadow:1px 1px 50px -10px #999" class="btn btn-primary" <?php if($j!=0)echo 'onclick="previous()"';?>><i class='fas fa-arrow-left'></i></a>
+							<a style="padding:15px; margin-bottom: 15px;  width:50px;height:50px;border: none; text-align:center; float: right; margin-top: 20px;border-radius:50px;color:white;font-weight:400;box-shadow:1px 1px 50px -10px #999" class="btn btn-primary" id="nextQuestion" 
+							<?php if($j != $count-1)echo 'onclick="next()"';?>><i class='fas fa-arrow-right'></i></a>
 
 
 						</div>
@@ -170,8 +170,10 @@ while($row = mysqli_fetch_assoc($result_set)){
 			//echo false return length as 9 therefore 9 check this
 			if(data.length===9){
 				cnt++;
-				if(cnt==1){
+				if(cnt==3){
 					document.getElementById("submit_test").click();
+				}else{
+					console.log("We're syping you! Dont look side ways! Remaining Chances "+(3-cnt));
 				}
 			}
 			else{
