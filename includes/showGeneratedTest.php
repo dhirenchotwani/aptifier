@@ -40,9 +40,11 @@ echo "<span style='margin-bottom:0px;color:#04456B;font-weight:400;font-size:15p
 //echo "you have ".$result2." Old Questions";
 
 ?>
-								<label style="font-weight:400;font-size:18px;padding-top:20px;text-align:center;">How many questions should your test contains?<input type="text" name="countOfQuestions" style="margin-top:10px;"></label>
-								<label for="" style="font-weight:400;font-size:18px;;text-align:center;padding-left:180px;">Test on: 						<select name="test_id" style="width: 80px;margin: 20px;" id="test_id">
-               <option value="" style="font-size:16px">...</option>
+								<label style="font-weight:400;font-size:18px;padding-top:20px;text-align:center;margin-left:80px">How many questions should your test contains?</label>
+								<input type="text" name="countOfQuestions" style="margin-top:10px;margin-left:240px;width:100px;">
+								<label for="" style="font-weight:400;font-size:18px;;text-align:center;padding-left:30px;">Test on: 						
+              <select name="test_id" style="width:380px;height:40px;margin:20px;" id="test_id">
+               <option value="" >Select one option</option>
        <?php
            if($result = $obj->countnewInsertedQuestions($user_id) > 0){
                echo "<option value='new' style='font-size:16px'>Generate Random Test on new Questions</option>";

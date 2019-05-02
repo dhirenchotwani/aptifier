@@ -49,14 +49,15 @@ global $database;
 	<html>
 
 	<head>
-		<title>Upload Excel Sample Here</title>
+		<title>Aptifier | Excel Questions</title>
 		<!-- Argon CSS -->
 		<link type="text/css" href="../assets/css/argon.css?v=1.0.0" rel="stylesheet">
+		<link href="../assets/data2/images/faviconb.png" rel="icon" type="image/png">
 		 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
  
 	</head>
 
-	<body style="background:#fff">
+	<body style="background:#08476E">
 	 <!-- Sidenav -->
  
 
@@ -67,8 +68,8 @@ global $database;
       </a>
 -->
 
-		<h1 style="text-align:center; padding-top:75px;">Upload your .csv files here</h1>
-		<div class="container" style="border: 1px solid #ddd; background-color: #f9f9f9; margin:0 auto;width: 400px;margin-right:490px;padding:70px;padding-left:90px;">
+		<h1 style="text-align:center; padding-top:75px;color:white">Upload your .csv files here</h1>
+		<div class="container" style="border: 1px solid #ddd; background-color: #f9f9f9; margin:0 auto;width: 400px;margin-left:550px;padding:70px;padding-left:90px;">
 
 			<form action="" method="post" enctype="multipart/form-data">
 				<input type="file" name="csv_file" style="padding-right:25px;">

@@ -42,7 +42,7 @@ fclose($file);
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-   <title>Aptifier | Results</title>
+   <title>Aptifiers! | Results</title>
   <!-- Favicon -->
   <link href="../assets/data2/images/faviconb.png" rel="icon" type="image/png">
   <!-- Fonts -->
@@ -54,13 +54,13 @@ fclose($file);
   <link type="text/css" href="../assets/css/argon.css?v=1.0.0" rel="stylesheet">
   <style>
 	table, th, td {
-  border: 1px solid black;
+  border: 1px solid #999;
 }
 	  th, td {
   padding: 15px;
   text-align: center;
 }
-	  tr:hover {background-color: #08476E;
+	  tr:hover {background-color:#08476E;
 	  color:white;}
 	</style>
 </head>
@@ -83,36 +83,28 @@ fclose($file);
           <div class="row">
                               
 		<form action="" method="post" >
-            <div class="col-xl-12 col-lg-12">
-              <div class="card card-stats mb-4 mb-xl-0">
-                <div class="card-body" >
-                  <div class="row">
+            <div class="card-body" >
+                  <div class="row" style="background:#04456B">
                     <div class="col">
-                     <button name="tabular">Tabular Format</button>
+                     <button name="tabular" class="btn" style="color:#04456B; background:#fff">Tabular Format</button>
                       
                     </div>
                    
                   </div>
                  
                 </div>
-              </div>
-            </div>
             </form>
-            <form action="" method="post">
-            <div class="col-xl-12 col-lg-12">
-              <div class="card card-stats mb-4 mb-xl-0">
-                <div class="card-body">
-                  <div class="row">
+           <form action="" method="post">
+                   <div class="card-body">
+                  <div class="row" style="background:#04456B">
                     <div class="col">
-                   <button name="excel">Excel Sheet</button>
+                   <button name="excel" class="btn" style="color:#04456B; background:#fff">Excel Sheet</button>
                       
                     </div>
                    
                   </div>
                  
                 </div>
-              </div>
-            </div>
 			  </form>
 <!--
             <div class="col-xl-3 col-lg-6">

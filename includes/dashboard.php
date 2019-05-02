@@ -12,25 +12,21 @@ if($row=mysqli_fetch_assoc($res))
 
 if($user_role_id==5){
 	$res=$obj->getUserWithJoinCondition("INNER JOIN student on users.user_id = student.user_id INNER JOIN student_class on student.student_class_id=student_class.student_class_id INNER JOIN branch on student.student_branch=branch.branch_id","users.user_id",$_SESSION['user_id']);
-	if(mysqli_num_rows($res)>0){
 $row=mysqli_fetch_assoc($res);
 extract($row);
 	$res=$test->getAllTestForStudent($student_class_id,"=");		
 	}
-}
+
 
 else if($user_role_id==3){
 	$res=$test->getAllTestForTeacher($user_id,"=");
-	if(mysqli_num_rows($res)>0){
 	if($row=mysqli_fetch_assoc($res)){
 		extract($row);
 	$_SESSION['test_id']=$test_id;
 		$test_set=1;
 	}
 }
-}
 //Functions::redirect('includes/login.php');
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,46 +36,46 @@ else if($user_role_id==3){
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
- <title>Aptifier | Dashboard</title>
+  <title>Aptifier | Dashboard</title>
   <!-- Favicon -->
   <link href="../assets/data2/images/faviconb.png" rel="icon" type="image/png">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
   <!-- Icons -->
   <link href="../assets/vendor/nucleo/css/nucleo.css" rel="stylesheet">
-  <link href="../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+ 
   <!-- Argon CSS -->
 <!--  <link type="text/css" href="../assets/css/argon.min.css" rel="stylesheet">-->
   <link type="text/css" href="../assets/css/argon.css" rel="stylesheet">
-   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </head>
 
 <body>
    <!-- Sidenav -->
   <?php include_once("templates/sidebar.php"); ?>
-  <!-- Sidenav Ends here-->
+  
+   
   
   <!-- Main content -->
   <div class="main-content">
     <!-- Top navbar -->
-     <?php include_once("templates/topbar.php"); ?>
+     <?php  include_once("templates/topbar.php"); ?>
       <!-- Top navbar here -->
     <!-- Header -->
-    <?php
-	$flag=0;
+    <?php 
 	  if($user_role_id==5){
 		    $cnt=$test->getTestAndScoreCount($_SESSION['user_id']);
 	  if($row=mysqli_fetch_assoc($cnt))
 		  extract($row);
-	  $src=$test->getLastScoreAndTest($_SESSION['user_id']);
+	  $src=$test->getLastScoreAndTest($_SESSION['user_id']);{
 		  if($row=mysqli_fetch_assoc($src))
 			  extract($row);
 	$prevsrc=$test->getPrevHighScore($_SESSION['user_id']);
 		  if($row=mysqli_fetch_assoc($prevsrc))
 			  extract($row);
-	  if(mysqli_num_rows($cnt) == 1 && mysqli_num_rows($src) == 1 &&mysqli_num_rows($prevsrc) == 1){
-		  ?>
-    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+	  }
+		 ?>
+    <div class="header bg-gradient-primary  pt-5 pt-md-8">
       <div class="container-fluid">
         <div class="header-body">
           <!-- Card stats -->
@@ -90,18 +86,18 @@ else if($user_role_id==3){
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Total Score</h5>
-                      <span class="h2 font-weight-bold mb-0"><?php echo $final_score; ?></span>
+                      <span class="h2 font-weight-bold mb-0"><?php echo $final_score;  ?></span>
                     </div>
                     <div class="col-auto">
-                      <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-                        <i class="fas fa-chart-pie"></i>
+                      <div class="icon icon-shape bg-danger text-white rounded-circle shadow" style="background:green">
+                        <i class="fas fa-clipboard-list"></i>
                       </div>
                     </div>
                   </div>
                  <p class="mt-3 mb-0 text-muted text-sm">
                     
                     <span class="text-nowrap">Last Score</span>
-                    <span class="text-success mr-2 font-weight-bold "><b style="color:red;"><?php echo $last_score; ?></b></span>
+                    <span class="text-success mr-2 font-weight-bold "><b style="color:red"><?php echo $last_score; ?></b></span>
                   </p>
                 </div>
               </div>
@@ -112,10 +108,10 @@ else if($user_role_id==3){
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Total Tests</h5>
-                      <span class="h2 font-weight-bold mb-0 "><?php echo $testCount; ?></span>
+                      <span class="h2 font-weight-bold mb-0 "><?php  echo $testCount; ?></span>
                     </div>
                     <div class="col-auto">
-                      <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                      <div class="icon icon-shape bg-warning text-white rounded-circle shadow" style="background:red">
                         <i class="fas fa-file-alt"></i>
                       </div>
                     </div>
@@ -137,15 +133,15 @@ else if($user_role_id==3){
                       <span class="h2 font-weight-bold mb-0"><?php echo $max_score; ?></span>
                     </div>
                     <div class="col-auto">
-                      <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
-                        <i class="fas fa-calendar"></i>
+                      <div class="icon icon-shape bg-yellow text-white rounded-circle shadow" style="background:yellow;">
+                      <i class="fas fa-chalkboard-teacher"></i>
                       </div>
                     </div>
                   </div>
                  <p class="mt-3 mb-0 text-muted text-sm">
                     
                     <span class="text-nowrap">Last Max Score:</span>
-                    <span class="text-success mr-2 font-weight-bold "><b style="color:red"><?php echo $prevscore; ?></b></span>
+                    <span class="text-success mr-2 font-weight-bold "><b style="color:red"><?php echo $prevscore;  ?></b></span>
                   </p>
                 </div>
               </div>
@@ -167,7 +163,7 @@ else if($user_role_id==3){
                   <p class="mt-3 mb-0 text-muted text-sm">
                     
                     <span class="text-nowrap">Last Test given on:</span>
-     <span class="text-success mr-2 font-weight-bold "><b style="color:red"><?php echo substr($last_test_date,0,10); ?></b></span>
+     <span class="text-success mr-2 font-weight-bold "><b style="color:red"><?php  echo substr($last_test_date,0,10); ?></b></span>
                   </p>
                 </div>
               </div>
@@ -177,8 +173,8 @@ else if($user_role_id==3){
       </div>
    
     </div>
-    <?php
-	  }
+    <?php 
+	  
 	  }else if($user_role_id==3){
 	    $cnt=$test->getTotalQuestions($_SESSION['user_id']);
 	  if($row=mysqli_fetch_assoc($cnt))
@@ -197,15 +193,15 @@ else if($user_role_id==3){
           <!-- Card stats -->
           <div class="row">
             <div class="col-xl-3 col-lg-6">
-              <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card card-stats mb-xl-0" >
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Total Questions</h5>
-                      <span class="h2 font-weight-bold mb-0"><?php echo $total_ques; ?></span>
+                      <span class="h2 font-weight-bold mb-0"><?php echo $total_ques;?></span>
                     </div>
                     <div class="col-auto">
-                      <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                      <div class="icon icon-shape text-white rounded-circle shadow" style="background:green;">
                         <i class="fas fa-chart-pie"></i>
                       </div>
                     </div>
@@ -223,7 +219,7 @@ else if($user_role_id==3){
                       <span class="h2 font-weight-bold mb-0" style="color:"><?php echo $testCount; ?></span>
                     </div>
                     <div class="col-auto">
-                      <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                      <div class="icon icon-shape text-white rounded-circle shadow" style="background:red;">
                         <i class="fas fa-file-alt"></i>
                       </div>
                     </div>
@@ -241,8 +237,8 @@ else if($user_role_id==3){
                       <span class="h2 font-weight-bold mb-0"><?php echo $studCount; ?></span>
                     </div>
                     <div class="col-auto">
-                      <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
-                        <i class="fas fa-calendar"></i>
+                      <div class="icon icon-shape text-white rounded-circle shadow" style="background:yellow;">
+                        <i class="fas fa-user"></i>
                       </div>
                     </div>
                   </div>
@@ -273,9 +269,10 @@ else if($user_role_id==3){
       </div>
    
     </div>
-	<?php	  
+	<?php 
 	  }
-		  ?>
+	  
+		   ?>
   
 <!--hEADER ENDS HERE-->
    
@@ -292,18 +289,18 @@ else if($user_role_id==3){
           <!-- Card stats -->
   
           <div class="row">
-            <?php
+            <?php 
 			  if(mysqli_num_rows($res) > 0 ){
 			foreach($res as $tst){
 						extract($tst);
 			
            if($user_role_id==3){
-			   ?>	
+			    ?>	
             <div class="col-xl-3 col-lg-6">
               <div class="card card-stats mb-4 mb-xl-0">
-                <div class="card-body" >
+                <div class="card-body" style=''>
                  <?php
-							echo "<a href='showTestStatistics.php?q=$test_id' data-toggle='modal' data-target='#flipFlop'>$test_name</a>";
+					echo "<a href='showTestStatistics.php?q=$test_id'>$test_name</a>";
 						echo "<p>Test Class:D$test_class_id$test_division</p>";
 					
 						echo "<p>Test Date:$test_date</p>";
@@ -315,14 +312,14 @@ else if($user_role_id==3){
               </div>
             </div>
          
-            <?php
+            <?php 
 			      }else if($user_role_id==5){
 			   if(!$test->isTestGiven($_SESSION['user_id'],$test_id)){
-			   ?>
+			    ?>
 			   <div class="col-xl-3 col-lg-6">
               <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
-                 <?php
+                 <?php 
 							echo "<a href='startTest.php?q=$test_id'>$test_name</a>";
 						echo "<p>Test Date:$test_date</p>";
 				   $start_time=date("g:i a",strtotime(substr($start_time,10)));
@@ -333,7 +330,7 @@ else if($user_role_id==3){
                 </div>
               </div>
             </div>
-			<?php   
+			<?php    
 		   }
 		   }
 			}
@@ -348,7 +345,7 @@ else if($user_role_id==3){
     </div>
     
 <!--   UPCOOMING TESTS  SECTION HERE-->
-    <?php
+    <?php 
 	  if($user_role_id==5){
 		  $res=$test->getAllTestForStudent($student_class_id,">");
 	  }else($user_role_id==3){
@@ -368,7 +365,7 @@ else if($user_role_id==3){
           <!-- Card stats -->
   
           <div class="row">
-            <?php
+            <?php 
 			  if(mysqli_num_rows($res) > 0 ){
 				 	foreach($res as $tst){
 						extract($tst);
@@ -392,7 +389,7 @@ else if($user_role_id==3){
 		   }
 			
 			
-            ?>
+             ?>
            
            
            
@@ -414,7 +411,7 @@ else if($user_role_id==3){
 		 echo "<h3 style='color:white; padding-left:40px;'>ALL TESTS</h3>";
 	   }else if($user_role_id==5){
 		    echo "<h3 style='color:white; padding-left:40px;'>TESTS GIVEN</h3>";
-	   }?>
+	   } ?>
        
     
       <div class="container-fluid">
@@ -422,7 +419,7 @@ else if($user_role_id==3){
           <!-- Card stats -->
   
           <div class="row">
-            <?php
+            <?php 
 			  if(mysqli_num_rows($res) > 0 ){
 				 	foreach($res as $tst){
 						extract($tst);
@@ -431,7 +428,7 @@ else if($user_role_id==3){
 			   <div class="col-xl-3 col-lg-6">
               <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body" style="width:300px;">
-                 <?php
+                 <?php 
 							echo "<p>Test Name:$test_name</p>";
 						echo "<p>Test Date:$test_date</p>";
 						if($user_role_id==5)
@@ -441,7 +438,7 @@ else if($user_role_id==3){
                 </div>
               </div>
             </div>
-			<?php   
+			<?php 
 		   }
 		   }
 			
@@ -456,13 +453,13 @@ else if($user_role_id==3){
     </div>
     
 <!--    TEST MISSED BY STUDENT HERE-->
-   	  <?php
+   	  <?php 
 	  if($user_role_id==5){
 		  $res=$test->getAllTestForStudent($student_class_id,"<");
 ?>
      <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
        <hr style="border-color:white">
-       <?php
+       <?php 
 		  	if($user_role_id==5){
 		    echo "<h3 style='color:white; padding-left:40px;'>TESTS MISSED</h3>";
 	   }?>
@@ -473,7 +470,7 @@ else if($user_role_id==3){
           <!-- Card stats -->
   
           <div class="row">
-            <?php
+            <?php 
 			  if(mysqli_num_rows($res) > 0 ){
 				 	foreach($res as $tst){
 						extract($tst);
@@ -483,22 +480,22 @@ else if($user_role_id==3){
 			   <div class="col-xl-3 col-lg-6">
               <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body" style="width:300px;">
-                 <?php
+                 <?php 
 							echo "<p>Test Name:$test_name</p>";
 						echo "<p>Test Date:$test_date</p>";
 					
 			
-					?>
+					 ?>
                 </div>
               </div>
             </div>
-			<?php   
+			<?php    
 		   }
 		   }
 			 }
 			
 			
-            ?>
+             ?>
            
            
           
@@ -506,7 +503,7 @@ else if($user_role_id==3){
         </div>
       </div>
     </div>
-    <?php
+    <?php 
 	  }
 	  ?>
 <!--    Page content ends here-->

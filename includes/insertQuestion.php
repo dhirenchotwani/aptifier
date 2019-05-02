@@ -82,9 +82,9 @@ if(isset($_POST['finish_inserting_question'])){
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Quiz Handlers</title>
+        <title>Aptifier | Insert Questions</title>
         <!-- Favicon -->
-        <link href="../assets/img/brand/favicon.png" rel="icon" type="image/png">
+        <link href="../assets/data2/images/faviconb.png" rel="icon" type="image/png">
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
         <!-- Icons -->
@@ -105,8 +105,8 @@ if(isset($_POST['finish_inserting_question'])){
         </div>
 -->
         
-        <h2 style="text-align: center; padding-top: 30px; padding-left:150px;color:#fff">Add|Questions</h2>
-        <div class="container" style="border: 1px solid #ddd; background-color: #fff; margin:0 auto;width: 600px;margin-right:300px;padding:70px;padding-left:90px;margin-top:0px;">
+        <h2 style="text-align: center; padding-top: 30px; padding-left:10px;color:#fff">Add|Questions</h2>
+        <div class="container" style="border: 1px solid #ddd; background-color: #fff;width: 600px;margin-right:450px;padding:70px;padding-left:90px;margin-top:0px;">
 		<a href="insertQuestionFromExcel.php">Insert From EXCEL</a>
             <form method="post" enctype="multipart/form-data" action="" class="" >
               
