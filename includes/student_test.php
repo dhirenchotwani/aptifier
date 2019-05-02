@@ -1,8 +1,9 @@
 <?php
 include_once("../classes/Session.php");
 Session::startSession();
-?>
-<?php
+extract($_SESSION);
+$user_role_id=5;
+
 include_once("bootstrap.php");
 ?>
 <!DOCTYPE html>
@@ -13,7 +14,7 @@ include_once("bootstrap.php");
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<title>Quiz Handlers</title>
+	<title>Aptifer | Test</title>
 	<!-- Favicon -->
 	<link href="../assets/data2/images/faviconb.png" rel="icon" type="image/png">
 	<!-- Fonts -->
@@ -25,27 +26,9 @@ include_once("bootstrap.php");
 	<link type="text/css" href="../assets/css/argon.css?v=1.0.0" rel="stylesheet">
 </head>
 
-<body class="">
+<body class="" style="background:#08476E">
 	<!-- Sidenav -->
-	<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
-		<div class="container-fluid">
-		<!-- Brand -->
-			<a class="navbar-brand pt-0" href="../index.html">
-        <img src="../assets/img/brand/logo_blue.png" class="navbar-brand-img" alt="...">
-      </a>
-     <!-- Collapse -->
-			<div class="collapse navbar-collapse" id="sidenav-collapse-main">
-       <!-- Navigation -->
-				<ul class="navbar-nav">
-					<li class="nav-item">
-						<a class="nav-link" href="../index.html">
-              <i class="ni ni-tv-2 text-primary"></i> Dashboard
-                       </a>
-					</li>
-               </ul>
-           </div>
-		</div>
-	</nav>
+	<?php include_once("templates/sidebar.php"); ?>
 	
 <form method="post" action="output.php">
 <?php
@@ -84,12 +67,12 @@ while($row = mysqli_fetch_assoc($result_set)){
                     echo '<img src="data:image/jpeg;base64,'.base64_encode($row['question_image']).'" width="200px" height="200px"/>';
                 }
                         ?>
-							<div class="text-muted mt-2 mb-3">Time Left: <strong style="font-size:16px;">10min</strong><small style="margin-left:260px;">Questions:<strong style="font-size:16px;">1/1</strong></small></div>
+							<div class="text-muted mt-2 mb-3">Time Left: <strong style="font-size:16px;"><span id="time" style="color:red"></span></strong><small style="margin-left:260px;">Questions:<strong style="font-size:16px;">1/1</strong></small></div>
 							<div class="" id="question_text">
-								<p id="questionID" value="<?php echo $questions_id;?>"><span><?php echo $i.")";?> </span><?php echo $question_text; ?></p>
+								<strong style="font-size:16px;"><p id="questionID" value="<?php echo $questions_id;?>" style="color:#08476E"><span style="color:#08476E"><?php echo $i.")";?> </span><?php echo $question_text; ?></p></strong>
 							</div>
 						</div>
-						<div class="card-body" style="background=#f9f9f9;margin:0px;">
+						<div class="card-body" style="background=#f9f9f9;margin:0px;color:#08476E">
 							<ul style="list-style: none;">
 								<div style="width:350px;height:40px;box-shadow:5px 12px 25px -10px #08476E;padding-left:20px;padding-top:8px;margin-bottom:15px;"><li id="question_option1"><li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="a"><span>A. </span><?php echo $question_option1 ?></li></div>
 								<div style="width:350px;height:40px;box-shadow:5px 12px 25px -10px #08476E;padding-left:20px;padding-top:8px;margin-bottom:15px;"><li><input type="radio" name="optradio[<?php echo $questions_id; ?>]" value="b"><span>B. </span><?php echo $question_option2 ?></li></div>
@@ -140,7 +123,21 @@ while($row = mysqli_fetch_assoc($result_set)){
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
     <script src="../assets/js/web.js"></script>
-    
+    <script>
+	      window.onload=function(){
+			  startTimer();
+}
+		  
+		  function startTimer(){
+			 			 var start=Date.now(),r=document.getElementById('time');
+(function f(){
+ var diff=Date.now()-start,ns=(((2e5-diff)/1000)>>0),m=(ns/60)>>0,s=ns-m*60;
+ r.textContent=m+':'+((''+s).length>1?'':'0')+s+'';
+ if(diff>(3e5)){start=Date.now()}
+ setTimeout(f,1000);
+})();
+		  }
+	</script>
             <script>
         $(window).blur(function(){
             window.alert("dont switch or you will be logged out!");
@@ -204,7 +201,8 @@ function myFunction() {
 //         var myDiv = "myDiv";
 //         var final = myDiv.concat(conversion);
 //         console.log(final);
-            
+   
+		 
          function next(){                 
                //console.log("hello");                
                 var questionID = document.getElementById("questionID").val;                
@@ -221,7 +219,7 @@ function myFunction() {
             x.style.display = "block";
         }
          
-        
+
     }
          
         function previous(){                 
@@ -239,9 +237,13 @@ function myFunction() {
         if(x.style.display === "none"){
             x.style.display = "block";
         }
-         
+
         
     }
+		 
+
+		 }
+
         </script>
 		
 	<!-- Argon Scripts -->

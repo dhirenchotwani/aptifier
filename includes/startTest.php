@@ -61,7 +61,7 @@ global $database;
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
     <style type="text/css">
-        #results { padding:20px; border:1px solid; background:#ccc; }
+        #results { padding:20px; border:2px solid #04456b; background:#04456b; color:white}
     </style>
 
 <style>
@@ -77,11 +77,11 @@ Click Me
 -->
 
 <!-- The modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" style="background:#04456b">
 <div class="modal-dialog" role="document">
 <div class="modal-content">
 <div class="modal-header">
-<h4 class="modal-title" id="modalLabel">Capture webcam image with php and jquery - ItSolutionStuff.com</h4>
+<h4 class="modal-title" id="modalLabel" style="color:#04456b"><?php echo $_SESSION['user_name'] ?> is that really you ?<br> Let Us Check!</h4>
 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 <span aria-hidden="true">&times;</span>
 </button>
@@ -92,7 +92,7 @@ Click Me
             <div class="col-md-6">
                 <div id="my_camera" style="display:none"></div>
                 <br/>
-                <input type=button value="Take Snapshot" onClick="take_snapshot()">
+                <input type=button class="btn btn-warning" value="Take Snapshot" onClick="take_snapshot()">
                 <input type="hidden" name="image" class="image-tag">
             </div>
             <div class="col-md-6">
@@ -106,7 +106,7 @@ Click Me
     </form>
 </div>
 <div class="modal-footer">
-<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+<button type="button" class="btn btn-danger" data-dismiss="modal" >Close</button>
 </div>
 </div>
 </div>

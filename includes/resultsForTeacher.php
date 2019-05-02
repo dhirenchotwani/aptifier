@@ -43,7 +43,7 @@ fclose($file);
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-   <title>Aptifiers! | Results</title>
+   <title>Aptifier | Results</title>
   <!-- Favicon -->
   <link href="../assets/data2/images/faviconb.png" rel="icon" type="image/png">
   <!-- Fonts -->

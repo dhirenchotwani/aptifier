@@ -40,7 +40,7 @@ else if($user_role_id==3){
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
- <title>Aptifiers! | Dashboard</title>
+ <title>Aptifier | Dashboard</title>
   <!-- Favicon -->
   <link href="../assets/data2/images/faviconb.png" rel="icon" type="image/png">
   <!-- Fonts -->
