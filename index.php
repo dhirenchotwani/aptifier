@@ -9,6 +9,7 @@ if($obj->isCookieSet()){
 	Functions::redirect('includes/dashboard.php');
 }
 else{
+
 ?>
 	<html>
 
@@ -126,19 +127,15 @@ else{
 		<meta name="author" content="">
 		<title>Aptifiers!</title>
 		<link rel="shortcut icon" href="assets/data2/images/faviconb.png" />
-		<!-- Start WOWSlider.com HEAD section -->
-		<link rel="stylesheet" type="text/css" href="assets/engine2/style.css" />
-		<script type="text/javascript" src="assets/engine2/jquery.js"></script>
-		<!-- End WOWSlider.com HEAD section -->
+		
 		<link rel="stylesheet" href="assets/css/bootstrap2.min.css">
 		<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 
-
-		<!-- Start WOWSlider.com HEAD section -->
-		<!-- add to the <head> of your page -->
-		<link rel="stylesheet" type="text/css" href="assets/engine2/style.css" />
-		<!--script type="text/javascript" src="engine2/jquery.js"></script-->
-		<!-- End WOWSlider.com HEAD section -->
+<!-- Start WOWSlider.com HEAD section -->
+<link rel="stylesheet" type="text/css" href="assets/engine2/style.css" />
+<script type="text/javascript" src="assets/engine2/jquery.js"></script>
+<!-- End WOWSlider.com HEAD section -->
+		
 	</head>
 
 	<body style="">
@@ -167,19 +164,17 @@ else{
 		<section id="home">
 
 			<!-- Start WOWSlider.com BODY section -->
-			<div id="wowslider-container2">
-				<div class="ws_images">
-					<ul>
-						<li><img src="assets/data2/images/web_1280__1.png" alt="Web 1280 – 1" id="wows2_0" /></li>
-						<li><a href="http://wowslider.net"><img src="assets/data2/images/web_1280__2.png" alt="bootstrap slideshow" id="wows2_1"/></a></li>
-						<li><img src="assets/data2/images/web_1280__3.png" alt="Web 1280 – 3" id="wows2_2" /></li>
-					</ul>
-				</div>
-
-			</div>
-			<script type="text/javascript" src="assets/engine2/wowslider.js"></script>
-			<script type="text/javascript" src="assets/engine2/script.js"></script>
-			<!-- End WOWSlider.com BODY section -->
+<div id="wowslider-container2">
+<div class="ws_images"><ul>
+		<li><img src="assets/data2/images/web_1280__3.png" alt="Web 1280 – 3"  id="wows2_0"/></li>
+		<li><a href="http://wowslider.net"><img src="assets/data2/images/web_1280__1.png" alt="bootstrap carousel example" id="wows2_1"/></a></li>
+		<li><img src="assets/data2/images/web_1280__2.png" alt="Web 1280 – 2" id="wows2_2"/></li>
+	</ul></div>
+	
+</div>	
+<script type="text/javascript" src="assets/engine2/wowslider.js"></script>
+<script type="text/javascript" src="assets/engine2/script.js"></script>
+<!-- End WOWSlider.com BODY section -->
 
 
 		</section>
@@ -196,7 +191,7 @@ else{
 		<div class="container-fluid" id="about">
 			<h1 style="text-align: center;margin-top:120px;color:#04456B;letter-spacing: 3px;font-weight:350 ">ABOUT US</h1>
 			<p style="text-align: center;margin-top:25px;color:#04456B;font-weight:350;font-size: 18px;">A Place where a student can test its skills!</p>
-			<p style="text-align:center;margin:25px 150px 15px 150px;color:#04456B;font-weight:350;font-size:16px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga iusto placeat sed similique alias iure quidem reprehenderit ab, eligendi, dolores esse magnam? Cumque possimus alias, dicta quaerat magni, labore distinctio! ipsum dolor sit amet, consectetur adipisicing elit. Ducimus nobis veniam reprehenderit assumenda mollitia vel laudantium ratione error dolor sequi repudiandae voluptates obcaecati similique cumque repellendus non, porro, eos placeat.</p>
+			<p style="text-align:center;margin:25px 150px 15px 150px;color:#04456B;font-weight:350;font-size:16px;">More than 75% colleges conduct online tests for the students between there official term tests just to make sure that the students are in touch with the terminologies and the concepts which are to be taught in different lectures planned all around the semester duration. Most of these tests are conducted online either on the official websites of these colleges or onto some online portal whereas our college uses Google forms to conduct such tests. While conducting these tests there are a number of mishaps faced by the students and the teachers as well. One major problem faced by the faculty is the process of retrieving data and the credibility of the students appearing for the tests. We aim to work on these 2 broad areas for the project. We will implement face recognition for ensuring that the expected student is giving the test. This particular software will prevent cheating in these examinations, the overhead of using Google forms (once the data set is saved it can be used until the syllabus is changed) and promote integrity, credibility, data retrieval and the efficiency of conducting tests.</p>
 		</div>
 
 		<footer id="contact" style="margin-top:150px;">
@@ -261,13 +256,14 @@ else{
 
 
 		</footer>
-<script src='//vws.responsivevoice.com/v/e?key=Oz1qUWj6'></script>
+
 	</body>
 
 	</html>
 
 
 	<?php
+
 }
 if(isset($_POST['send_enquiry_msg'])){
 
@@ -283,25 +279,26 @@ if(isset($_POST['send_enquiry_msg'])){
           
             <br>
             <br>
-			  <img src='cid:logo' alt='hahahahah'>
+			
             </div>";
 	$mailer->send_mail("handlesquizlikeaboss@gmail.com",$body,$subject);
 	
 	$subject="Your Enquiry is under Process";
 	$body = "<div style='font-family:Roboto; font-size:16px; max-width: 600px; line-height: 21px;'>     <h4>Hello,</h4>
-            <h3>Hello, We're from The Aptifier!</h3>
+            <h3> We're from The Aptifier!</h3>
             <br>  
             <p style='text-decoration:none; color:#fff; background-color:#08476E;border:solid #08476E; border-width:2px 10px; line-height:2;font-weight:bold; text-align:center; display:inline-block;border-radius:4px'>
             We,ve received your enquiry,our representative will get back to you soon! </p>
             <br>  
-            <h3>Thank you for choosing The Aptifiers!.</h3>
+            <h3>Thank you for choosing The Aptifier!</h3>
             <br>
             <br>
             <h4>Sincerely,</h4>
             <h5>The Aptifier Team.</h5>
-			  <img src='cid:logo' alt='hahahahah'>
+			  
             </div>";
 	
 	$mailer->send_mail($email,$body,$subject);
 }
+
 ?>
