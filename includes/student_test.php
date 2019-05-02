@@ -83,7 +83,7 @@ while($row = mysqli_fetch_assoc($result_set)){
 							<a style="padding:15px; margin-bottom: 15px;  width:50px;height:50px;border: none; text-align:center; float: right; margin-top: 20px;border-radius:50px;color:white;font-weight:400;box-shadow:1px 1px 50px -10px #999" class="btn btn-primary" id="nextQuestion" 
 							<?php if($j != $count-1)echo 'onclick="next()"';?>><i class='fas fa-arrow-right'></i></a>
 
-
+						<button type="submit" name="submit_test" class="btn btn-blue" id="submit_test" style="margin-left:100px;">Submit Test</button>
 						</div>
 					</div>
 
@@ -98,7 +98,7 @@ while($row = mysqli_fetch_assoc($result_set)){
        }
             ?>
    
-	<button type="submit" name="submit_test" class="btn btn-blue" id="submit_test">Submit Test</button>
+	
    
     </form>
     <form method="POST" action="" >
@@ -242,7 +242,7 @@ function myFunction() {
     }
 		 
 
-		 }
+		 
 
         </script>
 		
